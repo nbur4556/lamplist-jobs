@@ -1,10 +1,16 @@
 <script lang='ts'>
   import JobList from '../lib/JobList/JobList.svelte';
+  import {JobListStore} from '../store';
 
+  //TODO: Refactor job list to store
   let jobList: Array<string> = [];
   let entry: string = '';
 
   const targetListSize = 10;
+
+  JobListStore.subscribe((data) => {
+    jobList = data;
+  });
 
   const addEntry = () => {
     //TODO: Keep selection on entry input after submit for rapid data entry
