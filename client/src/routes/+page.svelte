@@ -7,7 +7,7 @@
 
   const addEntry = () => {
     //TODO: Keep selection on entry input after submit for rapid data entry
-    JobListStore.addEntry(entry);
+    JobListStore.addEntry({company: entry});
     entry = '';
   }
 
