@@ -3,13 +3,11 @@
   import {JobListStore} from '../store';
 
   let entry: string = '';
-  const targetListSize = 10;
+  const targetListSize = 40;
 
   const addEntry = () => {
     //TODO: Keep selection on entry input after submit for rapid data entry
-    JobListStore.update((data) => {
-      return [...data, entry];
-    });
+    JobListStore.addEntry(entry);
     entry = '';
   }
 
