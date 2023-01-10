@@ -12,6 +12,10 @@
     entry = '';
   }
 
+  const removeEntry = (index: number) => {
+    jobList = jobList.filter((val, i) => i !== index);
+  }
+
   $: remainingCount = (jobList.length < targetListSize) ? -(jobList.length - targetListSize) : 0;
 </script>
 
@@ -26,4 +30,4 @@
   <button type="submit">Submit</button>
 </form>
 
-<JobList {jobList} />
+<JobList {jobList} {removeEntry} />
