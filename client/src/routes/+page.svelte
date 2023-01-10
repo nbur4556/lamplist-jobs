@@ -1,4 +1,6 @@
 <script lang='ts'>
+  import JobList from '../lib/JobList/JobList.svelte';
+
   let jobList: Array<string> = [];
   let entry: string = '';
 
@@ -10,8 +12,7 @@
     entry = '';
   }
 
-  $: jobCount = jobList.length;
-  $: remainingCount = (jobCount < targetListSize) ? -(jobCount - targetListSize) : 0;
+  $: remainingCount = (jobList.length < targetListSize) ? -(jobList.length - targetListSize) : 0;
 </script>
 
 <h1>Welcome to Lamp List Jobs!</h1>
@@ -25,9 +26,4 @@
   <button type="submit">Submit</button>
 </form>
 
-<h2>Job List ({jobCount})</h2>
-<ul>
-  {#each jobList as job}
-    <li>{job}</li>
-  {/each}
-</ul>
+<JobList {jobList} />
