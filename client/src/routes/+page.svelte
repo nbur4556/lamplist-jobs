@@ -1,22 +1,18 @@
 <script lang='ts'>
   import JobList from '../lib/JobList/JobList.svelte';
+  import {JobListStore} from '../store';
 
-  let jobList: Array<string> = [];
   let entry: string = '';
-
-  const targetListSize = 10;
+  const targetListSize = 40;
 
   const addEntry = () => {
     //TODO: Keep selection on entry input after submit for rapid data entry
-    jobList = [...jobList, entry];
+    JobListStore.addEntry(entry);
     entry = '';
   }
 
-  const removeEntry = (index: number) => {
-    jobList = jobList.filter((val, i) => i !== index);
-  }
-
-  $: remainingCount = (jobList.length < targetListSize) ? -(jobList.length - targetListSize) : 0;
+  $: jobLength = $JobListStore.length
+  $: remainingCount = (jobLength < targetListSize) ? -(jobLength - targetListSize) : 0;
 </script>
 
 <h1>Welcome to Lamp List Jobs!</h1>
@@ -30,4 +26,4 @@
   <button type="submit">Submit</button>
 </form>
 
-<JobList {jobList} {removeEntry} />
+<JobList />
