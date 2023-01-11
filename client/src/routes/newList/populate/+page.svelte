@@ -2,47 +2,86 @@
   import Entry from '../../../lib/JobList/Entry.svelte';
   import {JobListStore} from '../../../store';
 
-  let entryId = 0;
+  let entryIndex = 0;
   let step: 0 | 1 | 2 = 0; 
+  let contact = '';
+  let interest = 0;
+  let posting = '';
+
+  const updateJobContact = () => {
+    JobListStore.updateEntry({contacts: [contact]}, entryIndex);
+    contact = '';
+  }
+  
+  const updateJobInterest  = () => {
+    JobListStore.updateEntry({interest}, entryIndex);
+    interest = 0;
+  }
+
+  const updateJobPosting = () => {
+    JobListStore.updateEntry({posting}, entryIndex);
+    posting = '';
+  }
 
   const nextEntry = () => {
-    const atMaxEntry = (entryId >= $JobListStore.length - 1);
+    const atMaxEntry = (entryIndex >= $JobListStore.length - 1);
 
     if(atMaxEntry && step >= 2) {
       return;
     }
     else if(atMaxEntry) {
-      entryId = 0;
+      entryIndex = 0;
       step += 1;
       return;
     }
 
-    entryId += 1;
+    entryIndex += 1;
   }
 
   const preEntry = () => {
-    if(entryId <= 0 && step <= 0) {
+    if(entryIndex <= 0 && step <= 0) {
       return;
     }
-    else if (entryId <= 0) {
-      entryId = $JobListStore.length - 1;
+    else if (entryIndex <= 0) {
+      entryIndex = $JobListStore.length - 1;
       step += -1;
       return;
     }
 
-    entryId += -1;
+    entryIndex += -1;
   }
 </script>
 
-{#if step === 0}
-  <p>Enter Contacts</p>
-{:else if step === 1}
-  <p>Enter Interest</p>
-{:else if step === 2}
-  <p>Enter Posting</p>
-{/if}
+  {#if step === 0}
+    <form>
+      <label>
+        Do you have a contact at this company? Enter their name:
+        <input type="text" bind:value={contact} />
+      </label>
 
-<Entry job={$JobListStore[entryId]} index={entryId} />
+      <button type="submit" on:click={updateJobContact}>Submit</button>
+    </form>
+  {:else if step === 1}
+    <form>
+      <label>
+        Enter your interest for this company on a scale of 0 - 3:
+        <input type="text" bind:value={interest} />
+      </label>
+
+      <button type="submit" on:click={updateJobInterest}>Submit</button>
+    </form>
+  {:else if step === 2}
+    <form>
+      <label>
+        Is there a current job posting? Enter the link here:
+        <input type="text" bind:value={posting} />
+      </label>
+
+      <button type="submit" on:click={updateJobPosting}>Submit</button>
+    </form>
+  {/if}
+
+<Entry job={$JobListStore[entryIndex]} index={entryIndex} />
 
 <button on:click={preEntry}>Pre</button>
 <button on:click={nextEntry}>Next</button>

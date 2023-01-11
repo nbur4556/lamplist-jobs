@@ -7,6 +7,9 @@
 </script>
 
 <li>
-  {job.company}
+  Company: {job.company}
+  {#if job.contacts}Contact: {job.contacts[0]}{/if}
+  {#if job.interest}Interest: {job.interest}{/if}
+  {#if job.posting}Posting: {job.posting}{/if}
   <button on:click={() => JobListStore.removeEntry(index)}>X</button>
 </li>
