@@ -1,8 +1,8 @@
-<script lang='ts'>
-  export let value: string | undefined;
+<script lang="ts">
+	export let value: string | undefined;
 </script>
 
 <label>
-  <slot></slot>
-  <input type="text" bind:value={value} />
+	<slot />
+	<input type="text" bind:value />
 </label>
