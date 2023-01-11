@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Input from '../../lib/Form/Input.svelte';
 	import JobList from '../../lib/JobList/JobList.svelte';
 	import { JobListStore } from '../../store';
 
@@ -19,10 +20,9 @@
 <a href="/">back</a>
 
 <form on:submit={addEntry}>
-	<label>
+  <Input bind:value={entry}>
 		List {remainingCount}+ employers that you would like to work for
-		<input type="text" bind:value={entry} />
-	</label>
+  </Input>
 
 	<button type="submit">Submit</button>
 </form>
