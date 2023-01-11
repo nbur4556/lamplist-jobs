@@ -39,6 +39,7 @@
 
 	const nextEntry = () => {
 		const atMaxEntry = entryIndex >= $JobListStore.length - 1;
+    updateJobEntry();
 
 		if (atMaxEntry && step >= 2) {
 			return;
@@ -81,10 +82,15 @@
 			<input type="text" bind:value={formValues.posting} />
 		</label>
 	{/if}
-	<button type="submit" on:click={updateJobEntry}>Submit</button>
+  <button on:click={preEntry}>Pre</button>
+
+  {#if entryIndex >= $JobListStore.length - 1 && step >= 2}
+    <a href="/"><button on:click={nextEntry}>Save</button></a>
+  {:else}
+    <button on:click={nextEntry}>Next</button>
+  {/if}
 </form>
 
 <Entry job={$JobListStore[entryIndex]} index={entryIndex} />
 
-<button on:click={preEntry}>Pre</button>
-<button on:click={nextEntry}>Next</button>
+
