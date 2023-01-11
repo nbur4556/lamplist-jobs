@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Input from '../../../lib/Form/Input.svelte';
 	import Entry from '../../../lib/JobList/Entry.svelte';
 	import { JobListStore } from '../../../store';
 
@@ -69,20 +70,18 @@
 
 <form>
 	{#if step === 0}
-		<label>
+		<Input bind:value={formValues.contact}>
 			Do you have a contact at this company? Enter their name:
-			<input type="text" bind:value={formValues.contact} />
-		</label>
+		</Input>
 	{:else if step === 1}
 		<label>
 			Enter your interest for this company on a scale of 0 - 3:
 			<input type="number" min={0} max={3} bind:value={formValues.interest} />
 		</label>
 	{:else if step === 2}
-		<label>
+		<Input bind:value={formValues.posting}>
 			Is there a current job posting? Enter the link here:
-			<input type="text" bind:value={formValues.posting} />
-		</label>
+    </Input>
 	{/if}
 	<button on:click={preEntry}>Pre</button>
 
