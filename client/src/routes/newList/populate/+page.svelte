@@ -10,7 +10,6 @@
 
 	let entryIndex = 0;
 	let step: 0 | 1 | 2 = 0;
-
 	let formValues: FormValues = {
 		contact: undefined,
 		interest: undefined,
@@ -20,15 +19,14 @@
 	const updateJobEntry = () => {
 		let cleanValues: FormValues = {};
 
-		for (const key in formValues) {
-			if (!formValues[key as keyof FormValues]) {
+		for (const k in formValues) {
+			const key = k as keyof FormValues;
+
+			if (formValues[key] === undefined) {
 				continue;
 			}
 
-			cleanValues = {
-				...cleanValues,
-				[key as keyof FormValues]: formValues[key as keyof FormValues]
-			};
+			cleanValues = { ...cleanValues, [key]: formValues[key] };
 		}
 
 		JobListStore.updateEntry({ ...cleanValues }, entryIndex);

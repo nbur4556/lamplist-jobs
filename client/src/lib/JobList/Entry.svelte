@@ -8,8 +8,8 @@
 
 <li>
 	Company: {job.company}
-	{#if job.contact}Contact: {job.contact}{/if}
-	{#if job.interest}Interest: {job.interest}{/if}
-	{#if job.posting}Posting: {job.posting}{/if}
+	{#if job.contact !== undefined}Contact: {job.contact}{/if}
+	{#if job.interest !== undefined}Interest: {job.interest}{/if}
+	{#if job.posting !== undefined}Posting: {job.posting}{/if}
 	<button on:click={() => JobListStore.removeEntry(index)}>X</button>
 </li>
