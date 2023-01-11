@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { JobListStore } from '../../store';
-	import type { JobEntry } from '../../store';
+	import { JobListStore } from '@src/store';
+	import type { JobEntry } from '@src/store';
 
 	export let job: JobEntry;
 	export let index: number;

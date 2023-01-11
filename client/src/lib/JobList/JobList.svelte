@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Entry from './Entry.svelte';
-	import { JobListStore } from '../../store';
+	import { JobListStore } from '@src/store';
 
 	$: jobCount = $JobListStore.length;
 </script>

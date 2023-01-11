@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Input from '../../../lib/Form/Input.svelte';
-	import InputNumber from '../../../lib/Form/InputNumber.svelte';
-	import Entry from '../../../lib/JobList/Entry.svelte';
-	import { JobListStore } from '../../../store';
+	import Input from '@src/lib/Form/Input.svelte';
+	import InputNumber from '@src/lib/Form/InputNumber.svelte';
+	import Entry from '@src/lib/JobList/Entry.svelte';
+	import { JobListStore } from '@src/store';
 
 	interface FormValues {
 		contact?: string;

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Input from '../../lib/Form/Input.svelte';
-	import JobList from '../../lib/JobList/JobList.svelte';
-	import { JobListStore } from '../../store';
+	import Input from '@src/lib/Form/Input.svelte';
+	import JobList from '@src/lib/JobList/JobList.svelte';
+	import { JobListStore } from '@src/store';
 
 	let entry = '';
 	const targetListSize = 40;
