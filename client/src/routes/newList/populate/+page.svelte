@@ -8,13 +8,20 @@
 		posting?: string;
 	}
 
-	let entryIndex = 0;
-	let step: 0 | 1 | 2 = 0;
-	let formValues: FormValues = {
+	const formDefault: FormValues = {
 		contact: undefined,
 		interest: undefined,
 		posting: undefined
 	};
+
+	let entryIndex = 0;
+	let step: 0 | 1 | 2 = 0;
+	let formValues: FormValues = formDefault;
+
+	$: maxInStep = entryIndex >= $JobListStore.length - 1;
+	$: minInStep = entryIndex <= 0;
+	$: lastEntry = maxInStep && step >= 2;
+	$: firstEntry = minInStep && step <= 0;
 
 	const updateJobEntry = () => {
 		let cleanValues: FormValues = {};
@@ -30,20 +37,15 @@
 		}
 
 		JobListStore.updateEntry({ ...cleanValues }, entryIndex);
-		formValues = {
-			contact: undefined,
-			interest: undefined,
-			posting: undefined
-		};
+		formValues = formDefault;
 	};
 
 	const nextEntry = () => {
-		const atMaxEntry = entryIndex >= $JobListStore.length - 1;
-    updateJobEntry();
+		updateJobEntry();
 
-		if (atMaxEntry && step >= 2) {
+		if (lastEntry) {
 			return;
-		} else if (atMaxEntry) {
+		} else if (maxInStep) {
 			entryIndex = 0;
 			step += 1;
 			return;
@@ -53,9 +55,9 @@
 	};
 
 	const preEntry = () => {
-		if (entryIndex <= 0 && step <= 0) {
+		if (firstEntry) {
 			return;
-		} else if (entryIndex <= 0) {
+		} else if (minInStep) {
 			entryIndex = $JobListStore.length - 1;
 			step += -1;
 			return;
@@ -82,15 +84,13 @@
 			<input type="text" bind:value={formValues.posting} />
 		</label>
 	{/if}
-  <button on:click={preEntry}>Pre</button>
+	<button on:click={preEntry}>Pre</button>
 
-  {#if entryIndex >= $JobListStore.length - 1 && step >= 2}
-    <a href="/"><button on:click={nextEntry}>Save</button></a>
-  {:else}
-    <button on:click={nextEntry}>Next</button>
-  {/if}
+	{#if lastEntry}
+		<a href="/"><button on:click={nextEntry}>Save</button></a>
+	{:else}
+		<button on:click={nextEntry}>Next</button>
+	{/if}
 </form>
 
 <Entry job={$JobListStore[entryIndex]} index={entryIndex} />
-
-

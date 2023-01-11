@@ -1,5 +1,5 @@
 <script>
-  import JobList from '../lib/JobList/JobList.svelte';
+	import JobList from '../lib/JobList/JobList.svelte';
 	import { JobListStore } from '../store';
 </script>
 
@@ -8,7 +8,7 @@
 <a href="/newList">New Lamp List</a>
 
 {#if $JobListStore.length > 0}
-  <JobList />
+	<JobList />
 {:else}
-  <p>No lamp list yet... Create one above!</p>
+	<p>No lamp list yet... Create one above!</p>
 {/if}
