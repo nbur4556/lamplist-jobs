@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-import { addJobEntries, fetchJobEntries } from '@src/features/jobList';
+import { addJobEntries, fetchJobEntries, updateJobEntries } from '@src/features/jobList';
 
 export interface JobEntry {
 	company: string;
@@ -14,17 +14,10 @@ export interface JobEntry {
 const createJobListStore = () => {
 	const { subscribe, update } = writable<Array<JobEntry>>([]);
 
-	const updateEntry = (entryData: Partial<JobEntry>, index: number) => {
-		update((state) => {
-			state[index] = { ...state[index], ...entryData };
-			return state;
-		});
-	};
-
 	return {
 		subscribe,
 		fetchEntries: () => fetchJobEntries(update),
-		updateEntry,
+		updateEntry: (entry: Partial<JobEntry>, id: number) => updateJobEntries(id, entry, update),
 		addEntry: (entry: JobEntry) => addJobEntries(entry, update),
 		removeEntry: (index: number) => update((state) => state.filter((val, i) => i !== index))
 	};
