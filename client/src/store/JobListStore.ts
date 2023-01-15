@@ -23,7 +23,7 @@ const createJobListStore = () => {
 
 	return {
 		subscribe,
-    fetchEntries: () => fetchJobEntries(update),
+		fetchEntries: () => fetchJobEntries(update),
 		updateEntry,
 		addEntry: (entry: JobEntry) => update((state) => [...state, entry]),
 		removeEntry: (index: number) => update((state) => state.filter((val, i) => i !== index))

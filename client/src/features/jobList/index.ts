@@ -1,5 +1,3 @@
 import fetchJobEntries from './fetchJobEntries';
 
-export {
-  fetchJobEntries,
-}
+export { fetchJobEntries };

@@ -1,6 +1,6 @@
 <script>
 	import JobList from '@src/lib/JobList/JobList.svelte';
-	import { JobListStore } from '@src/store';
+	import { JobListStore } from '@src/store/JobListStore';
 </script>
 
 <h1>Welcome to Lamp List Jobs!</h1>

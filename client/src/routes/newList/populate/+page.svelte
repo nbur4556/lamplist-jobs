@@ -2,7 +2,7 @@
 	import Input from '@src/lib/Form/Input.svelte';
 	import InputNumber from '@src/lib/Form/InputNumber.svelte';
 	import Entry from '@src/lib/JobList/Entry.svelte';
-	import { JobListStore } from '@src/store';
+	import { JobListStore } from '@src/store/JobListStore';
 
 	interface FormValues {
 		contact?: string;
@@ -28,7 +28,7 @@
 	const updateJobEntry = () => {
 		let cleanValues: FormValues = {};
 
-    //? Should this clean values method be added to a utility function?
+		//? Should this clean values method be added to a utility function?
 		for (const k in formValues) {
 			const key = k as keyof FormValues;
 
