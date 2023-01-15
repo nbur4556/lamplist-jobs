@@ -28,6 +28,7 @@
 	const updateJobEntry = () => {
 		let cleanValues: FormValues = {};
 
+    //? Should this clean values method be added to a utility function?
 		for (const k in formValues) {
 			const key = k as keyof FormValues;
 
@@ -69,6 +70,7 @@
 	};
 </script>
 
+<!-- //! Some inputs are not clearing on next -->
 <form>
 	{#if step === 0}
 		<Input bind:value={formValues.contact}>
