@@ -16,6 +16,7 @@ public class JobEntryRequest
 [Route("api/[controller]")]
 public class JobListController : ControllerBase
 {
+  //! JobEntryData is not persistent between api calls.
   List<JobEntry> JobEntryData = new List<JobEntry>();
 
   public JobListController()
