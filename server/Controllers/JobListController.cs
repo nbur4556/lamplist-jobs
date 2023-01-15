@@ -1,10 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 
 using server.Models;
 
 namespace server.Controllers;
+
+public class JobEntryRequest
+{
+  public string? company { get; set; }
+  public string? contact { get; set; }
+  public int? interest { get; set; }
+  public string? posting { get; set; }
+}
 
 [ApiController]
 [Route("api/[controller]")]
@@ -27,11 +33,16 @@ public class JobListController : ControllerBase
   }
 
   [HttpPost]
-  public ActionResult<JobEntry> PostJobEntryToList()
+  public IActionResult CreateJobEntry(JobEntryRequest request)
   {
-    JobEntry jobEntry = new JobEntry("Test Company 5");
+    if (request.company is null)
+    {
+      return BadRequest("company name is required.");
+    }
+
+    JobEntry jobEntry = new JobEntry(request.company);
     JobEntryData.Add(jobEntry);
-    return jobEntry;
+    return CreatedAtAction(nameof(CreateJobEntry), jobEntry);
   }
 
   //TODO: Update job entry route/
