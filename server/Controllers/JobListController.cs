@@ -73,5 +73,15 @@ public class JobListController : ControllerBase
     return JobEntryData[id];
   }
 
-  //TODO: Delete job entry route
+  [HttpDelete("{id}")]
+  public IActionResult DeleteJobEntry(int id)
+  {
+    if (id >= JobEntryData.Count() || id < 0)
+    {
+      return NotFound();
+    }
+
+    JobEntryData.RemoveAt(id);
+    return Ok("Job entry id: " + id + " removed.");
+  }
 }
