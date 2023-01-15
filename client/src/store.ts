@@ -1,5 +1,7 @@
 import { writable } from 'svelte/store';
 
+import { fetchJobEntries } from '@src/features/jobList';
+
 export interface JobEntry {
 	company: string;
 	//TODO: Should be an array of contacts
@@ -12,18 +14,6 @@ export interface JobEntry {
 const createJobListStore = () => {
 	const { subscribe, update } = writable<Array<JobEntry>>([]);
 
-  const fetchEntries = async () => {
-    try {
-      //TODO: Use environment to handle server url
-      const response = await (await fetch("http://localhost:5000/api/joblist")).json();
-      update(() => response);
-    }
-    catch(err) {
-      //TODO: Error Handling
-      console.error(err);
-    }
-  };
-
 	const updateEntry = (entryData: Partial<JobEntry>, index: number) => {
 		update((state) => {
 			state[index] = { ...state[index], ...entryData };
@@ -33,7 +23,7 @@ const createJobListStore = () => {
 
 	return {
 		subscribe,
-    fetchEntries,
+    fetchEntries: () => fetchJobEntries(update),
 		updateEntry,
 		addEntry: (entry: JobEntry) => update((state) => [...state, entry]),
 		removeEntry: (index: number) => update((state) => state.filter((val, i) => i !== index))
