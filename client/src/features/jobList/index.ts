@@ -1,3 +1,4 @@
+import addJobEntries from './addJobEntries';
 import fetchJobEntries from './fetchJobEntries';
 
-export { fetchJobEntries };
+export { addJobEntries, fetchJobEntries };

@@ -2,6 +2,7 @@ import type { Updater } from 'svelte/store';
 
 import type { JobEntry } from '@src/store/JobListStore';
 
+//TODO: Do not repeat this type
 type StoreUpdater = (updater: Updater<JobEntry[]>) => void;
 
 const fetchJobEntries = async (update: StoreUpdater) => {

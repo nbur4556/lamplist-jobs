@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-import { fetchJobEntries } from '@src/features/jobList';
+import { addJobEntries, fetchJobEntries } from '@src/features/jobList';
 
 export interface JobEntry {
 	company: string;
@@ -25,7 +25,7 @@ const createJobListStore = () => {
 		subscribe,
 		fetchEntries: () => fetchJobEntries(update),
 		updateEntry,
-		addEntry: (entry: JobEntry) => update((state) => [...state, entry]),
+		addEntry: (entry: JobEntry) => addJobEntries(entry, update),
 		removeEntry: (index: number) => update((state) => state.filter((val, i) => i !== index))
 	};
 };
