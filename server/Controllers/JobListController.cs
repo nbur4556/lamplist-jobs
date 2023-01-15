@@ -37,7 +37,7 @@ public class JobListController : ControllerBase
   {
     if (request.company is null)
     {
-      return BadRequest("company name is required.");
+      return BadRequest("Company name is required.");
     }
 
     JobEntry jobEntry = new JobEntry(request.company);
@@ -45,7 +45,33 @@ public class JobListController : ControllerBase
     return CreatedAtAction(nameof(CreateJobEntry), jobEntry);
   }
 
-  //TODO: Update job entry route/
+  [HttpPatch("{id}")]
+  public ActionResult<JobEntry> PatchJobEntry(int id, JobEntryRequest request)
+  {
+    if (id >= JobEntryData.Count() || id < 0)
+    {
+      return NotFound();
+    }
+
+    if (request.company != null)
+    {
+      JobEntryData[id].Company = request.company;
+    }
+    if (request.contact != null)
+    {
+      JobEntryData[id].Contact = request.contact;
+    }
+    if (request.interest != null)
+    {
+      JobEntryData[id].Interest = request.interest;
+    }
+    if (request.posting != null)
+    {
+      JobEntryData[id].Posting = request.posting;
+    }
+
+    return JobEntryData[id];
+  }
 
   //TODO: Delete job entry route
 }
