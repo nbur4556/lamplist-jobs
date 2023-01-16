@@ -1,8 +1,7 @@
 <script lang="ts">
-  import Card from '@src/lib/Card.svelte';
 	import Input from '@src/lib/Form/Input.svelte';
 	import InputNumber from '@src/lib/Form/InputNumber.svelte';
-	import Entry from '@src/lib/JobList/Entry.svelte';
+	import EntryCard from '@src/lib/JobList/EntryCard.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
 
 	interface FormValues {
@@ -95,6 +94,4 @@
 	{/if}
 </form>
 
-<Card>
-  <Entry job={$JobListStore[entryIndex]} index={entryIndex} />
-</Card>
+<EntryCard job={$JobListStore[entryIndex]} />
