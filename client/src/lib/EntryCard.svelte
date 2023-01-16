@@ -6,7 +6,9 @@
 </script>
 
 <Card>
-  {job.company}
+  <span slot="header">
+    {job.company}
+  </span>
   {#if job.contact}{job.contact}{/if}
   {#if job.interest}{job.interest}{/if}
   {#if job.posting}{job.posting}{/if}

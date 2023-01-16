@@ -1,5 +1,10 @@
 <section>
-  <slot />
+  <div class='header'>
+    <slot name="header" />
+  </div>
+  <div class='body'>
+    <slot />
+  </div>
 </section>
 
 <style lang='scss'>
@@ -9,12 +14,24 @@
   @use '../theme/sizes';
 
   section {
-    margin: sizes.$spacing-small;
-    padding: sizes.$spacing-mid;
+    display: flex;
+    flex-direction: column;
+
+    margin: sizes.$spacing-sm;
     border: sizes.$border solid colors.$black;
 
     width: max-content;
 
     box-shadow: effects.$container-shadow;
+  }
+
+  .header {
+    padding: sizes.$spacing-xs;
+    background-color: colors.$base;
+  }
+
+  .body {
+    flex-grow: 3;
+    padding: sizes.$spacing-xs;
   }
 </style>
