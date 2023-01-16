@@ -9,6 +9,7 @@
   <span slot="header">
     {job.company}
   </span>
+  <!-- //TODO: Organize Content -->
   {#if job.contact}{job.contact}{/if}
   {#if job.interest}{job.interest}{/if}
   {#if job.posting}{job.posting}{/if}
