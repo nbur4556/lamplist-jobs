@@ -4,6 +4,11 @@
 
 <style>
   section {
-    border: 2px solid black;
+    padding: 20px;
+    border: 3px solid black;
+
+    width: max-content;
+
+    box-shadow: 3px 3px black;
   }
 </style>

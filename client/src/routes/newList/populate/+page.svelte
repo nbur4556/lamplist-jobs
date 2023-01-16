@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Input from '@src/lib/Form/Input.svelte';
 	import InputNumber from '@src/lib/Form/InputNumber.svelte';
-	import EntryCard from '@src/lib/JobList/EntryCard.svelte';
+	import EntryCard from '@src/lib/EntryCard.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
 
 	interface FormValues {
