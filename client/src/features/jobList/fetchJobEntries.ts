@@ -1,9 +1,10 @@
+import { PUBLIC_API_URL } from '$env/static/public';
+
 import type { StoreUpdater } from './types';
 
 const fetchJobEntries = async (update: StoreUpdater) => {
 	try {
-		//TODO: Use environment to handle server url
-		const response = await (await fetch('http://localhost:5000/api/joblist')).json();
+		const response = await (await fetch(`${PUBLIC_API_URL}/api/joblist`)).json();
 		update(() => response);
 	} catch (err) {
 		//TODO: Error Handling

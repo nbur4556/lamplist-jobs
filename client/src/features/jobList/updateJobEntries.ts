@@ -1,10 +1,12 @@
+import { PUBLIC_API_URL } from '$env/static/public';
+
 import type { JobEntry } from '@src/store/JobListStore';
 
 import type { StoreUpdater } from './types';
 
 const updateJobEntries = async (id: number, entry: Partial<JobEntry>, update: StoreUpdater) => {
 	try {
-		const result = await fetch(`http://localhost:5000/api/joblist/${id}`, {
+		const result = await fetch(`${PUBLIC_API_URL}/api/joblist/${id}`, {
 			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json'
