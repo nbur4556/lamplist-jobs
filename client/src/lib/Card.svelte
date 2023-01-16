@@ -2,13 +2,17 @@
   <slot />
 </section>
 
-<style>
+<style lang='scss'>
+  // ? Does this have to be a relative path?
+  @use '../theme/colors.scss';
+  @use '../theme/sizes.scss';
+
   section {
     padding: 20px;
-    border: 3px solid black;
+    border: sizes.$border solid colors.$black;
 
     width: max-content;
 
-    box-shadow: 3px 3px black;
+    box-shadow: sizes.$border sizes.$border colors.$black;
   }
 </style>
