@@ -7,7 +7,6 @@ public class JobEntry
   public int? Interest { get; set; }
   public string? Posting { get; set; }
 
-  //? Can we use named parameters here?
   public JobEntry(
     string company,
     string? contact = null,
