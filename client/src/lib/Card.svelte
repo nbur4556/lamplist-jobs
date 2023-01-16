@@ -4,15 +4,17 @@
 
 <style lang='scss'>
   // ? Does this have to be a relative path?
-  @use '../theme/colors.scss';
-  @use '../theme/sizes.scss';
+  @use '../theme/colors';
+  @use '../theme/effects';
+  @use '../theme/sizes';
 
   section {
-    padding: 20px;
+    margin: sizes.$spacing-small;
+    padding: sizes.$spacing-mid;
     border: sizes.$border solid colors.$black;
 
     width: max-content;
 
-    box-shadow: sizes.$border sizes.$border colors.$black;
+    box-shadow: effects.$container-shadow;
   }
 </style>
