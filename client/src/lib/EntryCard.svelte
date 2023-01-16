@@ -9,8 +9,19 @@
   <span slot="header">
     {job.company}
   </span>
-  <!-- //TODO: Organize Content -->
-  {#if job.contact}{job.contact}{/if}
-  {#if job.interest}{job.interest}{/if}
-  {#if job.posting}{job.posting}{/if}
+  <div>
+    <p>Contact: {#if job.contact}{job.contact}{/if}</p>
+    <p>Interest: {#if job.interest}{job.interest}{/if}</p>
+    <p>Posting: {#if job.posting}{job.posting}{/if}</p>
+  </div>
 </Card>
+
+<style lang='scss'>
+  @use '../theme/sizes';
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: sizes.$spacing-sm;
+  }
+</style>

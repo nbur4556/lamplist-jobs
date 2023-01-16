@@ -21,17 +21,15 @@
     border: sizes.$border solid colors.$black;
 
     width: max-content;
-
     box-shadow: effects.$container-shadow;
-  }
 
-  .header {
-    padding: sizes.$spacing-xs;
-    background-color: colors.$base;
-  }
+    .header {
+      padding: sizes.$spacing-sm;
+      background-color: colors.$base;
+    }
 
-  .body {
-    flex-grow: 3;
-    padding: sizes.$spacing-xs;
+    .body {
+      padding: sizes.$spacing-sm;
+    }
   }
 </style>
