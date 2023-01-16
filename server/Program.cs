@@ -1,4 +1,5 @@
 var builder = WebApplication.CreateBuilder(args);
+var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<String[]>();
 
 String allowOriginPolicyRef = "_allowSpecificOrigins";
 
@@ -6,9 +7,9 @@ String allowOriginPolicyRef = "_allowSpecificOrigins";
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
+  if (corsOrigins is null) { return; }
   options.AddPolicy(name: allowOriginPolicyRef, policy =>
-    //TODO: Use environment to determine origin/s to add
-    policy.WithOrigins("http://localhost:5173").AllowAnyHeader().AllowAnyMethod()
+    policy.WithOrigins(corsOrigins).AllowAnyHeader().AllowAnyMethod()
   );
 });
 
