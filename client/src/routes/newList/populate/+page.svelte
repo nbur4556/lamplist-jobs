@@ -10,22 +10,20 @@
 		posting?: string;
 	}
 
-	const formDefault: FormValues = {
-		contact: undefined,
-		interest: undefined,
-		posting: undefined
-	};
-
 	let entryIndex = 0;
 	let step: 0 | 1 | 2 = 0;
-	let formValues: FormValues = formDefault;
+	let formValues: FormValues = {
+    contact: undefined,
+    interest: undefined,
+    posting: undefined
+  };;
 
 	$: maxInStep = entryIndex >= $JobListStore.length - 1;
 	$: minInStep = entryIndex <= 0;
 	$: lastEntry = maxInStep && step >= 2;
 	$: firstEntry = minInStep && step <= 0;
 
-	const updateJobEntry = () => {
+	const updateJobEntry = async () => {
 		let cleanValues: FormValues = {};
 
 		//? Should this clean values method be added to a utility function?
@@ -39,8 +37,12 @@
 			cleanValues = { ...cleanValues, [key]: formValues[key] };
 		}
 
-		JobListStore.updateEntry({ ...cleanValues }, entryIndex);
-		formValues = {...formDefault};
+		await JobListStore.updateEntry({ ...cleanValues }, entryIndex);
+		formValues = {
+      contact: undefined,
+      interest: undefined,
+      posting: undefined
+    };
 	};
 
 	const nextEntry = () => {
