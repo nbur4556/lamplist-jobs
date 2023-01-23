@@ -2,9 +2,10 @@
 	export let value: number | undefined;
 	export let min: number | undefined = undefined;
 	export let max: number | undefined = undefined;
+	export let hidden: boolean = false;
 </script>
 
-<label>
+<label {hidden}>
 	<slot />
-	<input type="number" bind:value {min} {max} />
+	<input type="number" bind:value {min} {max} {hidden} />
 </label>

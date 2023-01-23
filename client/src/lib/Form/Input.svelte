@@ -1,8 +1,9 @@
 <script lang="ts">
 	export let value: string | undefined;
+	export let hidden: boolean = false;
 </script>
 
-<label>
+<label {hidden}>
 	<slot />
-	<input type="text" bind:value />
+	<input type="text" bind:value {hidden} />
 </label>

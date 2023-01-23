@@ -1,0 +1,5 @@
+@use '../theme/fonts';
+
+main {
+	font-family: fonts.$base;
+}
