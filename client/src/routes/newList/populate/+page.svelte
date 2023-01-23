@@ -61,6 +61,7 @@
 	};
 </script>
 
+<!-- //! Page content is not removed on transition to new page while animating -->
 <main>
 	<form>
 		<Input bind:value={formValues.contact} hidden={step !== 0}>
@@ -81,5 +82,11 @@
 		{/if}
 	</form>
 
-	<EntryCard job={$JobListStore[entryIndex]} />
+  <section>
+    {#each $JobListStore as jobEntry, index}
+      {#if entryIndex === index}
+  	   <EntryCard job={jobEntry} />
+      {/if}
+    {/each}
+  </section>
 </main>

@@ -6,20 +6,20 @@
 </script>
 
 <Card>
-	<span slot="header" class="bold">
-		<h3>{job.company}</h3>
-	</span>
-	<div>
-		<p>
-			<span class="bold">Contact:</span> {#if job.contact}{job.contact}{/if}
-		</p>
-		<p>
-			<span class="bold">Interest:</span> {#if job.interest}{job.interest}{/if}
-		</p>
-		<p>
-			<span class="bold">Posting:</span> {#if job.posting}{job.posting}{/if}
-		</p>
-	</div>
+  <span slot="header" class="bold">
+    <h3>{job.company}</h3>
+  </span>
+  <div>
+    <p>
+      <span class="bold">Contact:</span> {#if job.contact}{job.contact}{/if}
+    </p>
+    <p>
+      <span class="bold">Interest:</span> {#if job.interest}{job.interest}{/if}
+    </p>
+    <p>
+      <span class="bold">Posting:</span> {#if job.posting}{job.posting}{/if}
+    </p>
+  </div>
 </Card>
 
 <style lang="scss">
