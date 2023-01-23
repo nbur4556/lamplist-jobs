@@ -20,7 +20,7 @@
 		margin: sizes.$spacing-sm;
 		border: sizes.$border solid colors.$black;
 
-    width: max-content;
+		width: max-content;
 		box-shadow: effects.$container-shadow;
 
 		.header {

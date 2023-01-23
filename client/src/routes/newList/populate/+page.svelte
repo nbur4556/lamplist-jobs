@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { fly } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 
 	import Input from '@src/lib/Form/Input.svelte';
 	import InputNumber from '@src/lib/Form/InputNumber.svelte';
@@ -13,6 +13,7 @@
 		posting?: string;
 	}
 
+	let animateLeft = false;
 	let entryIndex = 0;
 	let step: 0 | 1 | 2 = 0;
 	let formValues: FormValues = {
@@ -25,6 +26,7 @@
 	$: minInStep = entryIndex <= 0;
 	$: lastEntry = maxInStep && step >= 2;
 	$: firstEntry = minInStep && step <= 0;
+	$: animatePos = animateLeft ? 1000 : -1000;
 
 	const updateJobEntry = async () => {
 		const cleanValues = removeEmptyKeys<FormValues>(formValues);
@@ -37,6 +39,7 @@
 	};
 
 	const nextEntry = () => {
+		animateLeft = true;
 		updateJobEntry();
 
 		if (lastEntry) {
@@ -51,6 +54,8 @@
 	};
 
 	const preEntry = () => {
+		animateLeft = false;
+
 		if (firstEntry) {
 			return;
 		} else if (minInStep) {
@@ -63,7 +68,6 @@
 	};
 </script>
 
-<!-- //! Page content is not removed on transition to new page while animating -->
 <main>
 	<form>
 		<Input bind:value={formValues.contact} hidden={step !== 0}>
@@ -84,20 +88,23 @@
 		{/if}
 	</form>
 
-  <section>
-    {#each $JobListStore as jobEntry, index}
-      {#if entryIndex === index}
-      <!-- //TODO: Reverse this animation when backing up -->
-  	   <div class="animator" in:fly={{x: 1000, duration: 500}} out:fly={{x: -1000, duration: 500}}>
-        <EntryCard job={jobEntry} />
-        </div>
-      {/if}
-    {/each}
-  </section>
+	<section>
+		{#each $JobListStore as jobEntry, index}
+			{#if entryIndex === index}
+				<div
+					class="animator"
+					in:fly|local={{ x: animatePos, duration: 500 }}
+					out:fade={{ duration: 100 }}
+				>
+					<EntryCard job={jobEntry} />
+				</div>
+			{/if}
+		{/each}
+	</section>
 </main>
 
 <style>
-  .animator{
-    position: absolute;
-  }
+	.animator {
+		position: absolute;
+	}
 </style>
