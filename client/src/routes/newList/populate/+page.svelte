@@ -40,7 +40,7 @@
 		}
 
 		JobListStore.updateEntry({ ...cleanValues }, entryIndex);
-		formValues = formDefault;
+		formValues = {...formDefault};
 	};
 
 	const nextEntry = () => {
@@ -73,19 +73,15 @@
 <main>
   <!-- //! Some inputs are not clearing on next -->
   <form>
-  	{#if step === 0}
-  		<Input bind:value={formValues.contact}>
+  		<Input bind:value={formValues.contact} hidden={step !== 0}>
   			Do you have a contact at this company? Enter their name:
   		</Input>
-  	{:else if step === 1}
-  		<InputNumber bind:value={formValues.interest} min={0} max={3}>
+  		<InputNumber bind:value={formValues.interest} min={0} max={3} hidden={step !== 1}>
   			Enter your interest for this company on a scale of 0 - 3:
   		</InputNumber>
-  	{:else if step === 2}
-  		<Input bind:value={formValues.posting}>
+  		<Input bind:value={formValues.posting} hidden={step !== 2}>
   			Is there a current job posting? Enter the link here:
   		</Input>
-  	{/if}
   	<button on:click={preEntry}>Pre</button>
   
   	{#if lastEntry}
