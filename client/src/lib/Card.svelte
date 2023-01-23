@@ -1,9 +1,4 @@
-<script>
-  import { fly } from 'svelte/transition';
-</script>
-
-<!-- //TODO: Animation should be passed as props -->
-<section in:fly={{x: 1000, duration: 500}} out:fly={{x: -1000, duration: 500}}>
+<section>
 	<div class="header">
 		<slot name="header" />
 	</div>
@@ -22,8 +17,6 @@
 		display: flex;
 		flex-direction: column;
 
-    // TODO: Should only be position absolute if passed as a prop OR should have styling options passed as props
-    position: absolute;
 		margin: sizes.$spacing-sm;
 		border: sizes.$border solid colors.$black;
 

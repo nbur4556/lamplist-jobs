@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { fly } from 'svelte/transition';
+
 	import Input from '@src/lib/Form/Input.svelte';
 	import InputNumber from '@src/lib/Form/InputNumber.svelte';
 	import EntryCard from '@src/lib/EntryCard.svelte';
@@ -85,8 +87,17 @@
   <section>
     {#each $JobListStore as jobEntry, index}
       {#if entryIndex === index}
-  	   <EntryCard job={jobEntry} />
+      <!-- //TODO: Reverse this animation when backing up -->
+  	   <div class="animator" in:fly={{x: 1000, duration: 500}} out:fly={{x: -1000, duration: 500}}>
+        <EntryCard job={jobEntry} />
+        </div>
       {/if}
     {/each}
   </section>
 </main>
+
+<style>
+  .animator{
+    position: absolute;
+  }
+</style>
