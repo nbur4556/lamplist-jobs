@@ -6,28 +6,39 @@
 </script>
 
 <Card>
-	<span slot="header">
-		{job.company}
+	<span slot="header" class="bold">
+		<h3>{job.company}</h3>
 	</span>
 	<div>
 		<p>
-			Contact: {#if job.contact}{job.contact}{/if}
+			<span class="bold">Contact:</span> {#if job.contact}{job.contact}{/if}
 		</p>
 		<p>
-			Interest: {#if job.interest}{job.interest}{/if}
+			<span class="bold">Interest:</span> {#if job.interest}{job.interest}{/if}
 		</p>
 		<p>
-			Posting: {#if job.posting}{job.posting}{/if}
+			<span class="bold">Posting:</span> {#if job.posting}{job.posting}{/if}
 		</p>
 	</div>
 </Card>
 
 <style lang="scss">
+  @use '../theme/fonts';
 	@use '../theme/sizes';
 
 	div {
 		display: flex;
 		flex-direction: column;
-		gap: sizes.$spacing-sm;
+		gap: sizes.$spacing-md;
+    width: 40rem;
+    height: 10rem
 	}
+
+  h3 {
+    font-size: fonts.$size-lg;
+  }
+
+  .bold {
+    font-weight: fonts.$bold;
+  }
 </style>

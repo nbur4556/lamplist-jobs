@@ -62,7 +62,6 @@
 </script>
 
 <main>
-	<!-- //! Some inputs are not clearing on next -->
 	<form>
 		<Input bind:value={formValues.contact} hidden={step !== 0}>
 			Do you have a contact at this company? Enter their name:
