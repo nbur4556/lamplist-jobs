@@ -7,7 +7,6 @@ const fetchJobEntries = async (update: StoreUpdater) => {
 		const response = await (await fetch(`${PUBLIC_API_URL}/api/joblist`)).json();
 		update(() => response);
 	} catch (err) {
-		//TODO: Error Handling
 		console.error(err);
 	}
 };

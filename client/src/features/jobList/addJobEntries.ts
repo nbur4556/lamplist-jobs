@@ -16,7 +16,6 @@ const addJobEntries = async (entry: JobEntry, update: StoreUpdater) => {
 		const response = await result.json();
 		update((state) => [...state, response]);
 	} catch (err) {
-		//TODO: Error Handling
 		console.error(err);
 	}
 };
