@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
+using server.Db;
 using server.Models;
 
 namespace server.Controllers;
@@ -16,21 +17,27 @@ public class JobEntryRequest
 [Route("api/[controller]")]
 public class JobListController : ControllerBase
 {
-  //! JobEntryData is not persistent between api calls.
+  private readonly DataContext _context;
   List<JobEntry> JobEntryData = new List<JobEntry>();
 
-  public JobListController()
+  public JobListController(DataContext context)
   {
     JobEntryData.Add(new JobEntry("Test Company 1"));
     JobEntryData.Add(new JobEntry("Test Company 2", contact: "Test Contact"));
     JobEntryData.Add(new JobEntry("Test Company 3", interest: 3));
     JobEntryData.Add(new JobEntry("Test Company 4", posting: "Test Posting"));
+    _context = context;
   }
 
   [HttpGet]
   public ActionResult<JobEntry[]> GetJobList()
   {
-    return JobEntryData.ToArray<JobEntry>();
+    IOrderedQueryable<JobEntry>? jobEntries = _context.JobEntries?.OrderBy(entry => entry.Id);
+    if (jobEntries == null)
+    {
+      return NotFound();
+    }
+    return jobEntries.ToArray<JobEntry>();
   }
 
   [HttpPost]
