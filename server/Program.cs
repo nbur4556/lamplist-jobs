@@ -4,6 +4,8 @@ using server.Db;
 
 var builder = WebApplication.CreateBuilder(args);
 var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<String[]>();
+String? dbConnection = builder.Configuration.GetConnectionString("DataContext");
+String? dbPassword = builder.Configuration["PostgreSql:DbPassword"];
 
 String allowOriginPolicyRef = "_allowSpecificOrigins";
 
@@ -17,9 +19,7 @@ builder.Services.AddCors(options =>
   );
 });
 builder.Services.AddDbContext<DataContext>(options =>
-  options.UseNpgsql(
-    builder.Configuration.GetConnectionString("DataContext")
-  )
+  options.UseNpgsql($"{dbConnection}; Password={dbPassword}")
 );
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
