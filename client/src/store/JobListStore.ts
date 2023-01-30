@@ -11,9 +11,7 @@ export interface JobEntry {
   //? Can this be required?
 	id?: string;
 	company: string;
-	//TODO: Should be an array of contacts
 	contact?: string;
-	//TODO: Should be on a scale of 0 - 3
 	interest?: number;
 	posting?: string;
 }

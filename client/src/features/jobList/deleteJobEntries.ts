@@ -9,7 +9,6 @@ const deleteJobEntries = async (id: string, update: StoreUpdater) => {
 		});
 		update((state) => state.filter((val) => val.id !== id));
 	} catch (err) {
-		//TODO: Error Handling
 		console.error(err);
 	}
 };
