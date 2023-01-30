@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+
+using server.Db;
+
 var builder = WebApplication.CreateBuilder(args);
 var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<String[]>();
 
@@ -12,6 +16,11 @@ builder.Services.AddCors(options =>
     policy.WithOrigins(corsOrigins).AllowAnyHeader().AllowAnyMethod()
   );
 });
+builder.Services.AddDbContext<DataContext>(options =>
+  options.UseNpgsql(
+    builder.Configuration.GetConnectionString("DataContext")
+  )
+);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
