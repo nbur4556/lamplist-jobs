@@ -55,31 +55,30 @@ public class JobListController : ControllerBase
   }
 
   [HttpPatch("{id}")]
-  public ActionResult<JobEntry> PatchJobEntry(int id, JobEntryRequest request)
+  public ActionResult<JobEntry> PatchJobEntry(Guid id, JobEntryRequest request)
   {
-    if (id >= JobEntryData.Count() || id < 0)
-    {
-      return NotFound();
-    }
+    JobEntry? jobEntry = _context.Find<JobEntry>(id);
+    if (jobEntry is null) { return NotFound(); }
 
     if (request.company != null)
     {
-      JobEntryData[id].Company = request.company;
+      jobEntry.Company = request.company;
     }
     if (request.contact != null)
     {
-      JobEntryData[id].Contact = request.contact;
+      jobEntry.Contact = request.contact;
     }
     if (request.interest != null)
     {
-      JobEntryData[id].Interest = request.interest;
+      jobEntry.Interest = request.interest;
     }
     if (request.posting != null)
     {
-      JobEntryData[id].Posting = request.posting;
+      jobEntry.Posting = request.posting;
     }
 
-    return JobEntryData[id];
+    _context.SaveChanges();
+    return jobEntry;
   }
 
   [HttpDelete("{id}")]

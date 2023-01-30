@@ -29,8 +29,10 @@
 	$: animatePos = animateLeft ? 1000 : -1000;
 
 	const updateJobEntry = async () => {
+		//? Can the '' value be removed?
+		const id = $JobListStore[entryIndex].id || '';
 		const cleanValues = removeEmptyKeys<FormValues>(formValues);
-		await JobListStore.updateEntry({ ...cleanValues }, entryIndex);
+		await JobListStore.updateEntry({ ...cleanValues }, id);
 		formValues = {
 			contact: undefined,
 			interest: undefined,

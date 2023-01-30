@@ -8,6 +8,8 @@ import {
 } from '@src/features/jobList';
 
 export interface JobEntry {
+  //? Can this be required?
+	id?: string;
 	company: string;
 	//TODO: Should be an array of contacts
 	contact?: string;
@@ -22,7 +24,7 @@ const createJobListStore = () => {
 	return {
 		subscribe,
 		fetchEntries: () => fetchJobEntries(update),
-		updateEntry: (entry: Partial<JobEntry>, id: number) => updateJobEntries(id, entry, update),
+		updateEntry: (values: Partial<JobEntry>, id: string) => updateJobEntries(id, values, update),
 		addEntry: (entry: JobEntry) => addJobEntries(entry, update),
 		removeEntry: (id: number) => deleteJobEntries(id, update)
 	};
