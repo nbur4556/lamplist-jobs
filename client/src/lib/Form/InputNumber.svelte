@@ -2,7 +2,7 @@
 	export let value: number | undefined;
 	export let min: number | undefined = undefined;
 	export let max: number | undefined = undefined;
-	export let hidden: boolean = false;
+	export let hidden = false;
 </script>
 
 <label {hidden}>

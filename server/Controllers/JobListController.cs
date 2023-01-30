@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
+using server.Db;
 using server.Models;
 
 namespace server.Controllers;
@@ -16,20 +17,22 @@ public class JobEntryRequest
 [Route("api/[controller]")]
 public class JobListController : ControllerBase
 {
-  List<JobEntry> JobEntryData = new List<JobEntry>();
+  private readonly DataContext _context;
 
-  public JobListController()
+  public JobListController(DataContext context)
   {
-    JobEntryData.Add(new JobEntry("Test Company 1"));
-    JobEntryData.Add(new JobEntry("Test Company 2", contact: "Test Contact"));
-    JobEntryData.Add(new JobEntry("Test Company 3", interest: 3));
-    JobEntryData.Add(new JobEntry("Test Company 4", posting: "Test Posting"));
+    _context = context;
   }
 
   [HttpGet]
   public ActionResult<JobEntry[]> GetJobList()
   {
-    return JobEntryData.ToArray<JobEntry>();
+    IOrderedQueryable<JobEntry>? jobEntries = _context.JobEntries?.OrderBy(entry => entry.Id);
+    if (jobEntries == null)
+    {
+      return NotFound();
+    }
+    return jobEntries.ToArray<JobEntry>();
   }
 
   [HttpPost]
@@ -41,47 +44,49 @@ public class JobListController : ControllerBase
     }
 
     JobEntry jobEntry = new JobEntry(request.company);
-    JobEntryData.Add(jobEntry);
+    _context.Add(jobEntry);
+    _context.SaveChanges();
     return CreatedAtAction(nameof(CreateJobEntry), jobEntry);
   }
 
   [HttpPatch("{id}")]
-  public ActionResult<JobEntry> PatchJobEntry(int id, JobEntryRequest request)
+  public ActionResult<JobEntry> PatchJobEntry(Guid id, JobEntryRequest request)
   {
-    if (id >= JobEntryData.Count() || id < 0)
-    {
-      return NotFound();
-    }
+    JobEntry? jobEntry = _context.Find<JobEntry>(id);
+    if (jobEntry is null) { return NotFound(); }
 
     if (request.company != null)
     {
-      JobEntryData[id].Company = request.company;
+      jobEntry.Company = request.company;
     }
     if (request.contact != null)
     {
-      JobEntryData[id].Contact = request.contact;
+      jobEntry.Contact = request.contact;
     }
     if (request.interest != null)
     {
-      JobEntryData[id].Interest = request.interest;
+      jobEntry.Interest = request.interest;
     }
     if (request.posting != null)
     {
-      JobEntryData[id].Posting = request.posting;
+      jobEntry.Posting = request.posting;
     }
 
-    return JobEntryData[id];
+    _context.SaveChanges();
+    return jobEntry;
   }
 
   [HttpDelete("{id}")]
-  public IActionResult DeleteJobEntry(int id)
+  public IActionResult DeleteJobEntry(Guid id)
   {
-    if (id >= JobEntryData.Count() || id < 0)
+    JobEntry? jobEntry = _context.Find<JobEntry>(id);
+    if (jobEntry is null)
     {
       return NotFound();
     }
 
-    JobEntryData.RemoveAt(id);
+    _context.Remove<JobEntry>(jobEntry);
+    _context.SaveChanges();
     return Ok("Job entry id: " + id + " removed.");
   }
 }
