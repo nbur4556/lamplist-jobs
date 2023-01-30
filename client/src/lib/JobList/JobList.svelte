@@ -8,6 +8,6 @@
 <h2>Job List ({jobCount})</h2>
 <ul>
 	{#each $JobListStore as job, index}
-		<Entry {job} {index} />
+		<Entry {job} />
 	{/each}
 </ul>

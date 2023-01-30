@@ -26,7 +26,7 @@ const createJobListStore = () => {
 		fetchEntries: () => fetchJobEntries(update),
 		updateEntry: (values: Partial<JobEntry>, id: string) => updateJobEntries(id, values, update),
 		addEntry: (entry: JobEntry) => addJobEntries(entry, update),
-		removeEntry: (id: number) => deleteJobEntries(id, update)
+		removeEntry: (id: string) => deleteJobEntries(id, update)
 	};
 };
 

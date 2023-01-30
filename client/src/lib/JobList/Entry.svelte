@@ -3,7 +3,6 @@
 	import type { JobEntry } from '@src/store/JobListStore';
 
 	export let job: JobEntry;
-	export let index: number;
 </script>
 
 <li>
@@ -11,5 +10,6 @@
 	{#if job.contact !== undefined}Contact: {job.contact}{/if}
 	{#if job.interest !== undefined}Interest: {job.interest}{/if}
 	{#if job.posting !== undefined}Posting: {job.posting}{/if}
-	<button on:click={() => JobListStore.removeEntry(index)}>X</button>
+	<!-- //?: Can the blank string be removed form the 'removeEntry' parameter? -->
+	<button on:click={() => JobListStore.removeEntry(job.id || '')}>X</button>
 </li>

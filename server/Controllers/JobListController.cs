@@ -82,14 +82,16 @@ public class JobListController : ControllerBase
   }
 
   [HttpDelete("{id}")]
-  public IActionResult DeleteJobEntry(int id)
+  public IActionResult DeleteJobEntry(Guid id)
   {
-    if (id >= JobEntryData.Count() || id < 0)
+    JobEntry? jobEntry = _context.Find<JobEntry>(id);
+    if (jobEntry is null)
     {
       return NotFound();
     }
 
-    JobEntryData.RemoveAt(id);
+    _context.Remove<JobEntry>(jobEntry);
+    _context.SaveChanges();
     return Ok("Job entry id: " + id + " removed.");
   }
 }
