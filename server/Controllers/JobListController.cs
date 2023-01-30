@@ -49,7 +49,8 @@ public class JobListController : ControllerBase
     }
 
     JobEntry jobEntry = new JobEntry(request.company);
-    JobEntryData.Add(jobEntry);
+    _context.Add(jobEntry);
+    _context.SaveChanges();
     return CreatedAtAction(nameof(CreateJobEntry), jobEntry);
   }
 
