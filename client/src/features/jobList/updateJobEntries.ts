@@ -19,7 +19,6 @@ const updateJobEntries = async (id: number, entry: Partial<JobEntry>, update: St
 			return state;
 		});
 	} catch (err) {
-		//TODO: Error Handling
 		console.error(err);
 	}
 };

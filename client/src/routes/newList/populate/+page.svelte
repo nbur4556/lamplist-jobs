@@ -68,7 +68,6 @@
 	};
 </script>
 
-<!-- //TODO: Keep selection on entry input after submit for rapid data entry -->
 <main>
 	<form>
 		<Input bind:value={formValues.contact} hidden={step !== 0}>
