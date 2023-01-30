@@ -8,8 +8,7 @@ import {
 } from '@src/features/jobList';
 
 export interface JobEntry {
-  //? Can this be required?
-	id?: string;
+	id: string;
 	company: string;
 	contact?: string;
 	interest?: number;
