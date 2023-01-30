@@ -18,14 +18,9 @@ public class JobEntryRequest
 public class JobListController : ControllerBase
 {
   private readonly DataContext _context;
-  List<JobEntry> JobEntryData = new List<JobEntry>();
 
   public JobListController(DataContext context)
   {
-    JobEntryData.Add(new JobEntry("Test Company 1"));
-    JobEntryData.Add(new JobEntry("Test Company 2", contact: "Test Contact"));
-    JobEntryData.Add(new JobEntry("Test Company 3", interest: 3));
-    JobEntryData.Add(new JobEntry("Test Company 4", posting: "Test Posting"));
     _context = context;
   }
 
