@@ -50,4 +50,10 @@ public class AuthController : ControllerBase
     );
     return CreatedAtAction(nameof(Login), result);
   }
+
+  //TODO: JWT Authentication
+
+  //TODO: Logout
+
+  //TODO: Forgot Password
 }

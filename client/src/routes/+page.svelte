@@ -7,6 +7,7 @@
 	<h1>Welcome to Lamp List Jobs!</h1>
 
 	<a href="/newList">New Lamp List</a>
+	<a href="/auth/register">Register</a>
 
 	{#if $JobListStore.length > 0}
 		<JobList />
