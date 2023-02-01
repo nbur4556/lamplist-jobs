@@ -1,9 +1,11 @@
-using server.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+
+using server.Models;
 
 namespace server.Db;
 
-public class DataContext : DbContext
+public class DataContext : IdentityDbContext<User, UserRole, Guid>
 {
   public DataContext(DbContextOptions options) : base(options) { }
 
