@@ -5,24 +5,26 @@ import type { User } from '@src/store/AuthStore';
 import type { StoreUpdater } from '../types';
 
 const registerUser = async (userName: string, password: string, update: StoreUpdater<User>) => {
-  try{
-    const result = await fetch(`${PUBLIC_API_URL}/api/Auth/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({userName, password})
-    });
-    const response = await result.json();
+	try {
+		const result = await fetch(`${PUBLIC_API_URL}/api/Auth/register`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ userName, password })
+		});
+		const response = await result.json();
 
-    if(!response.succeeded) {
-      throw response.errors;
-    }
+		if (!response.succeeded) {
+			throw response.errors;
+		}
 
-    update(() => {return {userName}});
-  } catch(err) {
-    console.error(err);
-  }
+		update(() => {
+			return { userName };
+		});
+	} catch (err) {
+		console.error(err);
+	}
 };
 
-export default registerUser
+export default registerUser;

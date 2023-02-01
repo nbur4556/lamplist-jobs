@@ -4,7 +4,11 @@ import type { JobEntry } from '@src/store/JobListStore';
 
 import type { StoreUpdater } from '../types';
 
-const updateJobEntries = async (id: string, values: Partial<JobEntry>, update: StoreUpdater<JobEntry[]>) => {
+const updateJobEntries = async (
+	id: string,
+	values: Partial<JobEntry>,
+	update: StoreUpdater<JobEntry[]>
+) => {
 	try {
 		const result = await fetch(`${PUBLIC_API_URL}/api/joblist/${id}`, {
 			method: 'PATCH',
