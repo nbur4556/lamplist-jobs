@@ -27,12 +27,12 @@
 			return;
 		}
 
-		AuthStore.registerUser(formValues.userName, formValues.password);
+		AuthStore.register(formValues.userName, formValues.password);
 	};
 </script>
 
 <main>
-  <a href="/">Home</a>
+	<a href="/">Home</a>
 	<form on:submit={onSubmit}>
 		<Input bind:value={formValues.userName}>UserName</Input>
 		<PasswordInput bind:value={formValues.password}>Password</PasswordInput>

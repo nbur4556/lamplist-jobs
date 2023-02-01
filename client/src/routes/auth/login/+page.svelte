@@ -19,7 +19,7 @@
 			return;
 		}
 
-		AuthStore.loginUser(formValues.userName, formValues.password);
+		AuthStore.login(formValues.userName, formValues.password);
 	};
 </script>
 

@@ -1,5 +1,6 @@
-import { PUBLIC_API_URL } from '$env/static/public';
 import { writable } from 'svelte/store';
+
+import {loginUser, registerUser} from '@src/features/auth';
 
 export interface User {
   id?: string;
@@ -9,49 +10,11 @@ export interface User {
 const createAuthStore = () => {
   const { subscribe, update } = writable<User>({});
 
-  const registerUser = async (userName: string, password: string) => {
-    try{
-      const result = await fetch(`${PUBLIC_API_URL}/api/Auth/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({userName, password})
-      });
-      const response = await result.json();
-
-      if(!response.succeeded) {
-        throw response.errors;
-      }
-
-      update(() => {return {userName}});
-    } catch(err) {
-      console.error(err);
-    }
-  };
-
-  const loginUser = async (userName: string, password: string) => {
-    try {
-      const result = await fetch(`${PUBLIC_API_URL}/api/Auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({userName, password})
-      })
-      const response = await result.json();
-
-      if(!response.succeeded) {
-        throw 'Login failed';
-      }
-
-      update(() => {return {userName}});
-    } catch (err) {
-      console.error(err);
-    }
+  return { 
+    subscribe, 
+    register: (userName: string, password: string) => registerUser(userName, password, update), 
+    login: (userName: string, password: string) => loginUser(userName, password, update),
   }
-
-  return { subscribe, registerUser, loginUser }
 }
 
 export const AuthStore = createAuthStore();
