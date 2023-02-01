@@ -2,9 +2,9 @@ import { PUBLIC_API_URL } from '$env/static/public';
 
 import type { JobEntry } from '@src/store/JobListStore';
 
-import type { StoreUpdater } from './types';
+import type { StoreUpdater } from '../types';
 
-const addJobEntries = async (entry: JobEntry, update: StoreUpdater) => {
+const addJobEntries = async (entry: JobEntry, update: StoreUpdater<JobEntry[]>) => {
 	try {
 		const result = await fetch(`${PUBLIC_API_URL}/api/joblist`, {
 			method: 'POST',
