@@ -32,6 +32,7 @@
 </script>
 
 <main>
+  <a href="/">Home</a>
 	<form on:submit={onSubmit}>
 		<Input bind:value={formValues.userName}>UserName</Input>
 		<PasswordInput bind:value={formValues.password}>Password</PasswordInput>
