@@ -23,7 +23,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<DataContext>(options =>
   options.UseNpgsql($"{dbConnection}; Password={dbPassword}")
 );
-builder.Services.AddIdentityCore<User>().AddEntityFrameworkStores<DataContext>();
+builder.Services.AddIdentity<User, UserRole>().AddEntityFrameworkStores<DataContext>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
