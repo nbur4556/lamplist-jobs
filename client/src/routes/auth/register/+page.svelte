@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Input from '@src/lib/Form/Input.svelte';
 	import PasswordInput from '@src/lib/Form/PasswordInput.svelte';
+	import { AuthStore } from '@src/store/AuthStore';
 
 	interface FormValues {
 		userName?: string;
@@ -15,13 +16,18 @@
 	};
 
 	const onSubmit = () => {
+		if (!formValues.userName || !formValues.password) {
+			console.error('UserName and Password are required');
+			return;
+		}
+
 		if (formValues.password !== formValues.confirmPassword) {
 			//TODO: Display Error Message
 			console.error('Password and confirm password do not match');
 			return;
 		}
 
-		console.log(formValues);
+		AuthStore.registerUser(formValues.userName, formValues.password);
 	};
 </script>
 
