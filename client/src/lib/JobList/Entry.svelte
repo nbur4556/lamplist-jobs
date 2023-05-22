@@ -1,4 +1,5 @@
 <script lang="ts">
+	import EntryCard from '@src/lib/EntryCard.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
 	import type { JobEntry } from '@src/store/JobListStore';
 
@@ -8,9 +9,6 @@
 </script>
 
 <li>
-	Company: {job.company}
-	{#if job.contact !== undefined}Contact: {job.contact}{/if}
-	{#if job.interest !== undefined}Interest: {job.interest}{/if}
-	{#if job.posting !== undefined}Posting: {job.posting}{/if}
+	<EntryCard {job} />
 	<button on:click={() => JobListStore.removeEntry(id)}>X</button>
 </li>
