@@ -17,6 +17,7 @@
 		flex-direction: column;
 
 		margin: sizes.$spacing-sm;
+		padding: sizes.$spacing-sm;
 
 		width: max-content;
 
@@ -24,12 +25,10 @@
 		border-radius: 10px;
 
 		.header {
-			padding: sizes.$spacing-sm;
-			color: colors.$txt-main;
+			padding-bottom: sizes.$spacing-sm;
 		}
 
 		.body {
-			padding: sizes.$spacing-sm;
 			color: colors.$txt-sub;
 		}
 	}

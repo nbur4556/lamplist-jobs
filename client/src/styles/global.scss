@@ -1,5 +1,11 @@
+@use '../theme/colors';
 @use '../theme/fonts';
 
+body {
+  background-color: colors.$bg-dark;
+}
+
 main {
+  color: colors.$txt-main;
 	font-family: fonts.$base;
 }
