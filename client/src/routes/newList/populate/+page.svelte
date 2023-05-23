@@ -70,6 +70,7 @@
 	};
 </script>
 
+<!-- //! Page content is not being removed when navigating away -->
 <PageContent>
 	<form>
 		<Input bind:value={formValues.contact} hidden={step !== 0}>
@@ -105,13 +106,9 @@
 	</section>
 </PageContent>
 
+<!-- //TODO: Entry Card is not scaling on this screen -->
 <style>
 	section {
-		display: flex;
-		justify-content: center;
-	}
-
-	.animator {
-		position: absolute;
+		width: 100%;
 	}
 </style>

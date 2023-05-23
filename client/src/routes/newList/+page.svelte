@@ -37,8 +37,14 @@
 </PageContent>
 
 <style lang="scss">
+	form {
+		display: flex;
+		justify-content: space-between;
+		align-self: stretch;
+	}
+
 	nav {
-		width: 600px;
+		align-self: stretch;
 
 		ul {
 			display: flex;

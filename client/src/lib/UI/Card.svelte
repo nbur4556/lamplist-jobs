@@ -16,10 +16,10 @@
 		display: flex;
 		flex-direction: column;
 
-		margin: sizes.$spacing-sm;
+		margin: sizes.$spacing-sm 0;
 		padding: sizes.$spacing-sm;
 
-		width: max-content;
+		width: 100%;
 
 		background-color: colors.$bg-mid;
 		border-radius: 10px;

@@ -18,6 +18,7 @@
 	section {
 		display: flex;
 		flex-direction: column;
+		align-self: stretch;
 	}
 
 	.job-count {

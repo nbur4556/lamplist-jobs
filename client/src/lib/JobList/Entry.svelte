@@ -20,6 +20,8 @@
 	li {
 		display: flex;
 		flex-direction: row;
+		justify-content: space-between;
+		gap: sizes.$spacing-sm;
 	}
 
 	button {

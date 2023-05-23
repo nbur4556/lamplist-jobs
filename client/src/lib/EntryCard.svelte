@@ -33,8 +33,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: sizes.$spacing-md;
-		width: 40rem;
-		height: 10rem;
 	}
 
 	h3 {

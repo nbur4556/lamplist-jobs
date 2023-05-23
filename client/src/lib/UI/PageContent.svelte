@@ -10,5 +10,8 @@
 		flex-direction: column;
 		align-items: center;
 		gap: sizes.$spacing-sm;
+
+		max-width: 40rem;
+		width: 100%;
 	}
 </style>
