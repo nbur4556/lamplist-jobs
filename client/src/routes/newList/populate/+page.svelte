@@ -69,42 +69,45 @@
 	};
 </script>
 
-<main>
-	<form>
-		<Input bind:value={formValues.contact} hidden={step !== 0}>
-			Do you have a contact at this company? Enter their name:
-		</Input>
-		<InputNumber bind:value={formValues.interest} min={0} max={3} hidden={step !== 1}>
-			Enter your interest for this company on a scale of 0 - 3:
-		</InputNumber>
-		<Input bind:value={formValues.posting} hidden={step !== 2}>
-			Is there a current job posting? Enter the link here:
-		</Input>
-		<button on:click={preEntry}>Pre</button>
+<form>
+	<Input bind:value={formValues.contact} hidden={step !== 0}>
+		Do you have a contact at this company? Enter their name:
+	</Input>
+	<InputNumber bind:value={formValues.interest} min={0} max={3} hidden={step !== 1}>
+		Enter your interest for this company on a scale of 0 - 3:
+	</InputNumber>
+	<Input bind:value={formValues.posting} hidden={step !== 2}>
+		Is there a current job posting? Enter the link here:
+	</Input>
+	<button on:click={preEntry}>Pre</button>
 
-		{#if lastEntry}
-			<a href="/"><button on:click={nextEntry}>Save</button></a>
-		{:else}
-			<button on:click={nextEntry}>Next</button>
+	{#if lastEntry}
+		<a href="/"><button on:click={nextEntry}>Save</button></a>
+	{:else}
+		<button on:click={nextEntry}>Next</button>
+	{/if}
+</form>
+
+<section>
+	{#each $JobListStore as jobEntry, index}
+		{#if entryIndex === index}
+			<div
+				class="animator"
+				in:fly|local={{ x: animatePos, duration: 500 }}
+				out:fade={{ duration: 100 }}
+			>
+				<EntryCard job={jobEntry} />
+			</div>
 		{/if}
-	</form>
-
-	<section>
-		{#each $JobListStore as jobEntry, index}
-			{#if entryIndex === index}
-				<div
-					class="animator"
-					in:fly|local={{ x: animatePos, duration: 500 }}
-					out:fade={{ duration: 100 }}
-				>
-					<EntryCard job={jobEntry} />
-				</div>
-			{/if}
-		{/each}
-	</section>
-</main>
+	{/each}
+</section>
 
 <style>
+	section {
+		display: flex;
+		justify-content: center;
+	}
+
 	.animator {
 		position: absolute;
 	}

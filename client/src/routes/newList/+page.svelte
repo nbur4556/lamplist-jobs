@@ -7,6 +7,7 @@
 	const targetListSize = 40;
 
 	const addEntry = () => {
+		//! Add entry should not require an id, this should be created by the backend
 		JobListStore.addEntry({ company: entry });
 		entry = '';
 	};
@@ -15,19 +16,17 @@
 	$: remainingCount = jobLength < targetListSize ? -(jobLength - targetListSize) : 0;
 </script>
 
-<main>
-	<h1>Welcome to Lamp List Jobs!</h1>
-	<a href="/">back</a>
+<h1>Welcome to Lamp List Jobs!</h1>
+<a href="/">back</a>
 
-	<form on:submit={addEntry}>
-		<Input bind:value={entry}>
-			List {remainingCount}+ employers that you would like to work for
-		</Input>
+<form on:submit={addEntry}>
+	<Input bind:value={entry}>
+		List {remainingCount}+ employers that you would like to work for
+	</Input>
 
-		<button type="submit">Submit</button>
-	</form>
+	<button type="submit">Submit</button>
+</form>
 
-	<a href="/newList/populate">Next</a>
+<a href="/newList/populate">Next</a>
 
-	<JobList />
-</main>
+<JobList />
