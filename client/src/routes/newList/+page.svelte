@@ -16,9 +16,6 @@
 	$: remainingCount = jobLength < targetListSize ? -(jobLength - targetListSize) : 0;
 </script>
 
-<h1>Welcome to Lamp List Jobs!</h1>
-<a href="/">back</a>
-
 <form on:submit={addEntry}>
 	<Input bind:value={entry}>
 		List {remainingCount}+ employers that you would like to work for
@@ -27,6 +24,23 @@
 	<button type="submit">Submit</button>
 </form>
 
-<a href="/newList/populate">Next</a>
+<nav>
+	<ul>
+		<li><a href="/">Back</a></li>
+		<li><a href="/newList/populate">Next</a></li>
+	</ul>
+</nav>
 
 <JobList />
+
+<style lang="scss">
+	nav {
+		width: 600px;
+
+		ul {
+			display: flex;
+			justify-content: space-between;
+			align-self: stretch;
+		}
+	}
+</style>

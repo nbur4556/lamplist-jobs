@@ -20,10 +20,6 @@
 		font-size: sizes.$font-lg;
 	}
 
-	section {
-		margin: sizes.$spacing-md;
-	}
-
 	.cta-msg {
 		font-size: sizes.$font-md;
 

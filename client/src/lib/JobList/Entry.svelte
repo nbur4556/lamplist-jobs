@@ -24,10 +24,6 @@
 
 	button {
 		margin: sizes.$spacing-sm 0;
-
-		color: colors.$txt-main;
-		background-color: colors.$bg-mid;
-		border: none;
-		border-radius: 10px;
+		padding: sizes.$spacing-xs;
 	}
 </style>
