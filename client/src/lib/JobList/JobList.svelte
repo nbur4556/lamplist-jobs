@@ -5,9 +5,22 @@
 	$: jobCount = $JobListStore.length;
 </script>
 
-<h2>Job List ({jobCount})</h2>
-<ul>
-	{#each $JobListStore as job}
-		<Entry {job} />
-	{/each}
-</ul>
+<section>
+	<p class="job-count">Jobs ({jobCount})</p>
+	<ul>
+		{#each $JobListStore as job}
+			<Entry {job} />
+		{/each}
+	</ul>
+</section>
+
+<style>
+	section {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.job-count {
+		align-self: flex-end;
+	}
+</style>

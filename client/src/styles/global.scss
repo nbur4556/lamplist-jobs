@@ -1,5 +1,7 @@
 @use '../theme/colors';
 @use '../theme/fonts';
+@use '../theme/sizes';
+
 
 body {
 	background-color: colors.$bg-dark;
@@ -8,4 +10,16 @@ body {
 main {
 	color: colors.$txt-main;
 	font-family: fonts.$base;
+}
+
+p, a, button {
+  font-size: sizes.$font-sm;
+}
+
+a {
+  color: colors.$txt-main;
+
+  &:hover {
+    color: colors.$txt-sub;
+  }
 }

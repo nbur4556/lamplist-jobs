@@ -5,10 +5,30 @@
 
 <h1>Welcome to Lamp List Jobs!</h1>
 
-<a href="/newList">New Lamp List</a>
+<a href="/newList">Add Job Entries</a>
 
 {#if $JobListStore.length > 0}
 	<JobList />
 {:else}
-	<p>No lamp list yet... Create one above!</p>
+	<p class="cta-msg">You do not yet have a lamp list... <a href="/newList">Create one now!</a></p>
 {/if}
+
+<style lang="scss">
+	@use '../theme/sizes';
+
+	h1 {
+		font-size: sizes.$font-lg;
+	}
+
+	section {
+		margin: sizes.$spacing-md;
+	}
+
+	.cta-msg {
+		font-size: sizes.$font-md;
+
+		a {
+			font-size: sizes.$font-xl;
+		}
+	}
+</style>
