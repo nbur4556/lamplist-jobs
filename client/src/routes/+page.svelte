@@ -14,6 +14,7 @@
 {/if}
 
 <style lang="scss">
+	@use '../theme/colors';
 	@use '../theme/sizes';
 
 	h1 {
@@ -25,6 +26,11 @@
 
 		a {
 			font-size: sizes.$font-xl;
+			color: colors.$accent-mid;
+
+			&:hover {
+				color: colors.$accent-light;
+			}
 		}
 	}
 </style>
