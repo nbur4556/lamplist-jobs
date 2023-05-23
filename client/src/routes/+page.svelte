@@ -1,17 +1,19 @@
 <script>
 	import JobList from '@src/lib/JobList/JobList.svelte';
+	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
 </script>
 
-<h1>Welcome to Lamp List Jobs!</h1>
+<PageContent>
+	<h1>Welcome to Lamp List Jobs!</h1>
+	<a href="/newList">Add Job Entries</a>
 
-<a href="/newList">Add Job Entries</a>
-
-{#if $JobListStore.length > 0}
-	<JobList />
-{:else}
-	<p class="cta-msg">You do not yet have a lamp list... <a href="/newList">Create one now!</a></p>
-{/if}
+	{#if $JobListStore.length > 0}
+		<JobList />
+	{:else}
+		<p class="cta-msg">You do not yet have a lamp list... <a href="/newList">Create one now!</a></p>
+	{/if}
+</PageContent>
 
 <style lang="scss">
 	@use '../theme/colors';

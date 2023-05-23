@@ -11,10 +11,7 @@
 
 	main {
 		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: sizes.$spacing-sm;
-
+		justify-content: center;
 		padding: sizes.$spacing-md;
 	}
 </style>

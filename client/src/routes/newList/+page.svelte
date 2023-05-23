@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Input from '@src/lib/Form/Input.svelte';
 	import JobList from '@src/lib/JobList/JobList.svelte';
+	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
 
 	let entry = '';
@@ -16,22 +17,24 @@
 	$: remainingCount = jobLength < targetListSize ? -(jobLength - targetListSize) : 0;
 </script>
 
-<form on:submit={addEntry}>
-	<Input bind:value={entry}>
-		List {remainingCount}+ employers that you would like to work for
-	</Input>
+<PageContent>
+	<form on:submit={addEntry}>
+		<Input bind:value={entry}>
+			List {remainingCount}+ employers that you would like to work for
+		</Input>
 
-	<button type="submit">Submit</button>
-</form>
+		<button type="submit">Submit</button>
+	</form>
 
-<nav>
-	<ul>
-		<li><a href="/">Back</a></li>
-		<li><a href="/newList/populate">Next</a></li>
-	</ul>
-</nav>
+	<nav>
+		<ul>
+			<li><a href="/">Back</a></li>
+			<li><a href="/newList/populate">Next</a></li>
+		</ul>
+	</nav>
 
-<JobList />
+	<JobList />
+</PageContent>
 
 <style lang="scss">
 	nav {
