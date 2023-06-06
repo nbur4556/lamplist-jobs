@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Input from '@src/lib/Form/Input.svelte';
 	import JobList from '@src/lib/JobList/JobList.svelte';
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
@@ -19,10 +18,8 @@
 
 <PageContent>
 	<form on:submit={addEntry}>
-		<Input bind:value={entry}>
-			List {remainingCount}+ employers that you would like to work for
-		</Input>
-
+		<label for="job">List {remainingCount}+ employers that you would like to work for:</label>
+		<input name="job" type="text" bind:value={entry} />
 		<button type="submit">Submit</button>
 	</form>
 
@@ -40,7 +37,7 @@
 	form {
 		display: flex;
 		justify-content: space-between;
-		align-self: stretch;
+		width: 100%;
 	}
 
 	nav {
