@@ -4,6 +4,7 @@
 	import Input from '@src/lib/Form/Input.svelte';
 	import InputNumber from '@src/lib/Form/InputNumber.svelte';
 	import EntryCard from '@src/lib/EntryCard.svelte';
+	import ButtonAsLink from '@src/lib/UI/ButtonAsLink.svelte';
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
 	import removeEmptyKeys from '@src/utils/removeEmptyKeys';
@@ -85,15 +86,15 @@
 
 	<section class="controls">
 		{#if lastEntry}
-			<a href="/"><button>Save</button></a>
+			<a href="/">Save</a>
 		{:else}
-			<button on:click={nextEntry}>Next</button>
+			<ButtonAsLink onClick={nextEntry}>Next</ButtonAsLink>
 		{/if}
 
 		{#if !firstEntry}
-			<button on:click={preEntry}>Pre</button>
+			<ButtonAsLink onClick={preEntry}>Pre</ButtonAsLink>
 		{:else}
-			<a href="/"><button>Back</button></a>
+			<a href="/newList">Back</a>
 		{/if}
 	</section>
 
