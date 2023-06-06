@@ -70,7 +70,6 @@
 	};
 </script>
 
-<!-- //! Page content is not being removed when navigating away -->
 <PageContent>
 	<form>
 		<Input bind:value={formValues.contact} hidden={step !== 0}>
@@ -82,14 +81,21 @@
 		<Input bind:value={formValues.posting} hidden={step !== 2}>
 			Is there a current job posting? Enter the link here:
 		</Input>
-		<button on:click={preEntry}>Pre</button>
+	</form>
 
+	<section class="controls">
 		{#if lastEntry}
-			<a href="/"><button on:click={nextEntry}>Save</button></a>
+			<a href="/"><button>Save</button></a>
 		{:else}
 			<button on:click={nextEntry}>Next</button>
 		{/if}
-	</form>
+
+		{#if !firstEntry}
+			<button on:click={preEntry}>Pre</button>
+		{:else}
+			<a href="/"><button>Back</button></a>
+		{/if}
+	</section>
 
 	<section>
 		{#each $JobListStore as jobEntry, index}
@@ -107,8 +113,18 @@
 </PageContent>
 
 <!-- //TODO: Entry Card is not scaling on this screen -->
-<style>
+<style lang="scss">
 	section {
 		width: 100%;
+	}
+
+	form {
+		width: 100%;
+	}
+
+	.controls {
+		display: flex;
+		flex-direction: row-reverse;
+		justify-content: space-between;
 	}
 </style>
