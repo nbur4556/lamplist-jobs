@@ -2,4 +2,16 @@
 	import '@src/styles/global.scss';
 </script>
 
-<slot />
+<main>
+	<slot />
+</main>
+
+<style lang="scss">
+	@use '../theme/sizes';
+
+	main {
+		display: flex;
+		justify-content: center;
+		padding: sizes.$spacing-md;
+	}
+</style>

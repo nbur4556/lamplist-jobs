@@ -5,7 +5,17 @@
 	export let hidden = false;
 </script>
 
-<label {hidden}>
-	<slot />
+<div>
+	<label {hidden}>
+		<slot />
+	</label>
 	<input type="number" bind:value {min} {max} {hidden} />
-</label>
+</div>
+
+<style>
+	div {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+</style>

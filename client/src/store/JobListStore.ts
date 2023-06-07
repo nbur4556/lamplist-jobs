@@ -7,8 +7,9 @@ import {
 	updateJobEntries
 } from '@src/features/jobList';
 
+// TODO id should be required when referring to a server JobEntry, and optional when referring to a client job entry
 export interface JobEntry {
-	id: string;
+	id?: string;
 	company: string;
 	contact?: string;
 	interest?: number;

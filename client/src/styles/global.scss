@@ -1,5 +1,39 @@
+@use '../theme/colors';
 @use '../theme/fonts';
+@use '../theme/sizes';
+
+body {
+	background-color: colors.$bg-dark;
+}
 
 main {
+	color: colors.$txt-main;
 	font-family: fonts.$base;
+}
+
+p,
+a,
+button {
+	font-size: sizes.$font-sm;
+}
+
+a {
+	color: colors.$txt-main;
+
+	&:hover {
+		color: colors.$txt-sub;
+	}
+}
+
+button {
+	padding: sizes.$spacing-xs sizes.$spacing-sm;
+	border: none;
+
+	background-color: colors.$bg-mid;
+	color: colors.$txt-main;
+	border-radius: 10px;
+
+	&:hover {
+		background-color: colors.$bg-light;
+	}
 }

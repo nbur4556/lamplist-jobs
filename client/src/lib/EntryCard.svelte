@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Card from '@src/lib/Card.svelte';
+	import Card from '@src/lib/UI/Card.svelte';
 	import type { JobEntry } from '@src/store/JobListStore';
 
 	export let job: JobEntry;
@@ -33,8 +33,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: sizes.$spacing-md;
-		width: 40rem;
-		height: 10rem;
 	}
 
 	h3 {
