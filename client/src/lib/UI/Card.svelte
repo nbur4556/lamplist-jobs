@@ -17,18 +17,17 @@
 		flex-direction: column;
 
 		margin: sizes.$spacing-sm 0;
-		padding: sizes.$spacing-sm;
-
 		width: 100%;
 
 		background-color: colors.$bg-mid;
 		border-radius: 10px;
 
 		.header {
-			padding-bottom: sizes.$spacing-sm;
+			padding: sizes.$spacing-sm;
 		}
 
 		.body {
+			padding: sizes.$spacing-sm;
 			color: colors.$txt-sub;
 		}
 	}

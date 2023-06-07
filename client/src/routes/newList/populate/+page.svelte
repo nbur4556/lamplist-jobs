@@ -113,7 +113,6 @@
 	</section>
 </PageContent>
 
-<!-- //TODO: Entry Card is not scaling on this screen -->
 <style lang="scss">
 	section {
 		width: 100%;
