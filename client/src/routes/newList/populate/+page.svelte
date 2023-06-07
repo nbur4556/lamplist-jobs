@@ -4,6 +4,8 @@
 	import Input from '@src/lib/Form/Input.svelte';
 	import InputNumber from '@src/lib/Form/InputNumber.svelte';
 	import EntryCard from '@src/lib/EntryCard.svelte';
+	import ButtonAsLink from '@src/lib/UI/ButtonAsLink.svelte';
+	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
 	import removeEmptyKeys from '@src/utils/removeEmptyKeys';
 
@@ -69,7 +71,7 @@
 	};
 </script>
 
-<main>
+<PageContent>
 	<form>
 		<Input bind:value={formValues.contact} hidden={step !== 0}>
 			Do you have a contact at this company? Enter their name:
@@ -80,14 +82,21 @@
 		<Input bind:value={formValues.posting} hidden={step !== 2}>
 			Is there a current job posting? Enter the link here:
 		</Input>
-		<button on:click={preEntry}>Pre</button>
-
-		{#if lastEntry}
-			<a href="/"><button on:click={nextEntry}>Save</button></a>
-		{:else}
-			<button on:click={nextEntry}>Next</button>
-		{/if}
 	</form>
+
+	<section class="controls">
+		{#if lastEntry}
+			<a href="/">Save</a>
+		{:else}
+			<ButtonAsLink onClick={nextEntry}>Next</ButtonAsLink>
+		{/if}
+
+		{#if !firstEntry}
+			<ButtonAsLink onClick={preEntry}>Pre</ButtonAsLink>
+		{:else}
+			<a href="/newList">Back</a>
+		{/if}
+	</section>
 
 	<section>
 		{#each $JobListStore as jobEntry, index}
@@ -102,10 +111,20 @@
 			{/if}
 		{/each}
 	</section>
-</main>
+</PageContent>
 
-<style>
-	.animator {
-		position: absolute;
+<style lang="scss">
+	section {
+		width: 100%;
+	}
+
+	form {
+		width: 100%;
+	}
+
+	.controls {
+		display: flex;
+		flex-direction: row-reverse;
+		justify-content: space-between;
 	}
 </style>

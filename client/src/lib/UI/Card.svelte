@@ -9,27 +9,26 @@
 
 <style lang="scss">
 	// ? Does this have to be a relative path?
-	@use '../theme/colors';
-	@use '../theme/effects';
-	@use '../theme/sizes';
+	@use '../../theme/colors';
+	@use '../../theme/sizes';
 
 	section {
 		display: flex;
 		flex-direction: column;
 
-		margin: sizes.$spacing-sm;
-		border: sizes.$border solid colors.$black;
+		margin: sizes.$spacing-sm 0;
+		width: 100%;
 
-		width: max-content;
-		box-shadow: effects.$container-shadow;
+		background-color: colors.$bg-mid;
+		border-radius: 10px;
 
 		.header {
 			padding: sizes.$spacing-sm;
-			background-color: colors.$base;
 		}
 
 		.body {
 			padding: sizes.$spacing-sm;
+			color: colors.$txt-sub;
 		}
 	}
 </style>
