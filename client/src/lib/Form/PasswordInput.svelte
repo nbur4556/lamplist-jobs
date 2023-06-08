@@ -6,7 +6,7 @@
 <div>
 	<label {hidden}><slot /></label>
 	<!-- Placed in another div to remove 3rd party plugin icons as flex children -->
-	<div><input type="text" bind:value {hidden} /></div>
+	<div><input type="password" bind:value {hidden} /></div>
 </div>
 
 <style>

@@ -1,8 +1,10 @@
 import { PUBLIC_API_URL } from '$env/static/public';
 
-import type { StoreUpdater } from './types';
+import type { JobEntry } from '@src/store/JobListStore';
 
-const deleteJobEntries = async (id: string, update: StoreUpdater) => {
+import type { StoreUpdater } from '../types';
+
+const deleteJobEntries = async (id: string, update: StoreUpdater<JobEntry[]>) => {
 	try {
 		await fetch(`${PUBLIC_API_URL}/api/joblist/${id}`, {
 			method: 'DELETE'

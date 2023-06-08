@@ -1,12 +1,24 @@
 <script>
 	import JobList from '@src/lib/JobList/JobList.svelte';
 	import PageContent from '@src/lib/UI/PageContent.svelte';
+	import { AuthStore } from '@src/store/AuthStore';
 	import { JobListStore } from '@src/store/JobListStore';
+
+	$: authUserName = $AuthStore.userName;
 </script>
 
 <PageContent>
 	<h1>Welcome to Lamp List Jobs!</h1>
-	<a href="/newList">Add Job Entries</a>
+
+	<section>
+		<a href="/newList">Add Job Entries</a>
+		<a href="/auth/register">Register</a>
+		<a href="/auth/login">Login</a>
+	</section>
+
+	{#if authUserName}
+		<p>You are logged in as {authUserName}</p>
+	{/if}
 
 	{#if $JobListStore.length > 0}
 		<JobList />
