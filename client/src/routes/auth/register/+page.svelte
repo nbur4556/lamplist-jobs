@@ -27,20 +27,16 @@
 	const onSubmit = async () => {
 		try {
 			if (!formValues.userName || !formValues.password) {
-				throw 'Error: UserName and Password are required';
+				throw 'UserName and Password are required';
 			}
 			if (formValues.password !== formValues.confirmPassword) {
-				throw 'Error: Password and confirm password do not match';
+				throw 'Password and confirm password do not match';
 			}
 
-			const response = await AuthStore.register(formValues.userName, formValues.password);
-			if (response.type === 'error') {
-				throw `Error: ${response.message}`;
-			}
-
+			await AuthStore.register(formValues.userName, formValues.password);
 			goto('/');
 		} catch (err) {
-			errorMessage = JSON.stringify(err);
+			errorMessage = `Error: ${JSON.stringify(err)}`;
 			console.error(errorMessage);
 		}
 	};

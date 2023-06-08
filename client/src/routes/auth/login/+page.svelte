@@ -25,17 +25,13 @@
 	const onSubmit = async () => {
 		try {
 			if (!formValues.userName || !formValues.password) {
-				throw 'Error: UserName and Password are required';
+				throw 'UserName and Password are required';
 			}
 
-			const response = await AuthStore.login(formValues.userName, formValues.password);
-			if (response.type === 'error') {
-				throw `Error: ${response.message}`;
-			}
-
+			await AuthStore.login(formValues.userName, formValues.password);
 			goto('/');
 		} catch (err) {
-			errorMessage = JSON.stringify(err);
+			errorMessage = `Error: ${JSON.stringify(err)}`;
 			console.error(errorMessage);
 		}
 	};
