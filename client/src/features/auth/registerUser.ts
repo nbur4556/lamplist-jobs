@@ -22,8 +22,10 @@ const registerUser = async (userName: string, password: string, update: StoreUpd
 		update(() => {
 			return { userName };
 		});
-	} catch (err) {
-		console.error(err);
+    
+    return {type: 'success'}
+	} catch (err: any) { //TODO: improve error typing
+    return {type: 'error', message: JSON.stringify(err)};
 	}
 };
 

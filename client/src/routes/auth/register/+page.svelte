@@ -16,9 +16,15 @@
 		confirmPassword: undefined
 	};
 
+	let successMessage = '';
 	let errorMessage = '';
 
-	const onSubmit = () => {
+	const clearResultMessages = () => {
+		successMessage = '';
+		errorMessage = '';
+	};
+
+	const onSubmit = async () => {
 		if (!formValues.userName || !formValues.password) {
 			errorMessage = 'Error: UserName and Password are required';
 			console.error(errorMessage);
@@ -31,20 +37,26 @@
 			return;
 		}
 
-		//TODO: catch and display errors from server e.g. PasswordTooShort
-		AuthStore.register(formValues.userName, formValues.password);
+		const response = await AuthStore.register(formValues.userName, formValues.password);
+		if (response.type === 'error') {
+			errorMessage = `Error: ${response.message}`;
+			console.error(errorMessage);
+		} else {
+			successMessage = `User ${formValues.userName} registered`;
+		}
 	};
 </script>
 
 <PageContent>
 	<h1>Register</h1>
 	<a href="/">Home</a>
-	<form on:change={() => (errorMessage = '')} on:submit={onSubmit}>
+	<form on:change={clearResultMessages} on:submit={onSubmit}>
 		<Input bind:value={formValues.userName}>UserName</Input>
 		<PasswordInput bind:value={formValues.password}>Password</PasswordInput>
 		<PasswordInput bind:value={formValues.confirmPassword}>Confirm Password</PasswordInput>
 		<button type="submit">Submit</button>
 	</form>
+	<p class="success-message">{successMessage}</p>
 	<p class="error-message">{errorMessage}</p>
 </PageContent>
 
@@ -62,6 +74,9 @@
 		gap: sizes.$spacing-md;
 
 		width: 100%;
+	}
+	.success-message {
+		color: green;
 	}
 
 	.error-message {
