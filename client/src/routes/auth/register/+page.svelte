@@ -16,18 +16,22 @@
 		confirmPassword: undefined
 	};
 
+	let errorMessage = '';
+
 	const onSubmit = () => {
 		if (!formValues.userName || !formValues.password) {
-			console.error('UserName and Password are required');
+			errorMessage = 'Error: UserName and Password are required';
+			console.error(errorMessage);
 			return;
 		}
 
 		if (formValues.password !== formValues.confirmPassword) {
-			//TODO: Display Error Message
-			console.error('Password and confirm password do not match');
+			errorMessage = 'Error: Password and confirm password do not match';
+			console.error(errorMessage);
 			return;
 		}
 
+		//TODO: catch and display errors from server e.g. PasswordTooShort
 		AuthStore.register(formValues.userName, formValues.password);
 	};
 </script>
@@ -35,15 +39,17 @@
 <PageContent>
 	<h1>Register</h1>
 	<a href="/">Home</a>
-	<form on:submit={onSubmit}>
+	<form on:change={() => (errorMessage = '')} on:submit={onSubmit}>
 		<Input bind:value={formValues.userName}>UserName</Input>
 		<PasswordInput bind:value={formValues.password}>Password</PasswordInput>
 		<PasswordInput bind:value={formValues.confirmPassword}>Confirm Password</PasswordInput>
 		<button type="submit">Submit</button>
 	</form>
+	<p class="error-message">{errorMessage}</p>
 </PageContent>
 
 <style lang="scss">
+	@use '../../../theme/colors';
 	@use '../../../theme/sizes';
 
 	h1 {
@@ -56,5 +62,9 @@
 		gap: sizes.$spacing-md;
 
 		width: 100%;
+	}
+
+	.error-message {
+		color: colors.$accent-mid;
 	}
 </style>
