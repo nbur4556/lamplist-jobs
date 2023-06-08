@@ -42,6 +42,7 @@
 			errorMessage = `Error: ${response.message}`;
 			console.error(errorMessage);
 		} else {
+			// TODO: Should reroute to home on success
 			successMessage = `User ${formValues.userName} registered`;
 		}
 	};
@@ -75,6 +76,7 @@
 
 		width: 100%;
 	}
+
 	.success-message {
 		color: green;
 	}

@@ -22,9 +22,9 @@ const registerUser = async (userName: string, password: string, update: StoreUpd
 		update(() => {
 			return { userName };
 		});
-    
+
     return {type: 'success'}
-	} catch (err: any) { //TODO: improve error typing
+	} catch (err) {
     return {type: 'error', message: JSON.stringify(err)};
 	}
 };

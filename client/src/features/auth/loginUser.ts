@@ -22,8 +22,10 @@ const loginUser = async (userName: string, password: string, update: StoreUpdate
 		update(() => {
 			return { userName };
 		});
+
+    return {type: 'success'};
 	} catch (err) {
-		console.error(err);
+		return {type: 'error', message: JSON.stringify(err)}
 	}
 };
 
