@@ -10,9 +10,11 @@
 <PageContent>
 	<h1>Welcome to Lamp List Jobs!</h1>
 
-	<a href="/newList">Add Job Entries</a>
-	<a href="/auth/register">Register</a>
-	<a href="/auth/login">Login</a>
+	<section>
+		<a href="/newList">Add Job Entries</a>
+		<a href="/auth/register">Register</a>
+		<a href="/auth/login">Login</a>
+	</section>
 
 	{#if authUserName}
 		<p>You are logged in as {authUserName}</p>

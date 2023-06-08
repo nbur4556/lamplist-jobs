@@ -3,7 +3,16 @@
 	export let hidden = false;
 </script>
 
-<label {hidden}>
-	<slot />
-	<input type="password" bind:value {hidden} />
-</label>
+<div>
+	<label {hidden}><slot /></label>
+	<!-- Placed in another div to remove 3rd party plugin icons as flex children -->
+	<div><input type="password" bind:value {hidden} /></div>
+</div>
+
+<style>
+	div {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+</style>
