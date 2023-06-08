@@ -4,6 +4,7 @@
 	import Input from '@src/lib/Form/Input.svelte';
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import PasswordInput from '@src/lib/Form/PasswordInput.svelte';
+	import PasswordRequirements from '@src/lib/PasswordRequirements.svelte';
 	import { AuthStore } from '@src/store/AuthStore';
 
 	interface FormValues {
@@ -52,6 +53,7 @@
 		<button type="submit">Submit</button>
 	</form>
 	<p class="error-message">{errorMessage}</p>
+	<PasswordRequirements />
 </PageContent>
 
 <style lang="scss">
