@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+
 	import Input from '@src/lib/Form/Input.svelte';
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import PasswordInput from '@src/lib/Form/PasswordInput.svelte';
@@ -14,28 +16,27 @@
 		password: undefined
 	};
 
-	let successMessage = '';
 	let errorMessage = '';
 
 	const clearResultMessages = () => {
-		successMessage = '';
 		errorMessage = '';
 	};
 
 	const onSubmit = async () => {
-		if (!formValues.userName || !formValues.password) {
-			errorMessage = 'Error: UserName and Password are required';
-			console.error(errorMessage);
-			return;
-		}
+		try {
+			if (!formValues.userName || !formValues.password) {
+				throw 'Error: UserName and Password are required';
+			}
 
-		const response = await AuthStore.login(formValues.userName, formValues.password);
-		if (response.type === 'error') {
-			errorMessage = `Error: ${response.message}`;
+			const response = await AuthStore.login(formValues.userName, formValues.password);
+			if (response.type === 'error') {
+				throw `Error: ${response.message}`;
+			}
+
+			goto('/');
+		} catch (err) {
+			errorMessage = JSON.stringify(err);
 			console.error(errorMessage);
-		} else {
-			// TODO: Should reroute to home on success
-			successMessage = `User ${formValues.userName} logged in`;
 		}
 	};
 </script>
@@ -48,7 +49,6 @@
 		<PasswordInput bind:value={formValues.password}>Password</PasswordInput>
 		<button type="submit">Submit</button>
 	</form>
-	<p class="success-message">{successMessage}</p>
 	<p class="error-message">{errorMessage}</p>
 </PageContent>
 
@@ -66,10 +66,6 @@
 		gap: sizes.$spacing-md;
 
 		width: 100%;
-	}
-
-	.success-message {
-		color: green;
 	}
 
 	.error-message {
