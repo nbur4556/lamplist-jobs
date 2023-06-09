@@ -39,7 +39,9 @@
     },
     "hotreloadprofile": {
       "commandName": "Project",
-      "launchBrowser": false,
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5000",
+      "launchUrl": "swagger",
       "hotReloadProfile": "aspnetcore",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
