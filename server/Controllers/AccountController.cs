@@ -18,6 +18,7 @@ public class AccountController : ControllerBase
     _context = context;
   }
 
+  //TODO: Refactor this to a service
   // /api/Account/{userId}
   [HttpGet("{userId}")]
   public ActionResult<Account> GetAccountByUserId(Guid userId)

@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-
-using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 using server.Models;
 
@@ -18,14 +20,12 @@ public struct AuthRequest
 public class AuthController : ControllerBase
 {
   private readonly UserManager<ApplicationUser> _userManager;
-  private readonly SignInManager<ApplicationUser> _signInManager;
+  private readonly IConfiguration _configuration;
 
-  public AuthController(
-    UserManager<ApplicationUser> userManager,
-    SignInManager<ApplicationUser> signInManager)
+  public AuthController(UserManager<ApplicationUser> userManager, IConfiguration configuration)
   {
     _userManager = userManager;
-    _signInManager = signInManager;
+    _configuration = configuration;
   }
 
   // /api/Auth/register
@@ -55,11 +55,35 @@ public class AuthController : ControllerBase
       return BadRequest("UserName and Password are required");
     }
 
-    SignInResult result = await _signInManager.PasswordSignInAsync(
-      request.userName, request.password, false, false
-    );
+    ApplicationUser? user = await _userManager.FindByNameAsync(request.userName);
+    if (user == null)
+    {
+      return Unauthorized();
+    }
 
-    return CreatedAtAction(nameof(Login), result);
+    bool isAuthorized = await _userManager.CheckPasswordAsync(user, request.password);
+    if (isAuthorized == false)
+    {
+      return Unauthorized();
+    }
+
+    //TODO: Include account id
+    Claim[] claims = new[]
+    {
+      new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+    };
+
+    SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));
+    JwtSecurityToken token = new JwtSecurityToken(
+      issuer: _configuration["AuthSettings:Issuer"],
+      audience: _configuration["AuthSettings:Audience"],
+      claims: claims,
+      expires: DateTime.Now.AddDays(1),
+      signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
+
+    string tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);
+    Console.WriteLine(tokenAsString);
+    return CreatedAtAction(nameof(Login), tokenAsString);
   }
 
   //TODO: JWT Authentication
