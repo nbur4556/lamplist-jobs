@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
+
 using server.Db;
 using server.Models;
 
@@ -38,17 +40,13 @@ public class AuthController : ControllerBase
       return BadRequest("UserName and Password are required");
     }
 
-    //! User is still created when account creation fails. Should have a way to rewind.
-    ApplicationUser user = new ApplicationUser() { UserName = request.userName };
+    ApplicationUser user = new ApplicationUser()
+    {
+      UserName = request.userName,
+      Account = new Account(),
+    };
     IdentityResult result = await _userManager.CreateAsync(user, request.password);
 
-    Account account = new Account()
-    {
-      ApplicationUser = user,
-      ApplicationUserId = user.Id,
-    };
-    _context.Add(account);
-    _context.SaveChanges();
     return CreatedAtAction(nameof(Register), result);
   }
 
@@ -60,9 +58,19 @@ public class AuthController : ControllerBase
       return BadRequest("UserName and Password are required");
     }
 
-    var result = await _signInManager.PasswordSignInAsync(
+    SignInResult result = await _signInManager.PasswordSignInAsync(
       request.userName, request.password, false, false
     );
+
+    //! Debugging registered user unable to access account
+    // if (result == SignInResult.Success)
+    // {
+    //   ApplicationUser? user = await _userManager.FindByNameAsync(request.userName);
+    //   Console.WriteLine(user?.Id);
+    //   Console.WriteLine(user?.Account?.Id);
+    //   Console.WriteLine(user?.Account?.ApplicationUserId);
+    // }
+
     return CreatedAtAction(nameof(Login), result);
   }
 
