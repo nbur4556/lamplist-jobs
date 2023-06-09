@@ -61,27 +61,6 @@ public class AuthController : ControllerBase
       request.userName, request.password, false, false
     );
 
-    // //! Debugging registered user unable to access account
-    if (result == SignInResult.Success)
-    {
-      ApplicationUser? user = await _userManager.FindByNameAsync(request.userName);
-      if (user == null)
-      {
-        Console.WriteLine("user is null");
-        return CreatedAtAction(nameof(Login), result);
-      }
-
-      Account? account = _context?.Account?.Single(e => e.ApplicationUserId.Equals(user.Id));
-      if (account == null)
-      {
-        Console.WriteLine("account is null");
-        return CreatedAtAction(nameof(Login), result);
-      }
-      Console.WriteLine(account.Id);
-      Console.WriteLine(account.ApplicationUserId);
-      Console.WriteLine(account.ApplicationUser);
-    }
-
     return CreatedAtAction(nameof(Login), result);
   }
 

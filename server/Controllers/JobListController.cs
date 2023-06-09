@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using server.Db;
@@ -15,6 +16,7 @@ public class JobEntryRequest
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class JobListController : ControllerBase
 {
   private readonly DataContext _context;
