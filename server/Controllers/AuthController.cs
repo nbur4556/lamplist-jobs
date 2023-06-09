@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
+using server.Db;
 using server.Models;
 
 namespace server.Controllers;
@@ -15,11 +16,16 @@ public struct AuthRequest
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
+  private readonly DataContext _context;
   private readonly UserManager<ApplicationUser> _userManager;
   private readonly SignInManager<ApplicationUser> _signInManager;
 
-  public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+  public AuthController(
+    DataContext context,
+    UserManager<ApplicationUser> userManager,
+    SignInManager<ApplicationUser> signInManager)
   {
+    _context = context;
     _userManager = userManager;
     _signInManager = signInManager;
   }
@@ -32,8 +38,17 @@ public class AuthController : ControllerBase
       return BadRequest("UserName and Password are required");
     }
 
+    //! User is still created when account creation fails. Should have a way to rewind.
     ApplicationUser user = new ApplicationUser() { UserName = request.userName };
     IdentityResult result = await _userManager.CreateAsync(user, request.password);
+
+    Account account = new Account()
+    {
+      ApplicationUser = user,
+      ApplicationUserId = user.Id,
+    };
+    _context.Add(account);
+    _context.SaveChanges();
     return CreatedAtAction(nameof(Register), result);
   }
 
