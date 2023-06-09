@@ -15,10 +15,10 @@ public struct AuthRequest
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
-  private readonly UserManager<User> _userManager;
-  private readonly SignInManager<User> _signInManager;
+  private readonly UserManager<ApplicationUser> _userManager;
+  private readonly SignInManager<ApplicationUser> _signInManager;
 
-  public AuthController(UserManager<User> userManager, SignInManager<User> signInManager)
+  public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
   {
     _userManager = userManager;
     _signInManager = signInManager;
@@ -32,7 +32,7 @@ public class AuthController : ControllerBase
       return BadRequest("UserName and Password are required");
     }
 
-    User user = new User() { UserName = request.userName };
+    ApplicationUser user = new ApplicationUser() { UserName = request.userName };
     IdentityResult result = await _userManager.CreateAsync(user, request.password);
     return CreatedAtAction(nameof(Register), result);
   }

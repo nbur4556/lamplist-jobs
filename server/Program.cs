@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 using server.Db;
@@ -23,7 +22,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<DataContext>(options =>
   options.UseNpgsql($"{dbConnection}; Password={dbPassword}")
 );
-builder.Services.AddIdentity<User, UserRole>(options => {
+builder.Services.AddIdentity<ApplicationUser, ApplicationUserRole>(options =>
+{
   options.Password.RequireDigit = true;
   options.Password.RequiredLength = 12;
   options.Password.RequireNonAlphanumeric = true;

@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 namespace server.Models;
 
 [PrimaryKey(nameof(Id))]
-public class User : IdentityUser<Guid>
+public class ApplicationUser : IdentityUser<Guid>
 {
 
 }
 
-public class UserRole : IdentityRole<Guid>
+public class ApplicationUserRole : IdentityRole<Guid>
 {
 
 }
