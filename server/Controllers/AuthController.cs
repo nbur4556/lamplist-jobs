@@ -1,9 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 
 using server.Models;
 using server.Services;
@@ -21,16 +18,16 @@ public struct AuthRequest
 public class AuthController : ControllerBase
 {
   private readonly IAccountService _accountService;
-  private readonly IConfiguration _configuration;
+  private readonly ITokenService _tokenService;
   private readonly UserManager<ApplicationUser> _userManager;
 
   public AuthController(
     IAccountService accountService,
-    IConfiguration configuration,
+    ITokenService tokenService,
     UserManager<ApplicationUser> userManager)
   {
     _accountService = accountService;
-    _configuration = configuration;
+    _tokenService = tokenService;
     _userManager = userManager;
   }
 
@@ -78,20 +75,11 @@ public class AuthController : ControllerBase
       Account account = _accountService.GetAccountByUserId(user.Id);
       Claim[] claims = new[]
       {
-      new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-      new Claim("AccountIdentifier", account.Id.ToString()),
-    };
-
-      SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));
-      JwtSecurityToken token = new JwtSecurityToken(
-        issuer: _configuration["AuthSettings:Issuer"],
-        audience: _configuration["AuthSettings:Audience"],
-        claims: claims,
-        expires: DateTime.Now.AddDays(1),
-        signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
-
-      string tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);
-      return CreatedAtAction(nameof(Login), tokenAsString);
+        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+        new Claim("AccountIdentifier", account.Id.ToString()),
+      };
+      string authToken = _tokenService.CreateToken(claims);
+      return CreatedAtAction(nameof(Login), authToken);
     }
     catch (Exception exception)
     {
