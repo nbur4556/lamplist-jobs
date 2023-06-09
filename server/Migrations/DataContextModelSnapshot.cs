@@ -139,7 +139,7 @@ namespace server.Migrations
                     b.HasIndex("ApplicationUserId")
                         .IsUnique();
 
-                    b.ToTable("Account");
+                    b.ToTable("Account", (string)null);
                 });
 
             modelBuilder.Entity("server.Models.ApplicationUser", b =>
@@ -255,7 +255,7 @@ namespace server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("JobEntries");
+                    b.ToTable("JobEntries", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

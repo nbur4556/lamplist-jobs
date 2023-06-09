@@ -46,7 +46,6 @@ public class AuthController : ControllerBase
       Account = new Account(),
     };
     IdentityResult result = await _userManager.CreateAsync(user, request.password);
-
     return CreatedAtAction(nameof(Register), result);
   }
 
@@ -62,13 +61,24 @@ public class AuthController : ControllerBase
       request.userName, request.password, false, false
     );
 
-    //! Debugging registered user unable to access account
+    // //! Debugging registered user unable to access account
     // if (result == SignInResult.Success)
     // {
     //   ApplicationUser? user = await _userManager.FindByNameAsync(request.userName);
-    //   Console.WriteLine(user?.Id);
-    //   Console.WriteLine(user?.Account?.Id);
-    //   Console.WriteLine(user?.Account?.ApplicationUserId);
+    //   if (user == null)
+    //   {
+    //     Console.WriteLine("user is null");
+    //     return CreatedAtAction(nameof(Login), result);
+    //   }
+
+    //   Account? account = _context?.Account?.Single(e => e.ApplicationUserId.Equals(user.Id));
+    //   if (account == null)
+    //   {
+    //     Console.WriteLine("account is null");
+    //     return CreatedAtAction(nameof(Login), result);
+    //   }
+    //   Console.WriteLine(account.Id);
+    //   Console.WriteLine(account.ApplicationUserId);
     // }
 
     return CreatedAtAction(nameof(Login), result);

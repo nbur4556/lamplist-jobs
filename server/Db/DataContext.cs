@@ -10,5 +10,7 @@ public class DataContext : IdentityDbContext<ApplicationUser, ApplicationUserRol
   public DataContext(DbContextOptions options) : base(options) { }
 
   // Data Tables
+  public DbSet<Account>? Account { get; set; }
+  public DbSet<ApplicationUser>? ApplicationUser { get; set; }
   public DbSet<JobEntry>? JobEntries { get; set; }
 }
