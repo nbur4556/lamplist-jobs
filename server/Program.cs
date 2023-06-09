@@ -5,6 +5,7 @@ using System.Text;
 
 using server.Db;
 using server.Models;
+using server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<String[]>();
@@ -50,6 +51,9 @@ builder.Services.AddAuthentication(auth =>
     ValidateIssuerSigningKey = true,
   };
 });
+
+// Add Scopes
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

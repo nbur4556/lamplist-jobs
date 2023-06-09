@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 
 using server.Models;
+using server.Services;
 
 namespace server.Controllers;
 
@@ -19,13 +20,18 @@ public struct AuthRequest
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
-  private readonly UserManager<ApplicationUser> _userManager;
+  private readonly IAccountService _accountService;
   private readonly IConfiguration _configuration;
+  private readonly UserManager<ApplicationUser> _userManager;
 
-  public AuthController(UserManager<ApplicationUser> userManager, IConfiguration configuration)
+  public AuthController(
+    IAccountService accountService,
+    IConfiguration configuration,
+    UserManager<ApplicationUser> userManager)
   {
-    _userManager = userManager;
+    _accountService = accountService;
     _configuration = configuration;
+    _userManager = userManager;
   }
 
   // /api/Auth/register
@@ -67,23 +73,30 @@ public class AuthController : ControllerBase
       return Unauthorized();
     }
 
-    //TODO: Include account id
-    Claim[] claims = new[]
+    try
     {
+      Account account = _accountService.GetAccountByUserId(user.Id);
+      Claim[] claims = new[]
+      {
       new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+      new Claim("AccountIdentifier", account.Id.ToString()),
     };
 
-    SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));
-    JwtSecurityToken token = new JwtSecurityToken(
-      issuer: _configuration["AuthSettings:Issuer"],
-      audience: _configuration["AuthSettings:Audience"],
-      claims: claims,
-      expires: DateTime.Now.AddDays(1),
-      signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
+      SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));
+      JwtSecurityToken token = new JwtSecurityToken(
+        issuer: _configuration["AuthSettings:Issuer"],
+        audience: _configuration["AuthSettings:Audience"],
+        claims: claims,
+        expires: DateTime.Now.AddDays(1),
+        signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
 
-    string tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);
-    Console.WriteLine(tokenAsString);
-    return CreatedAtAction(nameof(Login), tokenAsString);
+      string tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);
+      return CreatedAtAction(nameof(Login), tokenAsString);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.ToString());
+    }
   }
 
   //TODO: JWT Authentication
