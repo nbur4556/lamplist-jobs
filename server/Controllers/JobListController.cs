@@ -26,6 +26,7 @@ public class JobListController : ControllerBase
     _context = context;
   }
 
+  // /api/JobList
   [HttpGet]
   public ActionResult<JobEntry[]> GetJobList()
   {
@@ -37,6 +38,7 @@ public class JobListController : ControllerBase
     return jobEntries.ToArray<JobEntry>();
   }
 
+  // /api/JobList
   [HttpPost]
   public IActionResult CreateJobEntry(JobEntryRequest request)
   {
@@ -51,6 +53,7 @@ public class JobListController : ControllerBase
     return CreatedAtAction(nameof(CreateJobEntry), jobEntry);
   }
 
+  // /api/JobList/{id}
   [HttpPatch("{id}")]
   public ActionResult<JobEntry> PatchJobEntry(Guid id, JobEntryRequest request)
   {
@@ -78,6 +81,7 @@ public class JobListController : ControllerBase
     return jobEntry;
   }
 
+  // /api/JobList/{id}
   [HttpDelete("{id}")]
   public IActionResult DeleteJobEntry(Guid id)
   {

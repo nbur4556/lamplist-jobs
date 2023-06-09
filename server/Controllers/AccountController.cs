@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using server.Db;
@@ -5,6 +6,9 @@ using server.Models;
 
 namespace server.Controllers;
 
+[ApiController]
+[Route("api/[controller]")]
+[Authorize]
 public class AccountController : ControllerBase
 {
   private readonly DataContext _context;
@@ -14,6 +18,7 @@ public class AccountController : ControllerBase
     _context = context;
   }
 
+  // /api/Account/{userId}
   [HttpGet("{userId}")]
   public ActionResult<Account> GetAccountByUserId(Guid userId)
   {
