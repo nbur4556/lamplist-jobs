@@ -14,12 +14,12 @@ const loginUser = async (userName: string, password: string, update: StoreUpdate
   });
   const response = await result.json();
 
-  if (!response.succeeded) {
+  if (!response.succeeded || !response.authToken) {
     throw 'Login failed';
   }
 
   update(() => {
-    return { userName };
+    return { userName, token: response.authToken };
   });
 };
 

@@ -6,6 +6,7 @@ using server.Models;
 
 namespace server.Controllers;
 
+//TODO: Account ownership of job entries
 public class JobEntryRequest
 {
   public string? company { get; set; }

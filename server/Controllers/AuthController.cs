@@ -13,6 +13,12 @@ public struct AuthRequest
   public string? password { get; set; }
 }
 
+public struct LoginResponse
+{
+  public string authToken { get; set; }
+  public bool succeeded { get; set; }
+}
+
 [ApiController]
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
@@ -79,15 +85,13 @@ public class AuthController : ControllerBase
         new Claim("AccountIdentifier", account.Id.ToString()),
       };
       string authToken = _tokenService.CreateToken(claims);
-      return CreatedAtAction(nameof(Login), authToken);
+      return Ok(new LoginResponse() { succeeded = true, authToken = authToken });
     }
     catch (Exception exception)
     {
       return BadRequest(exception.ToString());
     }
   }
-
-  //TODO: JWT Authentication
 
   //TODO: Logout
 

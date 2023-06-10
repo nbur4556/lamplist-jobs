@@ -5,8 +5,10 @@ import { loginUser, registerUser } from '@src/features/auth';
 export interface User {
 	id?: string;
 	userName?: string;
+  token?: string;
 }
 
+//TODO: Persistent user data between sessions if token has not expired
 const createAuthStore = () => {
 	const { subscribe, update } = writable<User>({});
 
