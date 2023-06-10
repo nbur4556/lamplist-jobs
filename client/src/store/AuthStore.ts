@@ -5,7 +5,7 @@ import { loginUser, registerUser } from '@src/features/auth';
 export interface User {
 	id?: string;
 	userName?: string;
-  token?: string;
+	token?: string;
 }
 
 //TODO: Persistent user data between sessions if token has not expired
