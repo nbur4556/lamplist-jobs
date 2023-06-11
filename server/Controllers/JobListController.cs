@@ -9,7 +9,6 @@ using server.Services;
 
 namespace server.Controllers;
 
-//TODO: Account ownership of job entries
 public class JobEntryRequest
 {
   public string? company { get; set; }
@@ -32,10 +31,17 @@ public class JobListController : ControllerBase
     _context = context;
   }
 
-  private Account CurrentAccount()
+  private Account? FindAuthorizedAccount()
   {
     ClaimsPrincipal currentUser = this.User;
-    Guid currentUserId = Guid.Parse(currentUser.FindFirst(ClaimTypes.NameIdentifier).Value);
+    Claim? userClaim = currentUser.FindFirst(ClaimTypes.NameIdentifier);
+
+    if (userClaim == null)
+    {
+      return null;
+    }
+
+    Guid currentUserId = Guid.Parse(userClaim.Value);
     Account account = _accountService.GetAccountByUserId(currentUserId);
     return account;
   }
@@ -44,7 +50,16 @@ public class JobListController : ControllerBase
   [HttpGet]
   public ActionResult<JobEntry[]> GetJobList()
   {
-    IOrderedQueryable<JobEntry>? jobEntries = _context.JobEntries?.OrderBy(entry => entry.Id);
+    Account? account = this.FindAuthorizedAccount();
+    if (account == null)
+    {
+      return Unauthorized();
+    }
+
+    IOrderedQueryable<JobEntry> jobEntries = _context.JobEntries
+      .Where(entry => entry.AccountId.Equals(account.Id))
+      .OrderBy(entry => entry.Id);
+    Console.WriteLine(jobEntries);
     if (jobEntries == null)
     {
       return NotFound();
@@ -56,8 +71,11 @@ public class JobListController : ControllerBase
   [HttpPost]
   public IActionResult CreateJobEntry(JobEntryRequest request)
   {
-    Account account = this.CurrentAccount();
-
+    Account? account = this.FindAuthorizedAccount();
+    if (account == null)
+    {
+      return Unauthorized();
+    }
     if (request.company is null)
     {
       return BadRequest("Company name is required.");
