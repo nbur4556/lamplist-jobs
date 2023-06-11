@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 using server.Db;
 using server.Models;
+using server.Services;
 
 namespace server.Controllers;
 
@@ -21,10 +24,20 @@ public class JobEntryRequest
 public class JobListController : ControllerBase
 {
   private readonly DataContext _context;
+  private readonly IAccountService _accountService;
 
-  public JobListController(DataContext context)
+  public JobListController(DataContext context, IAccountService accountService)
   {
+    _accountService = accountService;
     _context = context;
+  }
+
+  private Account CurrentAccount()
+  {
+    ClaimsPrincipal currentUser = this.User;
+    Guid currentUserId = Guid.Parse(currentUser.FindFirst(ClaimTypes.NameIdentifier).Value);
+    Account account = _accountService.GetAccountByUserId(currentUserId);
+    return account;
   }
 
   // /api/JobList
@@ -43,12 +56,18 @@ public class JobListController : ControllerBase
   [HttpPost]
   public IActionResult CreateJobEntry(JobEntryRequest request)
   {
+    Account account = this.CurrentAccount();
+
     if (request.company is null)
     {
       return BadRequest("Company name is required.");
     }
 
-    JobEntry jobEntry = new JobEntry(request.company);
+    JobEntry jobEntry = new JobEntry()
+    {
+      Account = account,
+      Company = request.company,
+    };
     _context.Add(jobEntry);
     _context.SaveChanges();
     return CreatedAtAction(nameof(CreateJobEntry), jobEntry);
