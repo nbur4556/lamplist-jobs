@@ -14,7 +14,7 @@ const createAuthStore = () => {
 
 	return {
 		subscribe,
-		register: (userName: string, password: string) => registerUser(userName, password, update),
+		register: (userName: string, password: string) => registerUser(userName, password),
 		login: (userName: string, password: string) => loginUser(userName, password, update)
 	};
 };

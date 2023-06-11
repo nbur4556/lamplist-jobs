@@ -1,10 +1,10 @@
 import { PUBLIC_API_URL } from '$env/static/public';
 
-import type { User } from '@src/store/AuthStore';
+import { JobListStore } from '@src/store/JobListStore';
 
-import type { StoreUpdater } from '../types';
+const registerUser = async (userName: string, password: string) => {
+	JobListStore.emptyStore();
 
-const registerUser = async (userName: string, password: string, update: StoreUpdater<User>) => {
 	const result = await fetch(`${PUBLIC_API_URL}/api/Auth/register`, {
 		method: 'POST',
 		headers: {
@@ -17,10 +17,6 @@ const registerUser = async (userName: string, password: string, update: StoreUpd
 	if (!response.succeeded) {
 		throw response.errors;
 	}
-
-	update(() => {
-		return { userName };
-	});
 };
 
 export default registerUser;
