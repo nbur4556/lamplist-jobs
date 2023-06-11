@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -95,8 +94,16 @@ public class JobListController : ControllerBase
   [HttpPatch("{id}")]
   public ActionResult<JobEntry> PatchJobEntry(Guid id, JobEntryRequest request)
   {
+    Account? account = this.FindAuthorizedAccount();
     JobEntry? jobEntry = _context.Find<JobEntry>(id);
-    if (jobEntry is null) { return NotFound(); }
+    if (jobEntry is null)
+    {
+      return NotFound();
+    }
+    if (account?.Id == null || jobEntry.AccountId != account.Id)
+    {
+      return Unauthorized();
+    }
 
     if (request.company != null)
     {
@@ -123,10 +130,15 @@ public class JobListController : ControllerBase
   [HttpDelete("{id}")]
   public IActionResult DeleteJobEntry(Guid id)
   {
+    Account? account = this.FindAuthorizedAccount();
     JobEntry? jobEntry = _context.Find<JobEntry>(id);
     if (jobEntry is null)
     {
       return NotFound();
+    }
+    if (account?.Id == null || jobEntry.AccountId != account.Id)
+    {
+      return Unauthorized();
     }
 
     _context.Remove<JobEntry>(jobEntry);

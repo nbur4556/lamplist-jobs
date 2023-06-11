@@ -16,6 +16,7 @@ export interface JobEntry {
 	posting?: string;
 }
 
+//! Cache must be emptied when the user logs out or changes
 const createJobListStore = () => {
 	const { subscribe, update } = writable<Array<JobEntry>>([]);
 
