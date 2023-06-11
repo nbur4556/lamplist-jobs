@@ -1,11 +1,14 @@
 import { PUBLIC_API_URL } from '$env/static/public';
 
 import type { User } from '@src/store/AuthStore';
+import { JobListStore } from '@src/store/JobListStore';
 
 import type { StoreUpdater } from '../types';
 
 const loginUser = async (userName: string, password: string, update: StoreUpdater<User>) => {
-	const result = await fetch(`${PUBLIC_API_URL}/api/Auth/login`, {
+	JobListStore.emptyStore();
+  
+  const result = await fetch(`${PUBLIC_API_URL}/api/Auth/login`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
