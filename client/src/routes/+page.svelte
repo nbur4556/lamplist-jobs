@@ -1,5 +1,6 @@
 <script>
 	import JobList from '@src/lib/JobList/JobList.svelte';
+	import ButtonAsLink from '@src/lib/UI/ButtonAsLink.svelte';
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { AuthStore } from '@src/store/AuthStore';
 	import { JobListStore } from '@src/store/JobListStore';
@@ -14,6 +15,7 @@
 		<a href="/newList">Add Job Entries</a>
 		<a href="/auth/register">Register</a>
 		<a href="/auth/login">Login</a>
+		<ButtonAsLink onClick={AuthStore.logout}>Logout</ButtonAsLink>
 	</section>
 
 	{#if authUserName}
