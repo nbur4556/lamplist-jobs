@@ -7,8 +7,8 @@ import type { StoreUpdater } from '../types';
 
 const loginUser = async (userName: string, password: string, update: StoreUpdater<User>) => {
 	JobListStore.emptyStore();
-  
-  const result = await fetch(`${PUBLIC_API_URL}/api/Auth/login`, {
+
+	const result = await fetch(`${PUBLIC_API_URL}/api/Auth/login`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'

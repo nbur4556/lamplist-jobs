@@ -4,8 +4,8 @@ import { JobListStore } from '@src/store/JobListStore';
 import type { StoreSetter } from '../types';
 
 const logoutUser = (set: StoreSetter<User>) => {
-  JobListStore.emptyStore();
-  set({});
-}
+	JobListStore.emptyStore();
+	set({});
+};
 
 export default logoutUser;

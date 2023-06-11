@@ -25,7 +25,7 @@ const createJobListStore = () => {
 		updateEntry: (values: Partial<JobEntry>, id: string) => updateJobEntries(id, values, update),
 		addEntry: (entry: JobEntry) => addJobEntries(entry, update),
 		removeEntry: (id: string) => deleteJobEntries(id, update),
-    emptyStore: () => set([]),
+		emptyStore: () => set([])
 	};
 };
 
