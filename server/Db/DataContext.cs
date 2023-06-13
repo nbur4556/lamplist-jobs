@@ -11,7 +11,5 @@ public class DataContext : IdentityDbContext<ApplicationUser, ApplicationUserRol
 
   // Data Tables
   public DbSet<Account>? Account { get; set; }
-  //? Should ApplicationUser be in the DataContext?
-  public DbSet<ApplicationUser>? ApplicationUser { get; set; }
   public DbSet<JobEntry>? JobEntries { get; set; }
 }

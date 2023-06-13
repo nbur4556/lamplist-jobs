@@ -6,7 +6,6 @@ namespace server.Models;
 [PrimaryKey(nameof(Id))]
 public class ApplicationUser : IdentityUser<Guid>
 {
-  //! Not finding related Account
   public Account? Account { get; set; }
 }
 

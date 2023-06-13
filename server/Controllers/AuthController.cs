@@ -92,8 +92,4 @@ public class AuthController : ControllerBase
       return BadRequest(exception.ToString());
     }
   }
-
-  //TODO: Logout
-
-  //TODO: Forgot Password
 }
