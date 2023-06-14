@@ -11,7 +11,6 @@ public class Account
 
   public ApplicationUser? ApplicationUser { get; set; }
 
-  //? Is it possible to remove the JsonIgnore? https://stackoverflow.com/questions/60197270/jsonexception-a-possible-object-cycle-was-detected-which-is-not-supported-this
   [JsonIgnore]
   public ICollection<JobEntry> JobEntries { get; } = new List<JobEntry>();
 }
