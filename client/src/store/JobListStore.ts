@@ -17,14 +17,15 @@ export interface JobEntry {
 }
 
 const createJobListStore = () => {
-	const { subscribe, update } = writable<Array<JobEntry>>([]);
+	const { subscribe, update, set } = writable<Array<JobEntry>>([]);
 
 	return {
 		subscribe,
 		fetchEntries: () => fetchJobEntries(update),
 		updateEntry: (values: Partial<JobEntry>, id: string) => updateJobEntries(id, values, update),
 		addEntry: (entry: JobEntry) => addJobEntries(entry, update),
-		removeEntry: (id: string) => deleteJobEntries(id, update)
+		removeEntry: (id: string) => deleteJobEntries(id, update),
+		emptyStore: () => set([])
 	};
 };
 

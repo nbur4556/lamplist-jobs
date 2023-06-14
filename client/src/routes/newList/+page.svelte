@@ -7,7 +7,6 @@
 	const targetListSize = 40;
 
 	const addEntry = () => {
-		//! Add entry should not require an id, this should be created by the backend
 		JobListStore.addEntry({ company: entry });
 		entry = '';
 	};

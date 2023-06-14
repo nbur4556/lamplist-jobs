@@ -1,8 +1,11 @@
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 using server.Db;
 using server.Models;
+using server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<String[]>();
@@ -23,13 +26,39 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<DataContext>(options =>
   options.UseNpgsql($"{dbConnection}; Password={dbPassword}")
 );
-builder.Services.AddIdentity<User, UserRole>(options => {
+builder.Services.AddIdentity<ApplicationUser, ApplicationUserRole>(options =>
+{
   options.Password.RequireDigit = true;
   options.Password.RequiredLength = 12;
   options.Password.RequireNonAlphanumeric = true;
   options.Password.RequireUppercase = true;
   options.Password.RequireLowercase = true;
 }).AddEntityFrameworkStores<DataContext>();
+builder.Services.AddAuthentication(auth =>
+{
+  auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+  auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+  string? authKey = builder.Configuration["AuthSettings:Key"];
+  if (authKey != null)
+  {
+    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+      ValidateIssuer = true,
+      ValidateAudience = true,
+      ValidAudience = builder.Configuration["AuthSettings:Audience"],
+      ValidIssuer = builder.Configuration["AuthSettings:Issuer"],
+      RequireExpirationTime = true,
+      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authKey)),
+      ValidateIssuerSigningKey = true,
+    };
+  }
+});
+
+// Add Scopes
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -48,6 +77,7 @@ app.UseHttpsRedirection();
 
 app.UseCors(allowOriginPolicyRef);
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
