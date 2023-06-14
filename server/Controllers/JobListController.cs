@@ -58,7 +58,6 @@ public class JobListController : ControllerBase
     IOrderedQueryable<JobEntry> jobEntries = _context.JobEntries
       .Where(entry => entry.AccountId.Equals(account.Id))
       .OrderBy(entry => entry.Id);
-    Console.WriteLine(jobEntries);
     if (jobEntries == null)
     {
       return NotFound();
