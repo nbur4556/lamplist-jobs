@@ -8,10 +8,15 @@ using server.Db;
 using server.Models;
 using server.Services;
 
+//TODO: Remove connection string from appsettings.json if possible
+
 var builder = WebApplication.CreateBuilder(args);
 var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<String[]>();
-String? dbConnection = builder.Configuration.GetConnectionString("DataContext");
+String? dbHost = builder.Configuration["PostgreSql:DbHost"];
+String? dbDatabase = builder.Configuration["PostgreSql:DbDatabase"];
+String? dbUser = builder.Configuration["PostgreSql:DbUser"];
 String? dbPassword = builder.Configuration["PostgreSql:DbPassword"];
+String? dbConnection = "Host=" + dbHost + "; Database=" + dbDatabase + "; Username=" + dbUser;
 
 String allowOriginPolicyRef = "_allowSpecificOrigins";
 
