@@ -6,12 +6,6 @@
 	import { JobListStore } from '@src/store/JobListStore';
 
 	$: authUserName = $AuthStore.userName;
-
-	fetch('https://lamplist.server.nickburt.dev/test', {
-		method: 'GET'
-	})
-		.then((res) => res.text())
-		.then((result) => console.log(result));
 </script>
 
 <PageContent>

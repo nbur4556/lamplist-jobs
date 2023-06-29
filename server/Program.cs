@@ -8,10 +8,8 @@ using server.Db;
 using server.Models;
 using server.Services;
 
-//TODO: Remove connection string from appsettings.json if possible
-
 var builder = WebApplication.CreateBuilder(args);
-var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<String[]>();
+var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<String>();
 String? dbHost = builder.Configuration["PostgreSql:DbHost"];
 String? dbDatabase = builder.Configuration["PostgreSql:DbDatabase"];
 String? dbUser = builder.Configuration["PostgreSql:DbUser"];
@@ -78,8 +76,6 @@ if (app.Environment.IsDevelopment())
   app.UseSwagger();
   app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseCors(allowOriginPolicyRef);
 
