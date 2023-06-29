@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -8,9 +9,12 @@ using server.Models;
 using server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<String[]>();
-String? dbConnection = builder.Configuration.GetConnectionString("DataContext");
+var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<String>();
+String? dbHost = builder.Configuration["PostgreSql:DbHost"];
+String? dbDatabase = builder.Configuration["PostgreSql:DbDatabase"];
+String? dbUser = builder.Configuration["PostgreSql:DbUser"];
 String? dbPassword = builder.Configuration["PostgreSql:DbPassword"];
+String? dbConnection = "Host=" + dbHost + "; Database=" + dbDatabase + "; Username=" + dbUser;
 
 String allowOriginPolicyRef = "_allowSpecificOrigins";
 
@@ -73,9 +77,12 @@ if (app.Environment.IsDevelopment())
   app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
 app.UseCors(allowOriginPolicyRef);
+
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+  ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
