@@ -22,7 +22,9 @@ public class IAccountServiceTests
     _accountEntities = new List<Account>() {
       //! Multiple accounts will use the same Guid. Need a way to randomize this...
       //TODO: Add multiple accounts to select from
-      new Account(),
+      new Account() {ApplicationUserId = Guid.NewGuid()},
+      new Account() {ApplicationUserId = Guid.NewGuid()},
+      new Account() {ApplicationUserId = Guid.NewGuid()},
     };
     var queryable = _accountEntities.AsQueryable();
 
@@ -39,11 +41,11 @@ public class IAccountServiceTests
   }
 
   [Fact]
-  public void GetAccountByUserId_ShouldGetAccountWithValidUserId()
+  public void GetAccountByUserId_ShouldFindAccountWithValidUserId()
   {
     Account expected = _accountEntities[0];
 
-    Account result = _accountService.GetAccountByUserId(expected.Id);
+    Account result = _accountService.GetAccountByUserId(expected.ApplicationUserId);
 
     Assert.Equal(expected, result);
   }
