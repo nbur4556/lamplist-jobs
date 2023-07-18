@@ -4,36 +4,36 @@ using System.Security.Claims;
 
 using server.Services;
 
-//! No test is available
-//TODO: Make sure that test discoverer & executors are registered and platform & framework version settings are appropriate
-namespace server.Tests
+namespace server.Tests;
+
+public class ITokenServiceTests
 {
-  public class ITokenServiceTests
+  private readonly Mock<IConfiguration> _configurationMock;
+
+  public ITokenServiceTests()
   {
-    private readonly Mock<IConfiguration> _configurationMock;
+    _configurationMock = new Mock<IConfiguration>();
+  }
 
-    public ITokenServiceTests()
+  [Fact]
+  public void CreateToken_ShouldReturnNewSecurityTokenAsString()
+  {
+    _configurationMock.SetupGet(x => x[It.Is<string>(s => s == "AuthSettings:Key")]).Returns("testPassphrase123");
+    _configurationMock.SetupGet(x => x[It.Is<string>(s => s == "AuthSettings:Issuer")]).Returns("testIssuer");
+    _configurationMock.SetupGet(x => x[It.Is<string>(s => s == "AuthSettings:Audience")]).Returns("testAudience");
+
+    TokenService tokenService = new TokenService(_configurationMock.Object);
+    Claim[] claims = new[]
     {
-      _configurationMock = new Mock<IConfiguration>();
-    }
+      new Claim(ClaimTypes.NameIdentifier, "testId"),
+      new Claim("AccountIdentifier", "accountId"),
+    };
 
-    [Fact]
-    public void CreateToken_ShouldReturnNewSecurityTokenAsString()
-    {
-      _configurationMock.SetupGet(x => x[It.Is<string>(s => s == "AuthSettings:Key")]).Returns("testPassphrase123");
-      _configurationMock.SetupGet(x => x[It.Is<string>(s => s == "AuthSettings:Issuer")]).Returns("testIssuer");
-      _configurationMock.SetupGet(x => x[It.Is<string>(s => s == "AuthSettings:Audience")]).Returns("testAudience");
-
-      TokenService tokenService = new TokenService(_configurationMock.Object);
-      Claim[] claims = new[]
-      {
-        new Claim(ClaimTypes.NameIdentifier, "testId"),
-        new Claim("AccountIdentifier", "accountId"),
-      };
-
-      string tokenResult = tokenService.CreateToken(claims);
-      //? What can we assert here to confirm valid JWT?
-      Assert.Equal(tokenResult, tokenResult);
-    }
+    string tokenResult = tokenService.CreateToken(claims);
+    //? What other JWT assertiong can be included?
+    //? Can we assert that the tokenResult is in a valid JWT format?
+    //? Can we assert that the tokenResult contains the JWT claims?
+    Assert.IsType<string>(tokenResult);
+    Assert.Equal(308, tokenResult.Length);
   }
 }
