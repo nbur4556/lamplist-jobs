@@ -40,10 +40,13 @@ public class IAccountServiceTests
     _accountService = new AccountService(mockContext.Object);
   }
 
-  [Fact]
-  public void GetAccountByUserId_ShouldFindAccountWithValidUserId()
+  [Theory]
+  [InlineData(0)]
+  [InlineData(1)]
+  [InlineData(2)]
+  public void GetAccountByUserId_ShouldFindAccountWithValidUserId(int entityIndex)
   {
-    Account expected = _accountEntities[0];
+    Account expected = _accountEntities[entityIndex];
 
     Account result = _accountService.GetAccountByUserId(expected.ApplicationUserId);
 
