@@ -20,21 +20,23 @@ public class ITokenServiceTests
     _tokenService = new TokenService(_configurationMock.Object);
   }
 
-  [Fact]
-  public void CreateToken_ShouldReturnNewSecurityTokenAsString()
+  [Theory]
+  [InlineData("id", "account", 300)]
+  [InlineData("testId", "testAccount", 311)]
+  public void CreateToken_ShouldReturnNewSecurityTokenAsString(string id, string account, int expectedLength)
   {
     Claim[] claims = new[]
     {
-      new Claim(ClaimTypes.NameIdentifier, "testId"),
-      new Claim("AccountIdentifier", "accountId"),
+      new Claim(ClaimTypes.NameIdentifier, id),
+      new Claim("AccountIdentifier", account),
     };
 
-    int tokenLengthExpected = 308;
     string tokenResult = _tokenService.CreateToken(claims);
+
     //? What other JWT assertions can be included?
     //? Can we assert that the tokenResult is in a valid JWT format?
     //? Can we assert that the tokenResult contains the JWT claims?
     Assert.IsType<string>(tokenResult);
-    Assert.Equal(tokenLengthExpected, tokenResult.Length);
+    Assert.Equal(expectedLength, tokenResult.Length);
   }
 }
