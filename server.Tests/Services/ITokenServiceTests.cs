@@ -23,18 +23,18 @@ public class ITokenServiceTests
   [Fact]
   public void CreateToken_ShouldReturnNewSecurityTokenAsString()
   {
-
     Claim[] claims = new[]
     {
       new Claim(ClaimTypes.NameIdentifier, "testId"),
       new Claim("AccountIdentifier", "accountId"),
     };
 
+    int tokenLengthExpected = 308;
     string tokenResult = _tokenService.CreateToken(claims);
     //? What other JWT assertions can be included?
     //? Can we assert that the tokenResult is in a valid JWT format?
     //? Can we assert that the tokenResult contains the JWT claims?
     Assert.IsType<string>(tokenResult);
-    Assert.Equal(308, tokenResult.Length);
+    Assert.Equal(tokenLengthExpected, tokenResult.Length);
   }
 }

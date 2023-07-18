@@ -1,6 +1,7 @@
 using Moq;
 
 using server.Db;
+using server.Models;
 using server.Services;
 
 namespace server.Tests;
@@ -17,10 +18,13 @@ public class IAccountServiceTests
     _accountService = new AccountService(_mockContext.Object);
   }
 
-  // public void GetAccountByUserId_ShouldGetAccountWithValidUserId()
-  // {
-
-  // }
+  [Fact]
+  public void GetAccountByUserId_ShouldGetAccountWithValidUserId()
+  {
+    Account accountExpected = new Account();
+    Account accountResult = _accountService.GetAccountByUserId(accountExpected.Id);
+    Assert.Equal(accountExpected, accountResult);
+  }
 
   // public void GetAccountbyUserId_ShouldThrowExceptionWithInvalidUserId()
   // {
