@@ -8,16 +8,21 @@ namespace server.Tests;
 
 public class ITokenServiceTests
 {
-  private readonly Mock<IConfiguration> _configurationMock;
   private readonly TokenService _tokenService;
 
   public ITokenServiceTests()
   {
-    _configurationMock = new Mock<IConfiguration>();
-    _configurationMock.SetupGet(x => x[It.Is<string>(s => s == "AuthSettings:Key")]).Returns("testPassphrase123");
-    _configurationMock.SetupGet(x => x[It.Is<string>(s => s == "AuthSettings:Issuer")]).Returns("testIssuer");
-    _configurationMock.SetupGet(x => x[It.Is<string>(s => s == "AuthSettings:Audience")]).Returns("testAudience");
-    _tokenService = new TokenService(_configurationMock.Object);
+    Mock<IConfiguration> mockConfiguration = new Mock<IConfiguration>();
+    mockConfiguration
+      .SetupGet(moq => moq[It.Is<string>(param => param == "AuthSettings:Key")])
+      .Returns("testPassphrase123");
+    mockConfiguration
+      .SetupGet(moq => moq[It.Is<string>(param => param == "AuthSettings:Issuer")])
+      .Returns("testIssuer");
+    mockConfiguration
+      .SetupGet(moq => moq[It.Is<string>(param => param == "AuthSettings:Audience")])
+      .Returns("testAudience");
+    _tokenService = new TokenService(mockConfiguration.Object);
   }
 
   [Theory]
