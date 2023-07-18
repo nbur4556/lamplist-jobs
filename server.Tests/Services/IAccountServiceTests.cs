@@ -50,15 +50,15 @@ public class IAccountServiceTests
     Assert.Equal(expected, result);
   }
 
-  // [Fact]
-  // public void GetAccountbyUserId_ShouldThrowExceptionWithInvalidUserId()
-  // {
-  //   //TODO: expect not found exception
-  //   Account expected = new Account();
-  //   Guid guid = new Guid();
+  [Fact]
+  public void GetAccountbyUserId_ShouldThrowExceptionWithInvalidUserId()
+  {
+    string expected = "Sequence contains no matching element";
+    Guid guid = new Guid();
 
-  //   Account result = _accountService.GetAccountByUserId(guid);
+    Action action = () => _accountService.GetAccountByUserId(guid);
 
-  //   Assert.Equal(expected, result);
-  // }
+    InvalidOperationException exception = Assert.Throws<InvalidOperationException>(action);
+    Assert.Equal(expected, exception.Message);
+  }
 }
