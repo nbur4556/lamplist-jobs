@@ -5,6 +5,7 @@ using server.Db;
 using server.Models;
 using server.Services;
 using server.Tests.Fixtures;
+using server.Tests.Services;
 
 namespace server.Tests;
 
@@ -15,21 +16,10 @@ public class IAccountServiceTests
 
   public IAccountServiceTests()
   {
-    var mockContext = new Mock<DataContext>();
-    var mockSet = new Mock<DbSet<Account>>();
-
-    // Create mock data
     _accountEntities = new AccountEntitiesFixture().GetAccountEntities();
-    var queryable = _accountEntities.AsQueryable();
+    var mockSet = MockDbSetFactory.Create<Account>(_accountEntities);
+    var mockContext = new Mock<DataContext>();
 
-    //TODO: Refactor as a create mock set factory
-    // Apply mock data to mockSet
-    mockSet.As<IQueryable<Account>>().Setup(moq => moq.Provider).Returns(queryable.Provider);
-    mockSet.As<IQueryable<Account>>().Setup(moq => moq.Expression).Returns(queryable.Expression);
-    mockSet.As<IQueryable<Account>>().Setup(moq => moq.ElementType).Returns(queryable.ElementType);
-    mockSet.As<IQueryable<Account>>().Setup(moq => moq.GetEnumerator()).Returns(() => queryable.GetEnumerator());
-
-    // Provide mockSet to mockContext
     mockContext.Setup(moq => moq.Account).Returns(() => mockSet.Object);
     _accountService = new AccountService(mockContext.Object);
   }
