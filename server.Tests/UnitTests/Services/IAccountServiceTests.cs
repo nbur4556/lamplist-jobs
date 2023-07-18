@@ -20,8 +20,6 @@ public class IAccountServiceTests
     //TODO: Refactor to a reusable database
     // Create mock data
     _accountEntities = new List<Account>() {
-      //! Multiple accounts will use the same Guid. Need a way to randomize this...
-      //TODO: Add multiple accounts to select from
       new Account() {ApplicationUserId = Guid.NewGuid()},
       new Account() {ApplicationUserId = Guid.NewGuid()},
       new Account() {ApplicationUserId = Guid.NewGuid()},
