@@ -4,6 +4,7 @@ using Moq;
 using server.Db;
 using server.Models;
 using server.Services;
+using server.Tests.Fixtures;
 
 namespace server.Tests;
 
@@ -17,13 +18,8 @@ public class IAccountServiceTests
     var mockContext = new Mock<DataContext>();
     var mockSet = new Mock<DbSet<Account>>();
 
-    //TODO: Refactor to a reusable database
     // Create mock data
-    _accountEntities = new List<Account>() {
-      new Account() {ApplicationUserId = Guid.NewGuid()},
-      new Account() {ApplicationUserId = Guid.NewGuid()},
-      new Account() {ApplicationUserId = Guid.NewGuid()},
-    };
+    _accountEntities = new AccountEntitiesFixture().GetAccountEntities();
     var queryable = _accountEntities.AsQueryable();
 
     //TODO: Refactor as a create mock set factory
