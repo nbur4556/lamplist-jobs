@@ -1,6 +1,6 @@
+using Microsoft.Extensions.Configuration;
 using Moq;
 using System.Security.Claims;
-using Xunit;
 
 using server.Services;
 
