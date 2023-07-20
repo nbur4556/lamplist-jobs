@@ -19,6 +19,7 @@ public class TokenService : ITokenService
     _configuration = configuration;
   }
 
+  // TODO Handle errors and write tests for configuration values not provided
   public string CreateToken(Claim[] claims)
   {
     SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));
