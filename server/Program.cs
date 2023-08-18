@@ -9,14 +9,14 @@ using server.Models;
 using server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<String>();
-String? dbHost = builder.Configuration["PostgreSql:DbHost"];
-String? dbDatabase = builder.Configuration["PostgreSql:DbDatabase"];
-String? dbUser = builder.Configuration["PostgreSql:DbUser"];
-String? dbPassword = builder.Configuration["PostgreSql:DbPassword"];
-String? dbConnection = "Host=" + dbHost + "; Database=" + dbDatabase + "; Username=" + dbUser;
+var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<string>();
+string? dbHost = builder.Configuration["PostgreSql:DbHost"];
+string? dbDatabase = builder.Configuration["PostgreSql:DbDatabase"];
+string? dbUser = builder.Configuration["PostgreSql:DbUser"];
+string? dbPassword = builder.Configuration["PostgreSql:DbPassword"];
+string? dbConnection = "Host=" + dbHost + "; Database=" + dbDatabase + "; Username=" + dbUser;
 
-String allowOriginPolicyRef = "_allowSpecificOrigins";
+string allowOriginPolicyRef = "_allowSpecificOrigins";
 
 // Add services to the container.
 builder.Services.AddControllers();
