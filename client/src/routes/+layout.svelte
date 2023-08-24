@@ -1,4 +1,6 @@
 <script>
+	import '@src/app.css';
+	// TODO: replace with tailwindCSS and daisy UI
 	import '@src/styles/global.scss';
 </script>
 

@@ -2,6 +2,8 @@
 @use '../theme/fonts';
 @use '../theme/sizes';
 
+//TODO: Replace with Tailwind and DaisyUI
+//TODO: Uninstall Sass and dependencies when replaced
 body {
 	background-color: colors.$bg-dark;
 }
