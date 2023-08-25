@@ -4,27 +4,14 @@
 
 //TODO: Replace with Tailwind and DaisyUI
 //TODO: Uninstall Sass and dependencies when replaced
-body {
-	background-color: colors.$bg-dark;
-}
-
 main {
 	color: colors.$txt-main;
 	font-family: fonts.$base;
 }
 
 p,
-a,
 button {
 	font-size: sizes.$font-sm;
-}
-
-a {
-	color: colors.$txt-main;
-
-	&:hover {
-		color: colors.$txt-sub;
-	}
 }
 
 button {
