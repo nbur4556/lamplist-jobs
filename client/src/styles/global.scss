@@ -13,16 +13,3 @@ p,
 button {
 	font-size: sizes.$font-sm;
 }
-
-button {
-	padding: sizes.$spacing-xs sizes.$spacing-sm;
-	border: none;
-
-	background-color: colors.$bg-mid;
-	color: colors.$txt-main;
-	border-radius: 10px;
-
-	&:hover {
-		background-color: colors.$bg-light;
-	}
-}
