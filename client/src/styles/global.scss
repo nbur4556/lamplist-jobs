@@ -1,15 +1,5 @@
+//TODO: Replace with Tailwind and DaisyUI
+//TODO: Uninstall Sass and dependencies when replaced
 @use '../theme/colors';
 @use '../theme/fonts';
 @use '../theme/sizes';
-
-//TODO: Replace with Tailwind and DaisyUI
-//TODO: Uninstall Sass and dependencies when replaced
-main {
-	color: colors.$txt-main;
-	font-family: fonts.$base;
-}
-
-p,
-button {
-	font-size: sizes.$font-sm;
-}

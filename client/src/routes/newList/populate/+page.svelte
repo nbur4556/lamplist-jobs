@@ -3,7 +3,7 @@
 
 	import Input from '@src/lib/Form/Input.svelte';
 	import InputNumber from '@src/lib/Form/InputNumber.svelte';
-	import EntryCard from '@src/lib/EntryCard.svelte';
+	import EntryCard from '@src/lib/JobList/EntryCard.svelte';
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
 	import removeEmptyKeys from '@src/utils/removeEmptyKeys';
