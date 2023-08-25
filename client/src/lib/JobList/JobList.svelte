@@ -5,8 +5,8 @@
 	$: jobCount = $JobListStore.length;
 </script>
 
-<section>
-	<p class="job-count">Jobs ({jobCount})</p>
+<section class="flex flex-col self-stretch">
+	<p class="self-end">Jobs ({jobCount})</p>
 	<ul>
 		{#each $JobListStore as job}
 			<li class="py-2">
@@ -23,15 +23,3 @@
 		{/each}
 	</ul>
 </section>
-
-<style>
-	section {
-		display: flex;
-		flex-direction: column;
-		align-self: stretch;
-	}
-
-	.job-count {
-		align-self: flex-end;
-	}
-</style>
