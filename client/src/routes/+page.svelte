@@ -10,7 +10,7 @@
 <PageContent>
 	<nav class="navbar">
 		<section class="menu menu-horizontal gap-2">
-			<a class="link link-secondary" href="/newList">Add Job Entries</a>
+			<a class="link link-primary" href="/newList">Add Job Entries</a>
 			<a class="link link-secondary" href="/auth/register">Register</a>
 			<a class="link link-secondary" href="/auth/login">Login</a>
 			<button class="link link-secondary" on:click={AuthStore.logout}>Logout</button>

@@ -45,7 +45,11 @@
 </script>
 
 <PageContent>
-	<a class="link link-primary" href="/">Home</a>
+	<nav class="navbar">
+		<section class="menu menu-horizontal gap-2">
+			<a class="link link-primary" href="/">Home</a>
+		</section>
+	</nav>
 	<h1 class="text-2xl">Register</h1>
 	<form class="w-full" on:change={clearResultMessages} on:submit={onSubmit}>
 		<Input bind:value={formValues.userName}>UserName</Input>
