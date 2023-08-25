@@ -20,7 +20,6 @@
 
 	<h1 class="text-xl">Welcome to Lamp List Jobs!</h1>
 
-
 	{#if authUserName}
 		<p>You are logged in as {authUserName}</p>
 	{/if}
@@ -28,7 +27,11 @@
 	{#if $JobListStore.length > 0}
 		<JobList />
 	{:else}
-		<p>You do not yet have a lamp list... <a class="link link-accent" href="/newList">Create one now!</a></p>
+		<p>
+			You do not yet have a lamp list... 
+			<a class="link link-accent" href="/newList">
+				Create one now!
+			</a>
+		</p>
 	{/if}
 </PageContent>
-
