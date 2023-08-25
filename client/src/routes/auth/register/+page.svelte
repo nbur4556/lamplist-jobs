@@ -1,3 +1,4 @@
+
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
@@ -44,35 +45,14 @@
 </script>
 
 <PageContent>
-	<h1>Register</h1>
-	<a href="/">Home</a>
-	<form on:change={clearResultMessages} on:submit={onSubmit}>
+	<a class="link link-primary" href="/">Home</a>
+	<h1 class="text-2xl">Register</h1>
+	<form class="w-full" on:change={clearResultMessages} on:submit={onSubmit}>
 		<Input bind:value={formValues.userName}>UserName</Input>
 		<PasswordInput bind:value={formValues.password}>Password</PasswordInput>
 		<PasswordInput bind:value={formValues.confirmPassword}>Confirm Password</PasswordInput>
-		<button type="submit">Submit</button>
+		<button class="btn btn-primary mt-2" type="submit">Submit</button>
 	</form>
-	<p class="error-message">{errorMessage}</p>
+	<p class="text-error">{errorMessage}</p>
 	<PasswordRequirements />
 </PageContent>
-
-<style lang="scss">
-	@use '../../../theme/colors';
-	@use '../../../theme/sizes';
-
-	h1 {
-		font-size: sizes.$font-lg;
-	}
-
-	form {
-		display: flex;
-		flex-direction: column;
-		gap: sizes.$spacing-md;
-
-		width: 100%;
-	}
-
-	.error-message {
-		color: colors.$accent-mid;
-	}
-</style>
