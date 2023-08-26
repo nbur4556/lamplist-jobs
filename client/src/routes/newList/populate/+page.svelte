@@ -85,7 +85,7 @@
 
 	<section class="flex flex-row-reverse justify-between w-full">
 		{#if lastEntry}
-			<a href="/">Save</a>
+			<a class="link link-primary" href="/">Save</a>
 		{:else}
 			<button class="link link-primary" on:click={nextEntry}>Next</button>
 		{/if}
