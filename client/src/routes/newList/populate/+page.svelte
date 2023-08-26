@@ -71,7 +71,7 @@
 </script>
 
 <PageContent>
-	<form>
+	<form class="w-full">
 		<Input bind:value={formValues.contact} hidden={step !== 0}>
 			Do you have a contact at this company? Enter their name:
 		</Input>
@@ -83,7 +83,7 @@
 		</Input>
 	</form>
 
-	<section class="controls">
+	<section class="flex flex-row-reverse justify-between w-full">
 		{#if lastEntry}
 			<a href="/">Save</a>
 		{:else}
@@ -93,11 +93,11 @@
 		{#if !firstEntry}
 			<button class="link link-primary" on:click={preEntry}>Pre</button>
 		{:else}
-			<a href="/newList">Back</a>
+			<a class="link link-primary" href="/newList">Back</a>
 		{/if}
 	</section>
 
-	<section>
+	<section class="w-full">
 		{#each $JobListStore as jobEntry, index}
 			{#if entryIndex === index}
 				<div
@@ -111,19 +111,3 @@
 		{/each}
 	</section>
 </PageContent>
-
-<style lang="scss">
-	section {
-		width: 100%;
-	}
-
-	form {
-		width: 100%;
-	}
-
-	.controls {
-		display: flex;
-		flex-direction: row-reverse;
-		justify-content: space-between;
-	}
-</style>

@@ -17,7 +17,7 @@
 </script>
 
 <PageContent>
-	<form class="flex justify-between items-center w-full" on:submit={addEntry}>
+	<form class="flex justify-between items-end w-full" on:submit={addEntry}>
 		<Input name="job" bind:value={entry}>
 			List {remainingCount}+ employers that you would like to work for:
 		</Input>
