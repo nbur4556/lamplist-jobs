@@ -11,6 +11,14 @@
 			JobListStore.addEntry({ company });
 		})
 	};
+
+	const addToForm = () => {
+		jobEntries = [...jobEntries, ...new Array<string>(1)];
+	};
+
+	const removeFromForm = () => {
+		jobEntries = jobEntries.slice(0, jobEntries.length - 1);
+	}
 </script>
 
 <PageContent>
@@ -23,6 +31,11 @@
 
 	<!-- //TODO: should use 4 different categories from lamplist method -->
 	<p>Add entries for 10 companies of CATEGORY</p>
+
+	<div class="flex self-end gap-3">
+		<button class="btn btn-outline btn-xs" on:click={removeFromForm}>-</button>
+		<button class="btn btn-outline btn-xs" on:click={addToForm}>+</button>
+	</div>
 	
 	<form class="flex flex-col justify-between w-full" on:submit={addEntry}>
 		{#each jobEntries as _, i}
