@@ -10,10 +10,12 @@
 </script>
 
 <section class="flex flex-col self-stretch">
-	<p class="self-end">Jobs ({jobCount})</p>
-	<button class="btn btn-outline btn-sm self-end" on:click={toggleCollapsedEntries}>
-		{#if !collapsedEntries}Collapse{:else}Expand{/if}
-	</button>
+	<div class="flex justify-end items-center gap-3">
+		<p>Jobs ({jobCount})</p>
+		<button class="btn btn-outline btn-sm" on:click={toggleCollapsedEntries}>
+			{#if !collapsedEntries}Collapse{:else}Expand{/if}
+		</button>
+	</div>
 	<ul>
 		{#each $JobListStore as job}
 			<li class="py-2">
