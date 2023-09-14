@@ -6,10 +6,10 @@
 	
 	let jobEntries = new Array<string>(10);
 
-	const addEntry = () => {
+	const addEntries = () => {
 		jobEntries.forEach(company => {
 			JobListStore.addEntry({ company });
-		})
+		});
 	};
 
 	const addToForm = () => {
@@ -37,9 +37,9 @@
 		<button class="btn btn-outline btn-xs" on:click={addToForm}>+</button>
 	</div>
 	
-	<form class="flex flex-col justify-between w-full" on:submit={addEntry}>
+	<form class="flex flex-col justify-between w-full" on:submit={addEntries}>
 		{#each jobEntries as _, i}
-			<Input name={`job-${i}`} value={jobEntries[i]} />
+			<Input name={`job-${i}`} bind:value={jobEntries[i]} />
 		{/each}
 		<button class="btn btn-primary" type="submit">Submit</button>
 	</form>
