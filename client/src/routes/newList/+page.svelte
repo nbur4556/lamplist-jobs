@@ -3,13 +3,16 @@
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
 
-	
+	//TODO: Should use category text from lamplist method
+	const categories = ["CATEGORY 1", "CATEGORY 2", "CATEGORY 3", "CATEGORY 4"];
+	let categoryIndex = 0;
 	let jobEntries = new Array<string>(10);
 
 	const addEntries = () => {
 		jobEntries.forEach(company => {
 			JobListStore.addEntry({ company });
 		});
+		initializeCategory();
 	};
 
 	const addToForm = () => {
@@ -18,6 +21,17 @@
 
 	const removeFromForm = () => {
 		jobEntries = jobEntries.slice(0, jobEntries.length - 1);
+	}
+
+	const initializeCategory = () => {
+		jobEntries = new Array(10);
+
+		if (categoryIndex >= categories.length - 1){
+			//TODO: Should route to the populating step
+			return;
+		}
+
+		categoryIndex++;
 	}
 </script>
 
@@ -29,8 +43,7 @@
 		</ul>
 	</nav>
 
-	<!-- //TODO: should use 4 different categories from lamplist method -->
-	<p>Add entries for 10 companies of CATEGORY</p>
+	<p>Add entries for 10 companies of {categories[categoryIndex]}</p>
 
 	<div class="flex self-end gap-3">
 		<button class="btn btn-outline btn-xs" on:click={removeFromForm}>-</button>
