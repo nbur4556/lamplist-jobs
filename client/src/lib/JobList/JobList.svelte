@@ -1,6 +1,6 @@
 <script lang="ts">
-	import EntryCard from './EntryCard.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
+	import EntryCard from './EntryCard.svelte';
 
 	let collapsedEntries = false;
 

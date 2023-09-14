@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { JobEntry } from '@src/store/JobListStore';
+
 	export let job: JobEntry;
 	export let collapsed = false;
 
