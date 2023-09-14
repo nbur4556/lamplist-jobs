@@ -10,7 +10,7 @@
 	<ul>
 		{#each $JobListStore as job}
 			<li class="py-2">
-				<EntryCard {job}>
+				<EntryCard {job} collapsed={false}>
 					<button
 						class="btn btn-outline btn-xs"
 						slot="actions"
