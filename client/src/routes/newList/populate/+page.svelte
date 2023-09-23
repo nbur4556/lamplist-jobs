@@ -3,8 +3,7 @@
 
 	import Input from '@src/lib/Form/Input.svelte';
 	import InputNumber from '@src/lib/Form/InputNumber.svelte';
-	import EntryCard from '@src/lib/EntryCard.svelte';
-	import ButtonAsLink from '@src/lib/UI/ButtonAsLink.svelte';
+	import EntryCard from '@src/lib/JobList/EntryCard.svelte';
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
 	import removeEmptyKeys from '@src/utils/removeEmptyKeys';
@@ -72,7 +71,7 @@
 </script>
 
 <PageContent>
-	<form>
+	<form class="w-full">
 		<Input bind:value={formValues.contact} hidden={step !== 0}>
 			Do you have a contact at this company? Enter their name:
 		</Input>
@@ -84,21 +83,21 @@
 		</Input>
 	</form>
 
-	<section class="controls">
+	<section class="flex flex-row-reverse justify-between w-full">
 		{#if lastEntry}
-			<a href="/">Save</a>
+			<a class="link link-primary" href="/">Save</a>
 		{:else}
-			<ButtonAsLink onClick={nextEntry}>Next</ButtonAsLink>
+			<button class="link link-primary" on:click={nextEntry}>Next</button>
 		{/if}
 
 		{#if !firstEntry}
-			<ButtonAsLink onClick={preEntry}>Pre</ButtonAsLink>
+			<button class="link link-primary" on:click={preEntry}>Pre</button>
 		{:else}
-			<a href="/newList">Back</a>
+			<a class="link link-primary" href="/newList">Back</a>
 		{/if}
 	</section>
 
-	<section>
+	<section class="w-full">
 		{#each $JobListStore as jobEntry, index}
 			{#if entryIndex === index}
 				<div
@@ -112,19 +111,3 @@
 		{/each}
 	</section>
 </PageContent>
-
-<style lang="scss">
-	section {
-		width: 100%;
-	}
-
-	form {
-		width: 100%;
-	}
-
-	.controls {
-		display: flex;
-		flex-direction: row-reverse;
-		justify-content: space-between;
-	}
-</style>

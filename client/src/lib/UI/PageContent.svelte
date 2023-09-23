@@ -1,17 +1,3 @@
-<section class="page-content">
+<section class="flex flex-col items-center gap-2 w-full max-w-2xl">
 	<slot />
 </section>
-
-<style lang="scss">
-	@use '../../theme/sizes';
-
-	.page-content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: sizes.$spacing-sm;
-
-		max-width: 40rem;
-		width: 100%;
-	}
-</style>
