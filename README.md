@@ -63,4 +63,5 @@ Start server: `dotnet run`
 
 ## Contribution
 
-When contributing to Lamplist Jobs, please use the merge request feature provided by GitHub and tag nbur4556 for a code review. It is recommended to create a new branch for each individual feature contributed.
+When contributing to Lamplist Jobs, please use the merge request feature provided by GitHub and tag nbur4556 for a code review. It is recommended to create a new branch for each individual feature contributed. Github pull requests should merge to **staging** not main. This allows for testing code in a production environment before it's applied to the live application.
+
