@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Input from '@src/lib/Form/Input.svelte';
 	import JobList from '@src/lib/JobList/JobList.svelte';
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
@@ -16,36 +17,19 @@
 </script>
 
 <PageContent>
-	<form on:submit={addEntry}>
-		<label for="job">List {remainingCount}+ employers that you would like to work for:</label>
-		<input name="job" type="text" bind:value={entry} />
-		<button type="submit">Submit</button>
+	<form class="flex justify-between items-end w-full" on:submit={addEntry}>
+		<Input name="job" bind:value={entry}>
+			List {remainingCount}+ employers that you would like to work for:
+		</Input>
+		<button class="btn btn-primary" type="submit">Submit</button>
 	</form>
 
-	<nav>
-		<ul>
-			<li><a href="/">Back</a></li>
-			<li><a href="/newList/populate">Next</a></li>
+	<nav class="w-full">
+		<ul class="flex justify-between">
+			<li><a class="link link-primary" href="/">Back</a></li>
+			<li><a class="link link-primary" href="/newList/populate">Next</a></li>
 		</ul>
 	</nav>
 
 	<JobList />
 </PageContent>
-
-<style lang="scss">
-	form {
-		display: flex;
-		justify-content: space-between;
-		width: 100%;
-	}
-
-	nav {
-		align-self: stretch;
-
-		ul {
-			display: flex;
-			justify-content: space-between;
-			align-self: stretch;
-		}
-	}
-</style>

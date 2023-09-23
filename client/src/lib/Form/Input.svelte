@@ -1,18 +1,12 @@
 <script lang="ts">
 	export let value: string | undefined;
+	export let name = 'name';
 	export let hidden = false;
+
+	$: hiddenClass = hidden ? 'hidden' : '';
 </script>
 
-<div>
-	<label {hidden}><slot /></label>
-	<!-- Placed in another div to remove 3rd party plugin icons as flex children -->
-	<div><input type="text" bind:value {hidden} /></div>
+<div class={`form-control ${hiddenClass}`}>
+	<label class="label label-text" for={name}><slot /></label>
+	<input class="input input-bordered" {name} type="text" bind:value />
 </div>
-
-<style>
-	div {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-	}
-</style>

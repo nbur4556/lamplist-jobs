@@ -1,17 +1,7 @@
 <script>
-	import '@src/styles/global.scss';
+	import '@src/app.css';
 </script>
 
-<main>
+<main class="flex justify-center p-6">
 	<slot />
 </main>
-
-<style lang="scss">
-	@use '../theme/sizes';
-
-	main {
-		display: flex;
-		justify-content: center;
-		padding: sizes.$spacing-md;
-	}
-</style>
