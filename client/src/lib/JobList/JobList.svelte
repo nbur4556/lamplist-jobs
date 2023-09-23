@@ -1,16 +1,25 @@
 <script lang="ts">
-	import EntryCard from './EntryCard.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
+	import EntryCard from './EntryCard.svelte';
+
+	let collapsedEntries = false;
+
+	const toggleCollapsedEntries = () => (collapsedEntries = !collapsedEntries);
 
 	$: jobCount = $JobListStore.length;
 </script>
 
 <section class="flex flex-col self-stretch">
-	<p class="self-end">Jobs ({jobCount})</p>
+	<div class="flex justify-end items-center gap-3">
+		<p>Jobs ({jobCount})</p>
+		<button class="btn btn-outline btn-sm" on:click={toggleCollapsedEntries}>
+			{#if !collapsedEntries}Collapse{:else}Expand{/if}
+		</button>
+	</div>
 	<ul>
 		{#each $JobListStore as job}
 			<li class="py-2">
-				<EntryCard {job}>
+				<EntryCard {job} collapsed={collapsedEntries}>
 					<button
 						class="btn btn-outline btn-xs"
 						slot="actions"
