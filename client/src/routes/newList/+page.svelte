@@ -7,6 +7,7 @@
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
 
+	let isOpen = true;
 	let categoryIndex = 0;
 	let jobEntries = new Array<string>(10);
 
@@ -41,10 +42,11 @@
 	<nav class="w-full">
 		<ul class="flex justify-between">
 			<li><a class="link link-primary" href="/">Back</a></li>
+			<li><button class="btn btn-outline btn-xs" on:click={() => (isOpen = true)}>?</button></li>
 		</ul>
 	</nav>
 
-	<Modal isOpen={true}>
+	<Modal bind:isOpen>
 		<p>
 			You will create your Lamp List by entering 10 companies for each of the following categories:
 		</p>
