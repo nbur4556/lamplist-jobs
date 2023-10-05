@@ -4,7 +4,7 @@
 	import { JobListStore } from '@src/store/JobListStore';
 
 	//TODO: Should use category text from lamplist method
-	const categories = ["CATEGORY 1", "CATEGORY 2", "CATEGORY 3", "CATEGORY 4"];
+	const categories = ["dream employers", "companies with a connection", "companies actively hiring", "trending employers"];
 	let categoryIndex = 0;
 	let jobEntries = new Array<string>(10);
 
@@ -43,7 +43,7 @@
 		</ul>
 	</nav>
 
-	<p>Add entries for 10 companies of {categories[categoryIndex]}</p>
+	<p>Add entries for 10 {categories[categoryIndex]}</p>
 
 	<div class="flex self-end gap-3">
 		<button class="btn btn-outline btn-xs" on:click={removeFromForm}>-</button>
