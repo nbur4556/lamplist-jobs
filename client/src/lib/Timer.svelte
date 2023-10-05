@@ -4,6 +4,7 @@
 
 	let timer: number;
 	let passed = 0;
+    let isRunning = false;
 
 	export const resetTimer = () => {
 		stopTimer();
@@ -19,12 +20,16 @@
 
 			passed++;
 		}, 1_000);
+        isRunning = true;
 	};
 
 	const stopTimer = () => {
 		clearInterval(timer);
+        isRunning = false;
 		onStopTime(remaining);
 	};
+
+    $: console.log(isRunning);
 
 	$: remaining = time - passed;
 	$: minutes = Math.floor(remaining / 60);
@@ -39,6 +44,9 @@
 		</span>
 	</p>
 	<!-- //TODO: Replace unicode symbols with icons -->
-	<button on:click={startTimer}>&#9654;</button>
-	<button on:click={stopTimer}>&#10074;&#10074;</button>
+    {#if isRunning}
+        <button on:click={stopTimer}>&#10074;&#10074;</button>
+    {:else}
+        <button on:click={startTimer}>&#9654;</button>
+    {/if}
 </div>

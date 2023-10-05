@@ -61,7 +61,7 @@
 
 	<Modal bind:isOpen={showInstructions}>
 		<p>
-			click You will create your Lamp List by entering 10 companies for each of the following
+			You will create your Lamp List by entering 10 companies for each of the following
 			categories:
 		</p>
 
