@@ -8,6 +8,7 @@
 	$: authUserName = $AuthStore.userName;
 </script>
 
+<!-- //TODO: Need starting instructions explaining what the lamplist method is and why to use it, as well as an overview of what this app does for you! -->
 <PageContent>
 	<NavigationBar>
 		<svelte:fragment slot="left">

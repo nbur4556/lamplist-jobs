@@ -10,7 +10,7 @@
 	import { JobListStore } from '@src/store/JobListStore';
 	import Timer from '@src/lib/Timer.svelte';
 
-	const timePerCategory = 10;
+	const timePerCategory = 600;
 
 	let resetTimer: () => void;
 	let timerComplete = false;
@@ -65,6 +65,7 @@
 			categories:
 		</p>
 
+		<!-- //? Rachel - Did not recognize the categories in the instructions -->
 		<ul>
 			{#each categories as category}
 				<li class="my-2">
@@ -75,6 +76,9 @@
 			{/each}
 		</ul>
 
+		<!-- //? Rachel - Why is it timed? -->
+		<!-- //TODO: Better describe what the lamplist method is (probably on title screen) -->
+		<!-- //TODO: Clearer instructions for use of timer as an optional tool -->
 		<p>
 			Add as close to 10 entries for each category as possible. However, you may reduce or increase
 			the amount if necessary. Try to take no longer than 10 minutes per category. You may use the
