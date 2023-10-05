@@ -9,8 +9,6 @@
 <dialog class="modal" class:modal-open={isOpen}>
     <section class="modal-box">
         <CloseWindowButton onClose={closeModal} />
-        <p>
-            <slot />
-        </p>
+        <slot />
     </section>
 </dialog>

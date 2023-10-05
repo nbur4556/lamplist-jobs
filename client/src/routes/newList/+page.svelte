@@ -29,7 +29,6 @@
 		jobEntries = new Array(10);
 
 		if (categoryIndex >= categories.length - 1) {
-			console.log('last');
 			goto('/newList/populate');
 			return;
 		}
@@ -46,8 +45,19 @@
 	</nav>
 
 	<Modal isOpen={true}>
-		You will create your Lamp List by entering 10 jobs for each of the following categories:
-		//TODO: List categories and further instructions
+		<p>You will create your Lamp List by entering 10 companies for each of the following categories:</p>
+
+		<ul>
+			{#each categories as category}
+				<li class="my-2">
+					<!-- //TODO: Should be capitalized here -->
+					<p>{category.title}</p>
+					<p>{category.description}</p>
+				</li>
+			{/each}
+		</ul>
+
+		<p>Add as close to 10 entries for each category as possible. However, you may reduce or increase the amount if necessary. Try to take no longer than 10 minutes per category.</p>
 	</Modal>
 
 	<p>Add 10 entries for {categories[categoryIndex].title}</p>
