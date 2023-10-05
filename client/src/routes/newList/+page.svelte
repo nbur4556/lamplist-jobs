@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+
 	import categories from '@src/content/listCategories.json';
 	import Input from '@src/lib/Form/Input.svelte';
 	import PageContent from '@src/lib/UI/PageContent.svelte';
@@ -26,7 +28,8 @@
 		jobEntries = new Array(10);
 
 		if (categoryIndex >= categories.length - 1) {
-			//TODO: Should route to the populating step
+			console.log('last');
+			goto('/newList/populate');
 			return;
 		}
 
@@ -38,7 +41,6 @@
 	<nav class="w-full">
 		<ul class="flex justify-between">
 			<li><a class="link link-primary" href="/">Back</a></li>
-			<li><a class="link link-primary" href="/newList/populate">Next</a></li>
 		</ul>
 	</nav>
 
@@ -50,10 +52,11 @@
 		<button class="btn btn-outline btn-xs" on:click={addToForm}>+</button>
 	</div>
 
-	<form class="flex flex-col justify-between w-full" on:submit={addEntries}>
+	<!-- //? Should this be a form? If so goto does not work. May need to handle using use:enhance if a form is needed -->
+	<section class="flex flex-col justify-between w-full">
 		{#each jobEntries as _, i}
 			<Input name={`job-${i}`} bind:value={jobEntries[i]} />
 		{/each}
-		<button class="btn btn-primary" type="submit">Submit</button>
-	</form>
+		<button class="btn btn-primary" on:click={addEntries}>Submit</button>
+	</section>
 </PageContent>
