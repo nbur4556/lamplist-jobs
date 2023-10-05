@@ -6,6 +6,8 @@
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
 
+	let isModalOpen = true;
+
 	let categoryIndex = 0;
 	let jobEntries = new Array<string>(10);
 
@@ -51,6 +53,24 @@
 		<button class="btn btn-outline btn-xs" on:click={removeFromForm}>-</button>
 		<button class="btn btn-outline btn-xs" on:click={addToForm}>+</button>
 	</div>
+
+	<dialog class="modal" class:modal-open={isModalOpen}>
+		<section class="modal-box">
+			<button
+				class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+				on:click={() => {
+					isModalOpen = false;
+				}}
+			>
+				✕
+			</button>
+			<p>
+				You will create your Lamp List be entering 10 jobs for each of the following categories:
+
+				//TODO: List categories and further instructions
+			</p>
+		</section>
+	</dialog>
 
 	<!-- //? Should this be a form? If so goto does not work. May need to handle using use:enhance if a form is needed -->
 	<section class="flex flex-col justify-between w-full">
