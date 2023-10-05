@@ -4,6 +4,7 @@
 	import categories from '@src/content/listCategories.json';
 	import Input from '@src/lib/Form/Input.svelte';
 	import Modal from '@src/lib/UI/Modal.svelte';
+	import MiniButton from '@src/lib/UI/MiniButton.svelte';
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
 
@@ -42,12 +43,12 @@
 	<nav class="w-full">
 		<ul class="flex justify-between">
 			<li><a class="link link-primary" href="/">Back</a></li>
-			<li><button class="btn btn-outline btn-xs" on:click={() => (isOpen = true)}>?</button></li>
+			<li><MiniButton onClick={() => isOpen = true}>?</MiniButton></li>
 		</ul>
 	</nav>
 
 	<Modal bind:isOpen>
-		<p>
+		<p>click
 			You will create your Lamp List by entering 10 companies for each of the following categories:
 		</p>
 
@@ -71,8 +72,8 @@
 	<p>{categories[categoryIndex].description}</p>
 
 	<div class="flex self-end gap-3">
-		<button class="btn btn-outline btn-xs" on:click={removeFromForm}>-</button>
-		<button class="btn btn-outline btn-xs" on:click={addToForm}>+</button>
+		<MiniButton onClick={removeFromForm}>-</MiniButton>
+		<MiniButton onClick={addToForm}>+</MiniButton>
 	</div>
 
 	<!-- //? Should this be a form? If so goto does not work. May need to handle using use:enhance if a form is needed -->
