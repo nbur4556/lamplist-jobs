@@ -8,6 +8,7 @@
 	import MiniButton from '@src/lib/UI/MiniButton.svelte';
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
+	import Timer from '@src/lib/Timer.svelte';
 
 	let isOpen = true;
 	let categoryIndex = 0;
@@ -70,9 +71,12 @@
 	<p>Add 10 entries for {categories[categoryIndex].title}</p>
 	<p>{categories[categoryIndex].description}</p>
 
-	<div class="flex self-end gap-3">
-		<MiniButton onClick={removeFromForm}>-</MiniButton>
-		<MiniButton onClick={addToForm}>+</MiniButton>
+	<div class="flex justify-between w-full">
+		<Timer time={600} />
+		<div class="flex gap-2">
+			<MiniButton onClick={removeFromForm}>-</MiniButton>
+			<MiniButton onClick={addToForm}>+</MiniButton>
+		</div>
 	</div>
 
 	<!-- //? Should this be a form? If so goto does not work. May need to handle using use:enhance if a form is needed -->
@@ -80,6 +84,6 @@
 		{#each jobEntries as _, i}
 			<Input name={`job-${i}`} bind:value={jobEntries[i]} />
 		{/each}
-		<button class="btn btn-primary" on:click={addEntries}>Submit</button>
+		<button class="btn btn-primary mt-4" on:click={addEntries}>Submit</button>
 	</section>
 </PageContent>
