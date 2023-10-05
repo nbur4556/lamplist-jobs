@@ -4,6 +4,11 @@
     let timer: number;
     let passed = 0;
 
+    export const resetTimer = () => {
+        stopTimer();
+        passed = 0;
+    }
+
     const startTimer = () => {
         timer = setInterval(() => {
             if (passed > time - 1) {

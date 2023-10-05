@@ -10,7 +10,10 @@
 	import { JobListStore } from '@src/store/JobListStore';
 	import Timer from '@src/lib/Timer.svelte';
 
-	let isOpen = true;
+	const timePerCategory = 600;
+
+	let resetTimer: () => void;
+	let showInstructions = true;
 	let categoryIndex = 0;
 	let jobEntries = new Array<string>(10);
 
@@ -31,6 +34,7 @@
 
 	const initializeCategory = () => {
 		jobEntries = new Array(10);
+		resetTimer();
 
 		if (categoryIndex >= categories.length - 1) {
 			goto('/newList/populate');
@@ -44,10 +48,10 @@
 <PageContent>
 	<NavigationBar>
 		<a slot="left" class="link link-primary" href="/">Back</a>
-		<MiniButton slot="right" onClick={() => isOpen = true}>?</MiniButton>
+		<MiniButton slot="right" onClick={() => showInstructions = true}>?</MiniButton>
 	</NavigationBar>
 
-	<Modal bind:isOpen>
+	<Modal bind:isOpen={showInstructions}>
 		<p>click
 			You will create your Lamp List by entering 10 companies for each of the following categories:
 		</p>
@@ -72,7 +76,7 @@
 	<p>{categories[categoryIndex].description}</p>
 
 	<div class="flex justify-between w-full">
-		<Timer time={600} />
+		<Timer time={timePerCategory} bind:resetTimer />
 		<div class="flex gap-2">
 			<MiniButton onClick={removeFromForm}>-</MiniButton>
 			<MiniButton onClick={addToForm}>+</MiniButton>
