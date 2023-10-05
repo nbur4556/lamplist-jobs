@@ -1,4 +1,6 @@
 <script lang="ts">
+    import CloseWindowButton from "@src/lib/UI/CloseWindowButton.svelte";
+
     export let isOpen: boolean = false;
 
     const closeModal = () => (isOpen = false);
@@ -6,12 +8,7 @@
 
 <dialog class="modal" class:modal-open={isOpen}>
     <section class="modal-box">
-        <button
-            class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-            on:click={closeModal}
-        >
-            ✕
-        </button>
+        <CloseWindowButton onClose={closeModal} />
         <p>
             <slot />
         </p>
