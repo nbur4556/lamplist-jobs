@@ -45,7 +45,9 @@
 	</nav>
 
 	<Modal isOpen={true}>
-		<p>You will create your Lamp List by entering 10 companies for each of the following categories:</p>
+		<p>
+			You will create your Lamp List by entering 10 companies for each of the following categories:
+		</p>
 
 		<ul>
 			{#each categories as category}
@@ -57,7 +59,10 @@
 			{/each}
 		</ul>
 
-		<p>Add as close to 10 entries for each category as possible. However, you may reduce or increase the amount if necessary. Try to take no longer than 10 minutes per category.</p>
+		<p>
+			Add as close to 10 entries for each category as possible. However, you may reduce or increase
+			the amount if necessary. Try to take no longer than 10 minutes per category.
+		</p>
 	</Modal>
 
 	<p>Add 10 entries for {categories[categoryIndex].title}</p>
