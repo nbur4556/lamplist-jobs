@@ -1,5 +1,6 @@
 <script>
 	import JobList from '@src/lib/JobList/JobList.svelte';
+	import NavigationBar from '@src/lib/NavigationBar.svelte';
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { AuthStore } from '@src/store/AuthStore';
 	import { JobListStore } from '@src/store/JobListStore';
@@ -8,14 +9,14 @@
 </script>
 
 <PageContent>
-	<nav class="navbar">
-		<section class="menu menu-horizontal gap-2">
+	<NavigationBar>
+		<svelte:fragment slot="left">
 			<a class="link link-primary" href="/newList">Add Job Entries</a>
 			<a class="link link-secondary" href="/auth/register">Register</a>
 			<a class="link link-secondary" href="/auth/login">Login</a>
 			<button class="link link-secondary" on:click={AuthStore.logout}>Logout</button>
-		</section>
-	</nav>
+		</svelte:fragment>
+	</NavigationBar>
 
 	<h1 class="text-2xl">Welcome to Lamp List Jobs!</h1>
 

@@ -3,6 +3,7 @@
 
 	import categories from '@src/content/listCategories.json';
 	import Input from '@src/lib/Form/Input.svelte';
+	import NavigationBar from '@src/lib/NavigationBar.svelte';
 	import Modal from '@src/lib/UI/Modal.svelte';
 	import MiniButton from '@src/lib/UI/MiniButton.svelte';
 	import PageContent from '@src/lib/UI/PageContent.svelte';
@@ -40,12 +41,10 @@
 </script>
 
 <PageContent>
-	<nav class="w-full">
-		<ul class="flex justify-between">
-			<li><a class="link link-primary" href="/">Back</a></li>
-			<li><MiniButton onClick={() => isOpen = true}>?</MiniButton></li>
-		</ul>
-	</nav>
+	<NavigationBar>
+		<a slot="left" class="link link-primary" href="/">Back</a>
+		<MiniButton slot="right" onClick={() => isOpen = true}>?</MiniButton>
+	</NavigationBar>
 
 	<Modal bind:isOpen>
 		<p>click

@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 
 	import Input from '@src/lib/Form/Input.svelte';
+	import NavigationBar from '@src/lib/NavigationBar.svelte';
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import PasswordInput from '@src/lib/Form/PasswordInput.svelte';
 	import { AuthStore } from '@src/store/AuthStore';
@@ -38,11 +39,9 @@
 </script>
 
 <PageContent>
-	<nav class="navbar">
-		<section class="menu menu-horizontal gap-2">
-			<a class="link link-primary" href="/">Home</a>
-		</section>
-	</nav>
+	<NavigationBar>
+		<a slot="left" class="link link-primary" href="/">Home</a>
+	</NavigationBar>
 	<h1 class="text-2xl">Log In</h1>
 	<form class="w-full" on:change={clearResultMessages} on:submit={onSubmit}>
 		<Input bind:value={formValues.userName}>UserName</Input>
