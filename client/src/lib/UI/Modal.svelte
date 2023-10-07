@@ -7,16 +7,24 @@
 		if (isOpen === false) {
 			isOpen = true;
 		}
-	}
+	};
 
 	const closeModal = () => {
 		if (isOpen === true) {
 			isOpen = false;
 		}
-	}
+	};
 </script>
 
-<dialog class="modal" class:modal-open={isOpen}>
+<dialog
+	class="modal"
+	class:modal-open={isOpen}
+	on:keydown={({ key }) => {
+		if (key === 'Escape') {
+			closeModal();
+		}
+	}}
+>
 	<section class="modal-box">
 		<CloseWindowButton onClose={closeModal} />
 		<slot />
