@@ -13,8 +13,8 @@
 	const timePerCategory = 600;
 
 	let resetTimer: () => void;
+	let showInstructions: () => void;
 	let timerComplete = false;
-	let showInstructions = true;
 	let categoryIndex = 0;
 	let jobEntries = new Array<string>(10);
 
@@ -56,10 +56,10 @@
 <PageContent>
 	<NavigationBar>
 		<a slot="left" class="link link-primary" href="/">Back</a>
-		<MiniButton slot="right" onClick={() => (showInstructions = true)}>?</MiniButton>
+		<MiniButton slot="right" onClick={showInstructions}>?</MiniButton>
 	</NavigationBar>
 
-	<Modal bind:isOpen={showInstructions}>
+	<Modal bind:openModal={showInstructions}>
 		<p>
 			You will create your Lamp List by entering 10 companies for each of the following
 			categories:

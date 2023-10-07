@@ -1,9 +1,19 @@
 <script lang="ts">
 	import CloseWindowButton from '@src/lib/UI/CloseWindowButton.svelte';
 
-	export let isOpen: boolean = false;
+	let isOpen: boolean = false;
 
-	const closeModal = () => (isOpen = false);
+	export const openModal = () => {
+		if (isOpen === false) {
+			isOpen = true;
+		}
+	}
+
+	const closeModal = () => {
+		if (isOpen === true) {
+			isOpen = false;
+		}
+	}
 </script>
 
 <dialog class="modal" class:modal-open={isOpen}>
