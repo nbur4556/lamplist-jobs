@@ -9,6 +9,7 @@
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
 	import Timer from '@src/lib/Timer.svelte';
+	import { upperCaseWordsInSentence } from '@src/utils/stringFormatting';
 
 	const timePerCategory = 600;
 
@@ -60,22 +61,20 @@
 	</NavigationBar>
 
 	<Modal bind:openModal={showInstructions}>
+		<p class="font-semibold">Help</p>
 		<p>
 			You will create your Lamp List by entering 10 companies for each of the following categories:
 		</p>
 
-		<!-- //? Rachel - Did not recognize the categories in the instructions -->
 		<ul>
 			{#each categories as category}
 				<li class="my-2">
-					<!-- //TODO: Should be capitalized here -->
-					<p>{category.title}</p>
+					<p class="font-semibold">{upperCaseWordsInSentence(category.title)}</p>
 					<p>{category.description}</p>
 				</li>
 			{/each}
 		</ul>
 
-		<!-- //? Rachel - Why is it timed? -->
 		<!-- //TODO: Better describe what the lamplist method is (probably on title screen) -->
 		<!-- //TODO: Clearer instructions for use of timer as an optional tool -->
 		<p>
