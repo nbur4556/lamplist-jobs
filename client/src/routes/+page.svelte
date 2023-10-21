@@ -8,7 +8,6 @@
 	$: authUserName = $AuthStore.userName;
 </script>
 
-<!-- //TODO: Need starting instructions explaining what the lamplist method is and why to use it, as well as an overview of what this app does for you! -->
 <PageContent>
 	<NavigationBar>
 		<svelte:fragment slot="left">
@@ -19,7 +18,7 @@
 		</svelte:fragment>
 	</NavigationBar>
 
-	<h1 class="text-2xl">Welcome to Lamp List Jobs!</h1>
+	<h1 class="text-2xl">Welcome to LAMP List Jobs!</h1>
 
 	{#if authUserName}
 		<p>You are logged in as {authUserName}</p>
@@ -29,8 +28,14 @@
 		<JobList />
 	{:else}
 		<p>
-			You do not yet have a lamp list...
-			<a class="link link-accent" href="/newList"> Create one now! </a>
+			The LAMP list is a simple but strategic job search method. LAMP stands for <span class="italic">List</span>, <span class="italic">Alumni</span>,
+			<span class="italic">Motivation</span>, and <span class="italic">Posting</span>.
 		</p>
+		<p>
+			Having this focused list keeps your job search efficient and optimized. Networking within your
+			LAMP connections gives you a competitive advantage in getting noticed and landing interviews.
+			The LAMP method provides a strategic approach to uncovering hidden job opportunities.
+		</p>
+		<a class="btn btn-accent" href="/newList">Create your LAMP List</a>
 	{/if}
 </PageContent>
