@@ -1,18 +1,18 @@
 [
 	{
 		"title": "dream employers",
-		"description": "Companies that you would love to work for."
+		"description": "Organizations that align with your ultimate career goals and interests. Your top wish-list targets."
 	},
 	{
 		"title": "alumni employers",
-		"description": "Companies where you have one or more connection."
+		"description": "Companies where you have a personal connection through your university, previous employers, or professional associations."
 	},
 	{
-		"title": "companies actively hiring",
-		"description": "Companies that are currently and frequently posting job positions."
+		"title": "actively hiring",
+		"description": "Employers who are currently and frequently posting new job openings based on your searches."
 	},
 	{
-		"title": "trending employers",
-		"description": "Companies you are seeing in the news and current events."
+		"title": "trending organizations",
+		"description": "Organizations you are seeing mentioned often in industry news, events, and social media. Buzzworthy companies making waves in their field."
 	}
 ]
