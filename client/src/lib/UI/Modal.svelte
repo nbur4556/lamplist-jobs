@@ -1,7 +1,7 @@
 <script lang="ts">
 	import CloseWindowButton from '@src/lib/UI/CloseWindowButton.svelte';
 
-	export let contentClass = "";
+	export let contentClass = '';
 
 	let isOpen: boolean = false;
 

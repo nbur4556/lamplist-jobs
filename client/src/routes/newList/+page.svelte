@@ -63,7 +63,7 @@
 	<Modal bind:openModal={showInstructions} contentClass="flex flex-col gap-2">
 		<p class="font-semibold">Help</p>
 		<p>
-			You will create your Lamp List by entering 10 companies for each of the following categories:
+			To build your LAMP list, please add approximately 10 entries for each of the 4 categories:
 		</p>
 
 		<ul>
@@ -76,13 +76,14 @@
 		</ul>
 
 		<p>
-			Add as close to 10 entries per category as you can. You may reduce or increase the entries if
-			necessary.
+			The goal is to populate your LAMP list with enough potential employers to give you a solid
+			starting point. Quality matters more than quantity here. You may use the plus and minus
+			buttons to adjust the number of entries up or down as needed.
 		</p>
 		<p>
-			You are provided a timer as an optional tool. Don't spend too much time (more than around 10
-			minutes) per category. If the category can not be completed in that time you may move on
-			to the next.
+			A 10-minute timer is provided for each category. This acts as a guide to keep you moving
+			through the process efficiently. Don't worry if you can't fully complete a category in that
+			time - simply move on to the next one.
 		</p>
 	</Modal>
 
