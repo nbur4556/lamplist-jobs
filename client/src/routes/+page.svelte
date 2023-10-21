@@ -21,7 +21,7 @@
 	<h1 class="text-2xl">Welcome to Lamplist Jobs!</h1>
 
 	{#if authUserName}
-		<p>You are logged in as {authUserName}</p>
+		<p class="text-secondary">You are logged in as {authUserName}</p>
 	{/if}
 
 	{#if $JobListStore.length > 0}

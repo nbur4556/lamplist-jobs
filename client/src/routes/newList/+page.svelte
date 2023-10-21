@@ -87,7 +87,7 @@
 		</p>
 	</Modal>
 
-	<p>Add 10 entries for {categories[categoryIndex].title}</p>
+	<p class="text-accent font-semibold">{categories[categoryIndex].title.toUpperCase()}</p>
 	<p>{categories[categoryIndex].description}</p>
 
 	<div class="flex justify-between w-full">
