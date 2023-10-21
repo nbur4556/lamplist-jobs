@@ -75,7 +75,6 @@
 			{/each}
 		</ul>
 
-		<!-- //TODO: Better describe what the lamplist method is (probably on title screen) -->
 		<!-- //TODO: Clearer instructions for use of timer as an optional tool -->
 		<p>
 			Add as close to 10 entries for each category as possible. However, you may reduce or increase

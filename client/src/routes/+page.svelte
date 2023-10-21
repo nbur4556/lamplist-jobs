@@ -18,7 +18,7 @@
 		</svelte:fragment>
 	</NavigationBar>
 
-	<h1 class="text-2xl">Welcome to LAMP List Jobs!</h1>
+	<h1 class="text-2xl">Welcome to Lamplist Jobs!</h1>
 
 	{#if authUserName}
 		<p>You are logged in as {authUserName}</p>
@@ -27,11 +27,10 @@
 	{#if $JobListStore.length > 0}
 		<JobList />
 	{:else}
-		<p>
-			The LAMP list is a simple but strategic job search method. LAMP stands for <span class="italic">List</span>, <span class="italic">Alumni</span>,
-			<span class="italic">Motivation</span>, and <span class="italic">Posting</span>.
+		<p class="self-start">
+			The LAMP list is a simple but strategic job search method.
 		</p>
-		<p>
+		<p class="selt-start">
 			Having this focused list keeps your job search efficient and optimized. Networking within your
 			LAMP connections gives you a competitive advantage in getting noticed and landing interviews.
 			The LAMP method provides a strategic approach to uncovering hidden job opportunities.
