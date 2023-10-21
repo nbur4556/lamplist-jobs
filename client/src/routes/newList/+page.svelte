@@ -70,7 +70,7 @@
 			{#each categories as category}
 				<li class="my-2">
 					<p class="font-semibold">{upperCaseWordsInSentence(category.title)}</p>
-					<p>{category.description}</p>
+					<p class="text-sm">{category.description}</p>
 				</li>
 			{/each}
 		</ul>
