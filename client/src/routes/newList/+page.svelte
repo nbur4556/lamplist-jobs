@@ -60,7 +60,7 @@
 		<MiniButton slot="right" onClick={showInstructions}>?</MiniButton>
 	</NavigationBar>
 
-	<Modal bind:openModal={showInstructions} contentClass="flex flex-col gap-2">
+	<Modal bind:openModal={showInstructions} isOpen={true} contentClass="flex flex-col gap-2">
 		<p class="font-semibold">Help</p>
 		<p>
 			To build your LAMP list, please add approximately 10 entries for each of the 4 categories:

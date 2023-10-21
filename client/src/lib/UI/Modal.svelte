@@ -2,8 +2,7 @@
 	import CloseWindowButton from '@src/lib/UI/CloseWindowButton.svelte';
 
 	export let contentClass = '';
-
-	let isOpen: boolean = false;
+	export let isOpen: boolean = false;
 
 	export const openModal = () => {
 		if (isOpen === false) {
