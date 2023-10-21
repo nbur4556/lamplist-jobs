@@ -1,6 +1,7 @@
 <script lang="ts">
 	import PlayIcon from '@src/lib/Icons/PlayIcon.svelte';
 	import PauseIcon from '@src/lib/Icons/PauseIcon.svelte';
+	import TooltipButton from './UI/TooltipButton.svelte';
 
 	export let time: number;
 	export let onStopTime: (remaining: number) => void;
@@ -45,12 +46,12 @@
 		</span>
 	</p>
 	{#if isRunning}
-		<button on:click={stopTimer}>
+		<TooltipButton tooltip="Pause" onClick={stopTimer}>
 			<PauseIcon />
-		</button>
+		</TooltipButton>
 	{:else}
-		<button on:click={startTimer}>
+		<TooltipButton tooltip="Play" onClick={startTimer}>
 			<PlayIcon />
-		</button>
+		</TooltipButton>
 	{/if}
 </div>
