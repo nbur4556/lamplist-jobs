@@ -60,7 +60,7 @@
 		<MiniButton slot="right" onClick={showInstructions}>?</MiniButton>
 	</NavigationBar>
 
-	<Modal bind:openModal={showInstructions}>
+	<Modal bind:openModal={showInstructions} contentClass="flex flex-col gap-2">
 		<p class="font-semibold">Help</p>
 		<p>
 			You will create your Lamp List by entering 10 companies for each of the following categories:
@@ -98,7 +98,7 @@
 	</div>
 
 	{#if timerComplete}
-		<p class="self-start">Time is up, please finish the category when you are ready.</p>
+		<p class="self-start">Time is up. When you are finished please move on to the next category.</p>
 	{/if}
 
 	<!-- //? Should this be a form? If so goto does not work. May need to handle using use:enhance if a form is needed -->

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import CloseWindowButton from '@src/lib/UI/CloseWindowButton.svelte';
 
+	export let contentClass = "";
+
 	let isOpen: boolean = false;
 
 	export const openModal = () => {
@@ -25,7 +27,7 @@
 		}
 	}}
 >
-	<section class="modal-box">
+	<section class={`modal-box ${contentClass}`}>
 		<CloseWindowButton onClose={closeModal} />
 		<slot />
 	</section>
