@@ -3,6 +3,8 @@
 
 	import categories from '@src/content/listCategories.json';
 	import Input from '@src/lib/Form/Input.svelte';
+	import MinusIcon from '@src/lib/Icons/MinusIcon.svelte';
+	import PlusIcon from '@src/lib/Icons/PlusIcon.svelte';
 	import NavigationBar from '@src/lib/NavigationBar.svelte';
 	import Modal from '@src/lib/UI/Modal.svelte';
 	import MiniButton from '@src/lib/UI/MiniButton.svelte';
@@ -93,8 +95,12 @@
 	<div class="flex justify-between w-full">
 		<Timer time={timePerCategory} onStopTime={handleTimerComplete} bind:resetTimer />
 		<div class="flex gap-2">
-			<MiniButton onClick={removeFromForm}>-</MiniButton>
-			<MiniButton onClick={addToForm}>+</MiniButton>
+			<MiniButton onClick={removeFromForm}>
+				<MinusIcon class="w-2 h-2" strokeWidth="4" />
+			</MiniButton>
+			<MiniButton onClick={addToForm}>
+				<PlusIcon class="w-2 h-2" strokeWidth="4" />
+			</MiniButton>
 		</div>
 	</div>
 
