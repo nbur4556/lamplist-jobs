@@ -75,11 +75,14 @@
 			{/each}
 		</ul>
 
-		<!-- //TODO: Clearer instructions for use of timer as an optional tool -->
 		<p>
-			Add as close to 10 entries for each category as possible. However, you may reduce or increase
-			the amount if necessary. Try to take no longer than 10 minutes per category. You may use the
-			timer to keep track of your time spent
+			Add as close to 10 entries per category as you can. You may reduce or increase the entries if
+			necessary.
+		</p>
+		<p>
+			You are provided a timer as an optional tool. Don't spend too much time (more than around 10
+			minutes) per category. If the category can not be completed in that time you may move on
+			to the next.
 		</p>
 	</Modal>
 

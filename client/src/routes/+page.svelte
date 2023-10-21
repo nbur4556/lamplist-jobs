@@ -27,9 +27,7 @@
 	{#if $JobListStore.length > 0}
 		<JobList />
 	{:else}
-		<p class="self-start">
-			The LAMP list is a simple but strategic job search method.
-		</p>
+		<p class="self-start">The LAMP list is a simple but strategic job search method.</p>
 		<p class="selt-start">
 			Having this focused list keeps your job search efficient and optimized. Networking within your
 			LAMP connections gives you a competitive advantage in getting noticed and landing interviews.
