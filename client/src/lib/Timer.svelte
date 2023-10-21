@@ -1,4 +1,7 @@
 <script lang="ts">
+	import PlayIcon from '@src/lib/Icons/PlayIcon.svelte';
+	import PauseIcon from '@src/lib/Icons/PauseIcon.svelte';
+
 	export let time: number;
 	export let onStopTime: (remaining: number) => void;
 
@@ -41,10 +44,13 @@
 			<span id="counterElement" style={`--value:${seconds};`} />
 		</span>
 	</p>
-	<!-- //TODO: Replace unicode symbols with icons -->
 	{#if isRunning}
-		<button on:click={stopTimer}>&#10074;&#10074;</button>
+		<button on:click={stopTimer}>
+			<PauseIcon />
+		</button>
 	{:else}
-		<button on:click={startTimer}>&#9654;</button>
+		<button on:click={startTimer}>
+			<PlayIcon />
+		</button>
 	{/if}
 </div>
