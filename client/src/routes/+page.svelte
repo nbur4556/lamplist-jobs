@@ -29,6 +29,16 @@
 		<p class="text-secondary">You are logged in as {authUserName}</p>
 	{/if}
 
+	<!-- //TODO: style with component library -->
+	<!-- //TODO: Add as part of Job List Controls -->
+	<p>SortBy</p>
+	<select bind:value={sortBy}>
+		<option value="company">Company</option>
+		<option value="contact">Contact</option>
+		<option value="interest">Interest</option>
+		<option value="posting">Posting</option>
+	</select>
+
 	{#if $JobListStore.length > 0}
 		<JobList sortBy={sortBy} />
 	{:else}
