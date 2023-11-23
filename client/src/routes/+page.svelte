@@ -1,9 +1,14 @@
-<script>
+<script lang="ts">
 	import JobList from '@src/lib/JobList/JobList.svelte';
 	import NavigationBar from '@src/lib/NavigationBar.svelte';
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { AuthStore } from '@src/store/AuthStore';
 	import { JobListStore } from '@src/store/JobListStore';
+
+	//TODO: do not reuse this type (currently defined in JobList.svelte
+	type SortBy = "company" | "contact" | "interest" | "posting";
+
+	let sortBy: SortBy = "contact";
 
 	$: authUserName = $AuthStore.userName;
 </script>
@@ -25,7 +30,7 @@
 	{/if}
 
 	{#if $JobListStore.length > 0}
-		<JobList sortBy="interest"/>
+		<JobList sortBy={sortBy} />
 	{:else}
 		<p class="self-start">The LAMP list is a simple but strategic job search method.</p>
 		<p class="selt-start">
