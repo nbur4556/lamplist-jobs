@@ -25,7 +25,7 @@
 	{/if}
 
 	{#if $JobListStore.length > 0}
-		<JobList />
+		<JobList sortBy="company" />
 	{:else}
 		<p class="self-start">The LAMP list is a simple but strategic job search method.</p>
 		<p class="selt-start">

@@ -3,6 +3,9 @@
 	import { JobListStore } from '@src/store/JobListStore';
 	import EntryCard from './EntryCard.svelte';
 
+	//? What is the best way to do this type? Is it defined? KeyOf(job)
+	export let sortBy: "company" | "contact" | "interest" | "posting";
+	
 	let collapsedEntries = false;
 
 	const toggleCollapsedEntries = () => (collapsedEntries = !collapsedEntries);
@@ -11,6 +14,7 @@
 </script>
 
 <section class="flex flex-col self-stretch">
+	{console.log(sortBy)}
 	<div class="flex justify-end items-center gap-3">
 		<p>Jobs ({jobCount})</p>
 		<button class="btn btn-outline btn-sm" on:click={toggleCollapsedEntries}>
@@ -19,6 +23,7 @@
 	</div>
 	<ul>
 		{#each $JobListStore as job}
+		{console.log(job)}
 			<li class="py-2">
 				<EntryCard {job} collapsed={collapsedEntries}>
 					<button
