@@ -4,9 +4,11 @@
 	import type { JobEntry } from '@src/store/JobListStore';
 	import EntryCard from './EntryCard.svelte';
 
+	//? What is the best way to do this type? Is it already defined? KeyOf(job)
+	type SortBy = "company" | "contact" | "interest" | "posting";
+
 	//TODO: Sort direction
-	//? What is the best way to do this type? Is it defined? KeyOf(job)
-	export let sortBy: "company" | "contact" | "interest" | "posting";
+	export let sortBy: SortBy;
 	
 	let collapsedEntries = false;
 
@@ -15,7 +17,7 @@
 	//TODO: refactor into generic typed sortObjectList
 	//TODO: refactor as a utility function
 	//TODO: thoroughly test this function
-	const sortJobList = (list: Array<JobEntry>, term: "company" | "contact" | "interest" | "posting"): Array<JobEntry> => {
+	const sortJobList = (list: Array<JobEntry>, term: SortBy): Array<JobEntry> => {
 		let sortedList: Array<JobEntry> = [];
 		list.forEach(job => {
 			for(let i = 0; i < sortedList.length; i++){
