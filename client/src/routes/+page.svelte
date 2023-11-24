@@ -1,6 +1,7 @@
 <script lang="ts">
 	import JobList from '@src/lib/JobList/JobList.svelte';
 	import NavigationBar from '@src/lib/NavigationBar.svelte';
+	import CloseWindowButton from '@src/lib/UI/CloseWindowButton.svelte';
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { AuthStore } from '@src/store/AuthStore';
 	import { JobListStore } from '@src/store/JobListStore';
@@ -9,6 +10,7 @@
 	type SortBy = "company" | "contact" | "interest" | "posting";
 
 	let sortBy: SortBy = "contact";
+	let sortIsReversed = false;
 
 	$: authUserName = $AuthStore.userName;
 </script>
@@ -31,6 +33,7 @@
 
 	<!-- //TODO: style with component library -->
 	<!-- //TODO: Add as part of Job List Controls -->
+	<!-- //TODO: Use labels -->
 	<p>SortBy</p>
 	<select bind:value={sortBy}>
 		<option value="company">Company</option>
@@ -39,8 +42,14 @@
 		<option value="posting">Posting</option>
 	</select>
 
+	<!-- //TODO: style with component library -->
+	<!-- //TODO: Add as part of Job List Controls -->
+	<!-- //TODO: Use labels -->
+	<p>Reverse Sort</p>
+	<input type="checkbox" bind:checked={sortIsReversed} />
+	
 	{#if $JobListStore.length > 0}
-		<JobList sortBy={sortBy} />
+		<JobList {sortBy} {sortIsReversed} />
 	{:else}
 		<p class="self-start">The LAMP list is a simple but strategic job search method.</p>
 		<p class="selt-start">

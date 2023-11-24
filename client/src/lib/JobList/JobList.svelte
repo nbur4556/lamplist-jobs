@@ -8,21 +8,27 @@
 	type SortBy = "company" | "contact" | "interest" | "posting";
 
 	//TODO: Sort direction
+	export let sortIsReversed = false;
 	export let sortBy: SortBy;
 	
 	let collapsedEntries = false;
 
 	const toggleCollapsedEntries = () => (collapsedEntries = !collapsedEntries);
 	
+	//! Undefined values do not get sorted, should be at the end
 	//TODO: refactor into generic typed sortObjectList
 	//TODO: refactor as a utility function
 	//TODO: thoroughly test this function
-	const sortJobList = (list: Array<JobEntry>, term: SortBy): Array<JobEntry> => {
+	const sortJobList = (list: Array<JobEntry>, term: SortBy, reversed: boolean): Array<JobEntry> => {
+		const checkComparison = (x: string | number | undefined, y: string | number | undefined, reversed: boolean) => {
+			//TODO: fix "may be undefined" type error
+			return reversed ? x > y : x < y;
+		}
+
 		let sortedList: Array<JobEntry> = [];
 		list.forEach(job => {
 			for(let i = 0; i < sortedList.length; i++){
-				//TODO: fix "may be undefined" type error
-				if (job[term] < sortedList[i][term]) {
+				if (checkComparison(job[term], sortedList[i][term], reversed)) {
 					sortedList = [...sortedList.slice(0, i), job, ...sortedList.slice(i, sortedList.length)];
 					return;
 				}
@@ -33,7 +39,7 @@
 	}
 
 	$: jobCount = $JobListStore.length;
-	$: sortedList = sortJobList($JobListStore, sortBy);
+	$: sortedList = sortJobList($JobListStore, sortBy, sortIsReversed);
 </script>
 
 <section class="flex flex-col self-stretch">
