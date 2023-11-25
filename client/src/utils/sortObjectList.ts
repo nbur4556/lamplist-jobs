@@ -1,8 +1,14 @@
 const compareVal = <T>(a: T, b: T, reversed: boolean) => {
+	if(!a) {
+		return false;
+	}
+	if(!b) {
+		return true;
+	}
+
 	return reversed ? a > b : a < b;
 };
 
-//! Undefined values do not get sorted, should be at the end
 //TODO: thoroughly test this function
 const sortObjectList = <T>(list: Array<T>, term: keyof T, reversed: boolean): Array<T> => {
 	type V = T[typeof term];
