@@ -44,6 +44,7 @@
 
 <section class="flex flex-col self-stretch">
 	<div class="flex justify-end items-center gap-3">
+		<slot name="controls" />
 		<p>Jobs ({jobCount})</p>
 		<button class="btn btn-outline btn-sm" on:click={toggleCollapsedEntries}>
 			{#if !collapsedEntries}Collapse{:else}Expand{/if}

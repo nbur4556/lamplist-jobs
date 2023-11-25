@@ -30,27 +30,30 @@
 		<p class="text-secondary">You are logged in as {authUserName}</p>
 	{/if}
 
-	<!-- //TODO: style with component library -->
-	<!-- //TODO: Add as part of Job List Controls -->
-	<label for="sort">
-	Sort by
-	<select name="sort" bind:value={sortBy}>
-		<option value="company">Company</option>
-		<option value="contact">Contact</option>
-		<option value="interest">Interest</option>
-		<option value="posting">Posting</option>
-	</select>
-	</label>
-
-	<!-- //TODO: style with component library -->
-	<!-- //TODO: Add as part of Job List Controls -->
-	<label for="reverse">
-	Reverse Sort
-	<input name="reverse" type="checkbox" bind:checked={sortIsReversed} />
-	</label>
 	
 	{#if $JobListStore.length > 0}
-		<JobList {sortBy} {sortIsReversed} />
+		<JobList {sortBy} {sortIsReversed}>
+			<div slot="controls">
+			<!-- //TODO: style with component library -->
+			<!-- //TODO: Add as part of Job List Controls -->
+			<label for="sort"> 
+			Sort by
+			<select name="sort" bind:value={sortBy}>
+				<option value="company">Company</option>
+				<option value="contact">Contact</option>
+				<option value="interest">Interest</option>
+				<option value="posting">Posting</option>
+			</select>
+			</label>
+
+			<!-- //TODO: style with component library -->
+			<!-- //TODO: Add as part of Job List Controls -->
+			<label for="reverse">
+			Reverse
+			<input name="reverse" type="checkbox" bind:checked={sortIsReversed} />
+			</label>
+			</div>
+		</JobList>
 	{:else}
 		<p class="self-start">The LAMP list is a simple but strategic job search method.</p>
 		<p class="selt-start">
