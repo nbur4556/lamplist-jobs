@@ -7,14 +7,14 @@ const sortObjectList = <T>(list: Array<T>, term: keyof T, reversed: boolean): Ar
 	};
 
 	let sortedList: Array<T> = [];
-	list.forEach((enty) => {
+	list.forEach((entry) => {
 		for (let i = 0; i < sortedList.length; i++) {
-			if (checkComparison(enty[term], sortedList[i][term], reversed)) {
-				sortedList = [...sortedList.slice(0, i), enty, ...sortedList.slice(i, sortedList.length)];
+			if (checkComparison(entry[term], sortedList[i][term], reversed)) {
+				sortedList = [...sortedList.slice(0, i), entry, ...sortedList.slice(i, sortedList.length)];
 				return;
 			}
 		}
-		sortedList = [...sortedList, enty];
+		sortedList = [...sortedList, entry];
 	});
 	return sortedList;
 };
