@@ -5,6 +5,7 @@
 	import { AuthStore } from '@src/store/AuthStore';
 	import { JobListStore } from '@src/store/JobListStore';
 	import type { JobEntry } from '@src/store/JobListStore';
+	import SortControls from '@src/lib/SortControls.svelte';
 
 	let sortBy: keyof JobEntry = 'contact';
 	let sortIsReversed = false;
@@ -30,27 +31,7 @@
 
 	{#if $JobListStore.length > 0}
 		<JobList {sortBy} {sortIsReversed}>
-			<svelte:fragment slot="controls">
-				<label for="sort">
-					Sort by
-					<select name="sort" class="select select-xs" bind:value={sortBy}>
-						<option value="company">Company</option>
-						<option value="contact">Contact</option>
-						<option value="interest">Interest</option>
-						<option value="posting">Posting</option>
-					</select>
-				</label>
-
-				<label for="reverse">
-					Reverse
-					<input
-						name="reverse"
-						type="checkbox"
-						class="checkbox checkbox-xs"
-						bind:checked={sortIsReversed}
-					/>
-				</label>
-			</svelte:fragment>
+			<SortControls bind:sortBy bind:sortIsReversed slot="controls" />
 		</JobList>
 	{:else}
 		<p class="self-start">The LAMP list is a simple but strategic job search method.</p>
