@@ -4,12 +4,8 @@
 	import type { JobEntry } from '@src/store/JobListStore';
 	import EntryCard from './EntryCard.svelte';
 
-	//? What is the best way to do this type? Is it already defined? KeyOf(job)
-	type SortBy = 'company' | 'contact' | 'interest' | 'posting';
-
-	//TODO: Sort direction
 	export let sortIsReversed = false;
-	export let sortBy: SortBy;
+	export let sortBy: keyof(JobEntry);
 
 	let collapsedEntries = false;
 
@@ -21,7 +17,6 @@
 	const sortObjectList = <T>(list: Array<T>, term: keyof(T), reversed: boolean): Array<T> => {
 		//TODO: Remove any types
 		const checkComparison = (a: any, b: any, reversed: boolean) => {
-			//TODO: fix "may be undefined" type error
 			return reversed ? a > b : a < b;
 		};
 

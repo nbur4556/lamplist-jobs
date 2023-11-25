@@ -4,11 +4,9 @@
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { AuthStore } from '@src/store/AuthStore';
 	import { JobListStore } from '@src/store/JobListStore';
+	import type { JobEntry } from '@src/store/JobListStore';
 
-	//TODO: do not reuse this type (currently defined in JobList.svelte
-	type SortBy = 'company' | 'contact' | 'interest' | 'posting';
-
-	let sortBy: SortBy = 'contact';
+	let sortBy: keyof(JobEntry) = 'contact';
 	let sortIsReversed = false;
 
 	$: authUserName = $AuthStore.userName;
