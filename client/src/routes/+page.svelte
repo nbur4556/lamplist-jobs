@@ -1,7 +1,6 @@
 <script lang="ts">
 	import JobList from '@src/lib/JobList/JobList.svelte';
 	import NavigationBar from '@src/lib/NavigationBar.svelte';
-	import CloseWindowButton from '@src/lib/UI/CloseWindowButton.svelte';
 	import PageContent from '@src/lib/UI/PageContent.svelte';
 	import { AuthStore } from '@src/store/AuthStore';
 	import { JobListStore } from '@src/store/JobListStore';
@@ -33,20 +32,22 @@
 
 	<!-- //TODO: style with component library -->
 	<!-- //TODO: Add as part of Job List Controls -->
-	<!-- //TODO: Use labels -->
-	<p>SortBy</p>
-	<select bind:value={sortBy}>
+	<label for="sort">
+	Sort by
+	<select name="sort" bind:value={sortBy}>
 		<option value="company">Company</option>
 		<option value="contact">Contact</option>
 		<option value="interest">Interest</option>
 		<option value="posting">Posting</option>
 	</select>
+	</label>
 
 	<!-- //TODO: style with component library -->
 	<!-- //TODO: Add as part of Job List Controls -->
-	<!-- //TODO: Use labels -->
-	<p>Reverse Sort</p>
-	<input type="checkbox" bind:checked={sortIsReversed} />
+	<label for="reverse">
+	Reverse Sort
+	<input name="reverse" type="checkbox" bind:checked={sortIsReversed} />
+	</label>
 	
 	{#if $JobListStore.length > 0}
 		<JobList {sortBy} {sortIsReversed} />
