@@ -33,12 +33,11 @@
 	
 	{#if $JobListStore.length > 0}
 		<JobList {sortBy} {sortIsReversed}>
-			<div slot="controls">
+			<svelte:fragment slot="controls">
 			<!-- //TODO: style with component library -->
-			<!-- //TODO: Add as part of Job List Controls -->
 			<label for="sort"> 
 			Sort by
-			<select name="sort" bind:value={sortBy}>
+			<select name="sort" class="select select-xs" bind:value={sortBy}>
 				<option value="company">Company</option>
 				<option value="contact">Contact</option>
 				<option value="interest">Interest</option>
@@ -47,12 +46,11 @@
 			</label>
 
 			<!-- //TODO: style with component library -->
-			<!-- //TODO: Add as part of Job List Controls -->
 			<label for="reverse">
 			Reverse
-			<input name="reverse" type="checkbox" bind:checked={sortIsReversed} />
+			<input name="reverse" type="checkbox" class="checkbox checkbox-xs" bind:checked={sortIsReversed} />
 			</label>
-			</div>
+			</svelte:fragment>
 		</JobList>
 	{:else}
 		<p class="self-start">The LAMP list is a simple but strategic job search method.</p>
