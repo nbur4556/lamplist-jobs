@@ -16,34 +16,30 @@
 	const toggleCollapsedEntries = () => (collapsedEntries = !collapsedEntries);
 
 	//! Undefined values do not get sorted, should be at the end
-	//TODO: refactor into generic typed sortObjectList
 	//TODO: refactor as a utility function
 	//TODO: thoroughly test this function
-	const sortJobList = (list: Array<JobEntry>, term: SortBy, reversed: boolean): Array<JobEntry> => {
-		const checkComparison = (
-			x: string | number | undefined,
-			y: string | number | undefined,
-			reversed: boolean
-		) => {
+	const sortObjectList = <T>(list: Array<T>, term: keyof(T), reversed: boolean): Array<T> => {
+		//TODO: Remove any types
+		const checkComparison = (a: any, b: any, reversed: boolean) => {
 			//TODO: fix "may be undefined" type error
-			return reversed ? x > y : x < y;
+			return reversed ? a > b : a < b;
 		};
 
-		let sortedList: Array<JobEntry> = [];
-		list.forEach((job) => {
+		let sortedList: Array<T> = [];
+		list.forEach((enty) => {
 			for (let i = 0; i < sortedList.length; i++) {
-				if (checkComparison(job[term], sortedList[i][term], reversed)) {
-					sortedList = [...sortedList.slice(0, i), job, ...sortedList.slice(i, sortedList.length)];
+				if (checkComparison(enty[term], sortedList[i][term], reversed)) {
+					sortedList = [...sortedList.slice(0, i), enty, ...sortedList.slice(i, sortedList.length)];
 					return;
 				}
 			}
-			sortedList = [...sortedList, job];
+			sortedList = [...sortedList, enty];
 		});
 		return sortedList;
 	};
 
 	$: jobCount = $JobListStore.length;
-	$: sortedList = sortJobList($JobListStore, sortBy, sortIsReversed);
+	$: sortedList = sortObjectList<JobEntry>($JobListStore, sortBy, sortIsReversed);
 </script>
 
 <section class="flex flex-col self-stretch">
