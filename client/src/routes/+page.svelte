@@ -6,9 +6,9 @@
 	import { JobListStore } from '@src/store/JobListStore';
 
 	//TODO: do not reuse this type (currently defined in JobList.svelte
-	type SortBy = "company" | "contact" | "interest" | "posting";
+	type SortBy = 'company' | 'contact' | 'interest' | 'posting';
 
-	let sortBy: SortBy = "contact";
+	let sortBy: SortBy = 'contact';
 	let sortIsReversed = false;
 
 	$: authUserName = $AuthStore.userName;
@@ -30,26 +30,28 @@
 		<p class="text-secondary">You are logged in as {authUserName}</p>
 	{/if}
 
-	
 	{#if $JobListStore.length > 0}
 		<JobList {sortBy} {sortIsReversed}>
 			<svelte:fragment slot="controls">
-			<!-- //TODO: style with component library -->
-			<label for="sort"> 
-			Sort by
-			<select name="sort" class="select select-xs" bind:value={sortBy}>
-				<option value="company">Company</option>
-				<option value="contact">Contact</option>
-				<option value="interest">Interest</option>
-				<option value="posting">Posting</option>
-			</select>
-			</label>
+				<label for="sort">
+					Sort by
+					<select name="sort" class="select select-xs" bind:value={sortBy}>
+						<option value="company">Company</option>
+						<option value="contact">Contact</option>
+						<option value="interest">Interest</option>
+						<option value="posting">Posting</option>
+					</select>
+				</label>
 
-			<!-- //TODO: style with component library -->
-			<label for="reverse">
-			Reverse
-			<input name="reverse" type="checkbox" class="checkbox checkbox-xs" bind:checked={sortIsReversed} />
-			</label>
+				<label for="reverse">
+					Reverse
+					<input
+						name="reverse"
+						type="checkbox"
+						class="checkbox checkbox-xs"
+						bind:checked={sortIsReversed}
+					/>
+				</label>
 			</svelte:fragment>
 		</JobList>
 	{:else}

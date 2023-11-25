@@ -1,33 +1,37 @@
 <script lang="ts">
 	import TrashIcon from '@src/lib/Icons/TrashIcon.svelte';
-	import { JobListStore } from '@src/store/JobListStore'; 
+	import { JobListStore } from '@src/store/JobListStore';
 	import type { JobEntry } from '@src/store/JobListStore';
 	import EntryCard from './EntryCard.svelte';
 
 	//? What is the best way to do this type? Is it already defined? KeyOf(job)
-	type SortBy = "company" | "contact" | "interest" | "posting";
+	type SortBy = 'company' | 'contact' | 'interest' | 'posting';
 
 	//TODO: Sort direction
 	export let sortIsReversed = false;
 	export let sortBy: SortBy;
-	
+
 	let collapsedEntries = false;
 
 	const toggleCollapsedEntries = () => (collapsedEntries = !collapsedEntries);
-	
+
 	//! Undefined values do not get sorted, should be at the end
 	//TODO: refactor into generic typed sortObjectList
 	//TODO: refactor as a utility function
 	//TODO: thoroughly test this function
 	const sortJobList = (list: Array<JobEntry>, term: SortBy, reversed: boolean): Array<JobEntry> => {
-		const checkComparison = (x: string | number | undefined, y: string | number | undefined, reversed: boolean) => {
+		const checkComparison = (
+			x: string | number | undefined,
+			y: string | number | undefined,
+			reversed: boolean
+		) => {
 			//TODO: fix "may be undefined" type error
 			return reversed ? x > y : x < y;
-		}
+		};
 
 		let sortedList: Array<JobEntry> = [];
-		list.forEach(job => {
-			for(let i = 0; i < sortedList.length; i++){
+		list.forEach((job) => {
+			for (let i = 0; i < sortedList.length; i++) {
 				if (checkComparison(job[term], sortedList[i][term], reversed)) {
 					sortedList = [...sortedList.slice(0, i), job, ...sortedList.slice(i, sortedList.length)];
 					return;
@@ -36,7 +40,7 @@
 			sortedList = [...sortedList, job];
 		});
 		return sortedList;
-	}
+	};
 
 	$: jobCount = $JobListStore.length;
 	$: sortedList = sortJobList($JobListStore, sortBy, sortIsReversed);
