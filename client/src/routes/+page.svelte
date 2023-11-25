@@ -6,7 +6,7 @@
 	import { JobListStore } from '@src/store/JobListStore';
 	import type { JobEntry } from '@src/store/JobListStore';
 
-	let sortBy: keyof(JobEntry) = 'contact';
+	let sortBy: keyof JobEntry = 'contact';
 	let sortIsReversed = false;
 
 	$: authUserName = $AuthStore.userName;

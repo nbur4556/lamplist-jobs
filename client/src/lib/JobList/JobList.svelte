@@ -6,12 +6,11 @@
 	import EntryCard from './EntryCard.svelte';
 
 	export let sortIsReversed = false;
-	export let sortBy: keyof(JobEntry);
+	export let sortBy: keyof JobEntry;
 
 	let collapsedEntries = false;
 
 	const toggleCollapsedEntries = () => (collapsedEntries = !collapsedEntries);
-
 
 	$: jobCount = $JobListStore.length;
 	$: sortedList = sortObjectList<JobEntry>($JobListStore, sortBy, sortIsReversed);
