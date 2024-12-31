@@ -58,14 +58,14 @@ Use Entity Framework to update the database to the most recent migration
 dotnet ef database update
 ```
 
-<!-- TODO: What are the steps to building the database? Is it just build when running `dotnet`? Is it the `ef database update`?-->
-- Build the database `dotnet`
-
 #### User Secretes
 
 The project requires the following environment variables for accessing the database
 
-- DOTNET SECRETS HERE!
+- PostgreSql:DbUser - User/Role to the postgres database
+- PostgreSql:DbPassword - Password to the postgres database
+- PostgreSql:DbHost - Host to the postgres database
+- PostgreSql:DbDatabase - Name of the postgres database
 
 It is recommended to add these environment variables using `dotnet user-secrets`PROJECTS
 <!-- TODO: readme: Link to creating dotnet user secrets -->
