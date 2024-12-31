@@ -26,7 +26,7 @@ Lamplist Jobs utilizes the "Lamp List" job strategy to help prospects track, org
 `git clone` the repository
 
 ### Client
-<!-- TODO: Prettier and linting instructions -->
+<!-- TODO: readme: Prettier and linting instructions -->
 
 Navigate to the client directory
 
@@ -48,7 +48,7 @@ Navigate to the server directory
 
 - Create a postgres database
 - Build the database `dotnet`
-<!-- TODO: Link to building and migrating dotnet databases -->
+<!-- TODO: readme: Link to building and migrating dotnet databases -->
 
 #### User Secretes
 
@@ -57,7 +57,7 @@ The project requires the following environment variables for accessing the datab
 - DOTNET SECRETS HERE!
 
 It is recommended to add these environment variables using `dotnet user-secrets`PROJECTS
-<!-- TODO: Link to creating dotnet user secrets -->
+<!-- TODO: readme: Link to creating dotnet user secrets -->
 
 Start server: `dotnet run`
 
