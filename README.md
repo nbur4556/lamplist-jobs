@@ -47,8 +47,28 @@ Navigate to the server directory
 #### Build Database
 
 - Create a postgres database
+
+<!-- TODO: readme: does my database have to have a specific name in my application? (probably...)-->
+Open the PostgreSQL command line tool (usually named `psql`) and create a new database.
+```sh
+createdb mydatabase
+```
+
+<!-- TODO: readme: is this part (migrating and updating the database) actually necessary? probably just needs to update to most current migration right? -->
+If you're using Entity Framework Core, you can use migrations to create and update your database schema.
+
+1. **Add a migration:**
+   ```sh
+   dotnet ef migrations add InitialCreate
+   ```
+
+2. **Update the database:**
+   ```sh
+   dotnet ef database update
+   ```
+
+<!-- TODO: What are the steps to building the database? Is it just build when running `dotnet`? Is it the `ef database update`?-->
 - Build the database `dotnet`
-<!-- TODO: readme: Link to building and migrating dotnet databases -->
 
 #### User Secretes
 
