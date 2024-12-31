@@ -26,8 +26,6 @@ Lamplist Jobs utilizes the "Lamp List" job strategy to help prospects track, org
 `git clone` the repository
 
 ### Client
-<!-- TODO: readme: Prettier and linting instructions -->
-
 Navigate to the client directory
 
 Install packages: `yarn install`
