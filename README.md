@@ -26,8 +26,6 @@ Lamplist Jobs utilizes the "Lamp List" job strategy to help prospects track, org
 `git clone` the repository
 
 ### Client
-<!-- TODO: readme: Prettier and linting instructions -->
-
 Navigate to the client directory
 
 Install packages: `yarn install`
@@ -47,17 +45,28 @@ Navigate to the server directory
 #### Build Database
 
 - Create a postgres database
-- Build the database `dotnet`
-<!-- TODO: readme: Link to building and migrating dotnet databases -->
+
+Open the PostgreSQL command line tool (usually named `psql`) and create a new database.
+```sh
+createdb mydatabase
+```
+
+Use Entity Framework to update the database to the most recent migration
+```sh
+dotnet ef database update
+```
 
 #### User Secretes
 
 The project requires the following environment variables for accessing the database
 
-- DOTNET SECRETS HERE!
+- PostgreSql:DbUser - User/Role to the postgres database
+- PostgreSql:DbPassword - Password to the postgres database
+- PostgreSql:DbHost - Host to the postgres database
+- PostgreSql:DbDatabase - Name of the postgres database
 
 It is recommended to add these environment variables using `dotnet user-secrets`PROJECTS
-<!-- TODO: readme: Link to creating dotnet user secrets -->
+[Microsoft DotNet User-Secrets Instructions](https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-9.0&tabs=linux)
 
 Start server: `dotnet run`
 
