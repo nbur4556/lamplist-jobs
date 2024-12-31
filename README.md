@@ -68,7 +68,7 @@ The project requires the following environment variables for accessing the datab
 - PostgreSql:DbDatabase - Name of the postgres database
 
 It is recommended to add these environment variables using `dotnet user-secrets`PROJECTS
-<!-- TODO: readme: Link to creating dotnet user secrets -->
+[Microsoft DotNet User-Secrets Instructions](https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-9.0&tabs=linux)
 
 Start server: `dotnet run`
 
