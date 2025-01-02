@@ -7,6 +7,9 @@ import { fileURLToPath } from 'node:url';
 import ts from 'typescript-eslint';
 const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
 
+// TODO: 202412-package-update: ensure lint is passing after all updates completed
+// TODO: 202412-package-update: ensure `yarn check` passes after all updates completed
+// FIX: 202412-package-update: lint "ignoring pluginSearchDirs"
 export default ts.config(
 	includeIgnoreFile(gitignorePath),
 	js.configs.recommended,
