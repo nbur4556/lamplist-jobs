@@ -10,6 +10,7 @@
 		"sourceMap": true,
 		"strict": true,
 		"verbatimModuleSyntax": true,
+		"moduleResolution": "bundler",
 
 		// Need to ignore error until "importsNotUsedAsValues" is removed from sveltekit
 		"ignoreDeprecations": "5.0"
