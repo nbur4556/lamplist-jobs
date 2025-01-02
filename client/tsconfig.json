@@ -12,7 +12,6 @@
 		"verbatimModuleSyntax": true,
 		"moduleResolution": "bundler",
 
-		// Need to ignore error until "importsNotUsedAsValues" is removed from sveltekit
 		"ignoreDeprecations": "5.0"
 	}
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
