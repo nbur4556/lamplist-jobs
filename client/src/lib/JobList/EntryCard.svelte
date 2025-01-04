@@ -14,7 +14,11 @@
 			<div class="card-actions">
 				<slot name="actions" />
 				<button class="btn btn-outline btn-xs" on:click={toggleCollapsed}>
-					{#if !collapsed} - {:else} + {/if}
+					{#if !collapsed}
+						-
+					{:else}
+						+
+					{/if}
 				</button>
 			</div>
 		</div>
