@@ -25,7 +25,7 @@
 	const onSubmit = async () => {
 		try {
 			if (!formValues.userName || !formValues.password) {
-				throw 'UserName and Password are required';
+				throw 'Username and Password are required';
 			}
 
 			await AuthStore.login(formValues.userName, formValues.password);

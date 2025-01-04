@@ -28,7 +28,7 @@
 	const onSubmit = async () => {
 		try {
 			if (!formValues.userName || !formValues.password) {
-				throw 'UserName and Password are required';
+				throw 'Username and Password are required';
 			}
 			if (formValues.password !== formValues.confirmPassword) {
 				throw 'Password and confirm password do not match';
