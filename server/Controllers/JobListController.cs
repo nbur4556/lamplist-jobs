@@ -23,11 +23,16 @@ public class JobListController : ControllerBase
 {
   private readonly DataContext _context;
   private readonly IAccountService _accountService;
+  private readonly ILogger _logger;
 
   public JobListController(DataContext context, IAccountService accountService)
   {
     _accountService = accountService;
     _context = context;
+
+    // TODO: fix-api-end-of-json-error: Should the logger factory be passed to controllers as a service (like the accountService and tokenService)
+    ILoggerFactory loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+    _logger = loggerFactory.CreateLogger("JobListController");
   }
 
   private Account? FindAuthorizedAccount()
@@ -52,6 +57,7 @@ public class JobListController : ControllerBase
     Account? account = this.FindAuthorizedAccount();
     if (account == null)
     {
+      _logger.LogError("unauthorized");
       return Unauthorized();
     }
 
@@ -60,6 +66,7 @@ public class JobListController : ControllerBase
       .OrderBy(entry => entry.Id);
     if (jobEntries == null)
     {
+      _logger.LogError("Job entry not found");
       return NotFound();
     }
     return jobEntries.ToArray<JobEntry>();
@@ -72,10 +79,12 @@ public class JobListController : ControllerBase
     Account? account = this.FindAuthorizedAccount();
     if (account == null)
     {
+      _logger.LogError("Unauthorized");
       return Unauthorized();
     }
     if (request.company is null)
     {
+      _logger.LogError("Company name is required");
       return BadRequest("Company name is required.");
     }
 
@@ -97,10 +106,12 @@ public class JobListController : ControllerBase
     JobEntry? jobEntry = _context.Find<JobEntry>(id);
     if (jobEntry is null)
     {
+      _logger.LogError("Job entry is not found");
       return NotFound();
     }
     if (account?.Id == null || jobEntry.AccountId != account.Id)
     {
+      _logger.LogError("Unauthorized");
       return Unauthorized();
     }
 
@@ -133,10 +144,12 @@ public class JobListController : ControllerBase
     JobEntry? jobEntry = _context.Find<JobEntry>(id);
     if (jobEntry is null)
     {
+      _logger.LogError("Job entry is not found");
       return NotFound();
     }
     if (account?.Id == null || jobEntry.AccountId != account.Id)
     {
+      _logger.LogError("Unauthorized");
       return Unauthorized();
     }
 
