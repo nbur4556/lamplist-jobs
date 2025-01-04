@@ -89,6 +89,12 @@ public class AuthController : ControllerBase
     }
     catch (Exception exception)
     {
+      //TODO: fix-api-end-of-json-error: Use a logger for better error logging
+      //TODO: fix-api-end-of-json-error: handle error logging for all relevant exceptions
+      Console.WriteLine(exception.ToString());
+
+      // FIX:: fix-api-end-of-json-error: This bad request message is not being displayed on client side
+      // FIX : fix-api-end-of-json-error: Reproduce by shortening Authorization key (appsettings.Development.json) until user can not log with too short of an encryption key. See that the message never makes it to the client
       return BadRequest(exception.ToString());
     }
   }
