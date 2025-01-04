@@ -26,6 +26,7 @@ public class AuthController : ControllerBase
   private readonly IAccountService _accountService;
   private readonly ITokenService _tokenService;
   private readonly UserManager<ApplicationUser> _userManager;
+  private readonly ILogger _logger;
 
   public AuthController(
     IAccountService accountService,
@@ -35,6 +36,10 @@ public class AuthController : ControllerBase
     _accountService = accountService;
     _tokenService = tokenService;
     _userManager = userManager;
+
+    // TODO: fix-api-end-of-json-error: Should the logger factory be passed to controllers as a service (like the accountService and tokenService)
+    ILoggerFactory loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+    _logger = loggerFactory.CreateLogger("AuthController");
   }
 
   // /api/Auth/register
@@ -89,9 +94,8 @@ public class AuthController : ControllerBase
     }
     catch (Exception exception)
     {
-      //TODO: fix-api-end-of-json-error: Use a logger for better error logging
       //TODO: fix-api-end-of-json-error: handle error logging for all relevant exceptions
-      Console.WriteLine(exception.ToString());
+      _logger.LogError(exception.ToString());
 
       // FIX:: fix-api-end-of-json-error: This bad request message is not being displayed on client side
       // FIX : fix-api-end-of-json-error: Reproduce by shortening Authorization key (appsettings.Development.json) until user can not log with too short of an encryption key. See that the message never makes it to the client
