@@ -1,4 +1,6 @@
 <script lang="ts">
+	import MinusIcon from '@src/lib/Icons/MinusIcon.svelte';
+	import PlusIcon from '@src/lib/Icons/PlusIcon.svelte';
 	import type { JobEntry } from '@src/store/JobListStore';
 
 	export let job: JobEntry;
@@ -15,9 +17,9 @@
 				<slot name="actions" />
 				<button class="btn btn-outline btn-xs" on:click={toggleCollapsed}>
 					{#if !collapsed}
-						-
+						<MinusIcon class="w-2 h-2" strokeWidth="4" />
 					{:else}
-						+
+						<PlusIcon class="w-2 h-2" strokeWidth="4" />
 					{/if}
 				</button>
 			</div>

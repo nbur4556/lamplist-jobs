@@ -1,4 +1,5 @@
 <script lang="ts">
+	import TrashIcon from '@src/lib/Icons/TrashIcon.svelte';
 	import { JobListStore } from '@src/store/JobListStore';
 	import EntryCard from './EntryCard.svelte';
 
@@ -25,7 +26,7 @@
 						slot="actions"
 						on:click={() => JobListStore.removeEntry(job.id || '')}
 					>
-						Delete
+						<TrashIcon class="w-4 h-4" strokeWidth="2" />
 					</button>
 				</EntryCard>
 			</li>
