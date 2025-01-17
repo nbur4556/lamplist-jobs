@@ -32,14 +32,12 @@ public class AuthController : ControllerBase
   public AuthController(
     IAccountService accountService,
     ITokenService tokenService,
+    ILoggerFactory loggerFactory,
     UserManager<ApplicationUser> userManager)
   {
     _accountService = accountService;
     _tokenService = tokenService;
     _userManager = userManager;
-
-    // TODO: fix-api-end-of-json-error: Should the logger factory be passed to controllers as a service (like the accountService and tokenService)
-    ILoggerFactory loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
     _logger = loggerFactory.CreateLogger("AuthController");
   }
 
@@ -62,6 +60,7 @@ public class AuthController : ControllerBase
     return CreatedAtAction(nameof(Register), result);
   }
 
+  // FIX: fix-api-end-of-json-error: increase length of JWT secret key
   // /api/Auth/login
   [HttpPost("login")]
   public async Task<IActionResult> Login(AuthRequest request)
