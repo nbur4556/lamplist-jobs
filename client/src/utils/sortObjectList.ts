@@ -9,7 +9,7 @@ const compareVal = <T>(a: T, b: T, reversed: boolean) => {
 	return reversed ? a > b : a < b;
 };
 
-//TODO: thoroughly test this function
+// TODO: thoroughly test this function
 const sortObjectList = <T>(list: Array<T>, term: keyof T, reversed: boolean): Array<T> => {
 	type V = T[typeof term];
 	let sortedList: Array<T> = [];
