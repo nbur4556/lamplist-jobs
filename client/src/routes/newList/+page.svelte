@@ -108,8 +108,8 @@
 		<p class="self-start">Time is up. When you are finished please move on to the next category.</p>
 	{/if}
 
-	<!-- //! Submitting is broken, no longer adding job entries... -->
-	<!-- //? Should this be a form? If so goto does not work. May need to handle using use:enhance if a form is needed -->
+	<!-- FIX: Submitting is broken, no longer adding job entries... -->
+	<!-- TODO: Should this be a form? If so goto does not work. May need to handle using use:enhance if a form is needed -->
 	<section class="flex flex-col justify-between w-full">
 		{#each jobEntries as _, i}
 			<Input name={`job-${i}`} bind:value={jobEntries[i]} />

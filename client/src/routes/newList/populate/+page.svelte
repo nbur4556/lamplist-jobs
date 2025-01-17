@@ -102,8 +102,8 @@
 			{#if entryIndex === index}
 				<div
 					class="animator"
-					in:fly|local={{ x: animatePos, duration: 500 }}
-					out:fade={{ duration: 100 }}
+					in:fly={{ x: animatePos, duration: 500 }}
+					out:fade|global={{ duration: 100 }}
 				>
 					<EntryCard job={jobEntry} />
 				</div>
