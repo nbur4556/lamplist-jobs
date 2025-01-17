@@ -25,13 +25,10 @@ public class JobListController : ControllerBase
   private readonly IAccountService _accountService;
   private readonly ILogger _logger;
 
-  public JobListController(DataContext context, IAccountService accountService)
+  public JobListController(DataContext context, IAccountService accountService, ILoggerFactory loggerFactory)
   {
     _accountService = accountService;
     _context = context;
-
-    // TODO: fix-api-end-of-json-error: Should the logger factory be passed to controllers as a service (like the accountService and tokenService)
-    ILoggerFactory loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
     _logger = loggerFactory.CreateLogger("JobListController");
   }
 
