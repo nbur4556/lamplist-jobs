@@ -60,7 +60,6 @@ public class AuthController : ControllerBase
     return CreatedAtAction(nameof(Register), result);
   }
 
-  // FIX: fix-api-end-of-json-error: increase length of JWT secret key
   // /api/Auth/login
   [HttpPost("login")]
   public async Task<IActionResult> Login(AuthRequest request)
@@ -100,8 +99,7 @@ public class AuthController : ControllerBase
     {
       _logger.LogError(exception.ToString());
 
-      // FIX:: fix-api-end-of-json-error: This bad request message is not being displayed on client side
-      // FIX : fix-api-end-of-json-error: Reproduce by shortening Authorization key (appsettings.Development.json) until user can not log with too short of an encryption key. See that the message never makes it to the client
+      // FIX:: fix-api-end-of-json-error: This bad request message is not being displayed on client side (short AuthSettings:Key for testing login)
       return BadRequest(exception.ToString());
     }
   }

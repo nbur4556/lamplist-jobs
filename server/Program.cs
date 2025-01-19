@@ -44,6 +44,7 @@ builder.Services.AddAuthentication(auth =>
   auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
+  // FIX: this key should probably be kept in user secrets instead of development configuration
   string? authKey = builder.Configuration["AuthSettings:Key"];
   if (authKey != null)
   {
