@@ -1,13 +1,13 @@
 [Unit]
-Description=Example .NET Core Web Application
+Description=Lamplist Application Tracker Web Server
 
 [Service]
 WorkingDirectory=/var/www/server
-ExecStart=/usr/bin/dotnet /var/www/server/bin/Release/net8.0/example-app.dll
+ExecStart=/usr/bin/dotnet /var/www/server/bin/Release/net8.0/server.dll
 Restart=always
 RestartSec=10
 KillSignal=SIGINT
-SyslogIdentifier=lamplist application tracker server
+SyslogIdentifier=lamplist application tracker web server
 User=www-data
 Environment=ASPNETCORE_ENVIRONMENT=Production
 Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
