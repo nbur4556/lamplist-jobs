@@ -1,0 +1,17 @@
+[Unit]
+Description=Example .NET Core Web Application
+
+[Service]
+WorkingDirectory=/var/www/server
+ExecStart=/usr/bin/dotnet /var/www/server/bin/Release/net8.0/example-app.dll
+Restart=always
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=lamplist application tracker server
+User=www-data
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+
+[Install]
+WantedBy=multi-user.target
+    
