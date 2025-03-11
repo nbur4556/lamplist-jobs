@@ -19,6 +19,7 @@ public struct LoginResponse
   public bool succeeded { get; set; }
 }
 
+// FIX: fix-api-end-of-json-error: BadRequest messages are not being received by client
 [ApiController]
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
@@ -26,15 +27,18 @@ public class AuthController : ControllerBase
   private readonly IAccountService _accountService;
   private readonly ITokenService _tokenService;
   private readonly UserManager<ApplicationUser> _userManager;
+  private readonly ILogger _logger;
 
   public AuthController(
     IAccountService accountService,
     ITokenService tokenService,
+    ILoggerFactory loggerFactory,
     UserManager<ApplicationUser> userManager)
   {
     _accountService = accountService;
     _tokenService = tokenService;
     _userManager = userManager;
+    _logger = loggerFactory.CreateLogger("AuthController");
   }
 
   // /api/Auth/register
@@ -43,7 +47,8 @@ public class AuthController : ControllerBase
   {
     if (request.userName is null || request.password is null)
     {
-      return BadRequest("UserName and Password are required");
+      _logger.LogError("Username and Password are required");
+      return BadRequest("Username and Password are required");
     }
 
     ApplicationUser user = new ApplicationUser()
@@ -61,18 +66,21 @@ public class AuthController : ControllerBase
   {
     if (request.userName is null || request.password is null)
     {
-      return BadRequest("UserName and Password are required");
+      _logger.LogError("Username and Password are required");
+      return BadRequest("Username and Password are required");
     }
 
     ApplicationUser? user = await _userManager.FindByNameAsync(request.userName);
     if (user == null)
     {
+      _logger.LogError("Unauthorized");
       return Unauthorized();
     }
 
     bool isAuthorized = await _userManager.CheckPasswordAsync(user, request.password);
     if (isAuthorized == false)
     {
+      _logger.LogError("Unauthorized");
       return Unauthorized();
     }
 
@@ -89,6 +97,9 @@ public class AuthController : ControllerBase
     }
     catch (Exception exception)
     {
+      _logger.LogError(exception.ToString());
+
+      // FIX:: fix-api-end-of-json-error: This bad request message is not being displayed on client side (short AuthSettings:Key for testing login)
       return BadRequest(exception.ToString());
     }
   }

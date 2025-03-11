@@ -15,8 +15,11 @@ const loginUser = async (userName: string, password: string, update: StoreUpdate
 		},
 		body: JSON.stringify({ userName, password })
 	});
+
+	// FIX: fix-api-end-of-json-error: getting no response from this. Why?
 	const response = await result.json();
 
+	// FIX: fix-api-end-of-json-error: this error will not be thrown if the result or response promises do not respond. Will get a generic error.
 	if (!response.succeeded || !response.authToken) {
 		throw 'Login failed';
 	}

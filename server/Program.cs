@@ -64,6 +64,9 @@ builder.Services.AddAuthentication(auth =>
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
+// Add Logging
+builder.Services.AddLogging(builder => builder.AddConsole());
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
