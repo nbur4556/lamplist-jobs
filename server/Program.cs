@@ -23,7 +23,6 @@ builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
   if (corsOrigins is null) { return; }
-  Console.WriteLine(corsOrigins);
   options.AddPolicy(name: allowOriginPolicyRef, policy =>
     policy.WithOrigins(corsOrigins).AllowAnyHeader().AllowAnyMethod()
   );
@@ -45,7 +44,6 @@ builder.Services.AddAuthentication(auth =>
   auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
-  // FIX: this key should probably be kept in user secrets instead of development configuration
   string? authKey = builder.Configuration["AuthSettings:Key"];
   if (authKey != null)
   {
