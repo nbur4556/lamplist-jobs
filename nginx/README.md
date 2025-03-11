@@ -52,6 +52,6 @@ kitten ssh {user}@{host}
 ## Upcoming Thoughts for Deployment
 - [ ] The application is turning into a mono-repo (client, server, tests, soon deployement).
     - Embrace this. Do some research on monorepos. How should it be organized? What kind of benefits do I get from a monorepo?
-- [ ] Try out making the PostgreSQL database directly on the linode. No need to find some other SQL service or pay for a Linode database, just use what I already have!
-    - Obviously this may not scale well, but I'm not expecting a lot of users so...
+- [ ] Error on server side that says "HOST" is null for data context. Not getting the value from user-secrets? Not the correct host name?
+    - Ignore cors errors for the time being. May be a red herring
 

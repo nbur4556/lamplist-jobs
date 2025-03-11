@@ -23,6 +23,7 @@ builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
   if (corsOrigins is null) { return; }
+  Console.WriteLine(corsOrigins);
   options.AddPolicy(name: allowOriginPolicyRef, policy =>
     policy.WithOrigins(corsOrigins).AllowAnyHeader().AllowAnyMethod()
   );
