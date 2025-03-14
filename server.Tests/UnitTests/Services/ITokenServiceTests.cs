@@ -15,7 +15,7 @@ public class ITokenServiceTests
     Mock<IConfiguration> mockConfiguration = new Mock<IConfiguration>();
     mockConfiguration
       .SetupGet(moq => moq[It.Is<string>(param => param == "AuthSettings:Key")])
-      .Returns("testPassphraserVWhG9@X8ZBDZcugVKa#@qEqF^JS%8Pm55zKfkeNY7soRcZo%&q@w!wB@szo@P^S");
+      .Returns(Environment.GetEnvironmentVariable("LAMPLIST_TEST_KEY"));
     mockConfiguration
       .SetupGet(moq => moq[It.Is<string>(param => param == "AuthSettings:Issuer")])
       .Returns("testIssuer");
