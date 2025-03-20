@@ -1,4 +1,4 @@
-# Lamplist Server Instance
+# Lamplist Jobs - NGINX Server Instance
 
 Welcome to the server for the Lamplist application.
 
