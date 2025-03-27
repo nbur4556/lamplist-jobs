@@ -6,6 +6,7 @@ using server.Services;
 
 namespace server.Tests;
 
+// FIX: lots of linter errors on this file after package update. App builds fine, but should check out these errors
 public class ITokenServiceTests
 {
   private readonly TokenService _tokenService;
@@ -38,9 +39,9 @@ public class ITokenServiceTests
 
     string tokenResult = _tokenService.CreateToken(claims);
 
-    //? What other JWT assertions can be included?
-    //? Can we assert that the tokenResult is in a valid JWT format?
-    //? Can we assert that the tokenResult contains the JWT claims?
+    // TODO: What other JWT assertions can be included?
+    // TODO: Can we assert that the tokenResult is in a valid JWT format?
+    // TODO: Can we assert that the tokenResult contains the JWT claims?
     Assert.IsType<string>(tokenResult);
     Assert.Equal(expectedLength, tokenResult.Length);
   }

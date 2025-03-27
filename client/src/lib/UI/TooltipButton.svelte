@@ -5,7 +5,7 @@
 	export { className as class };
 </script>
 
-<!-- //TODO: Use for all icon buttons -->
+<!-- TODO: Use for all icon buttons -->
 <div class="tooltip" data-tip={tooltip}>
 	<button class={className} on:click={onClick}>
 		<slot />
